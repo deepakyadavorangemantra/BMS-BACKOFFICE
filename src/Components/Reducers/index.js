@@ -50,6 +50,8 @@ import ViewInsurance from './ViewInsuranceReducers';
 import CovidReducer from './CovidReducers';
 import AccessoriesMasterReducer from './AccessoriesMasterReducer';
 import AccessoriesVarientReducer from './AccessoriesVarientReducer';
+
+import ChapterReducer from '../../Reducer/Education/ChapterReducer';
 export default combineReducers({
     OfferReducer:OfferReducer,
     LoginReducers:LoginReducers,
@@ -100,6 +102,6 @@ export default combineReducers({
     ViewInsurance:ViewInsurance,
      CovidReducers:CovidReducer,
     AccessoriesMasterReducer:AccessoriesMasterReducer,
-    AccessoriesVarientReducer:AccessoriesVarientReducer
-
+    AccessoriesVarientReducer:AccessoriesVarientReducer,
+    educationChapter : ChapterReducer
 })
