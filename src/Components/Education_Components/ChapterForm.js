@@ -64,10 +64,10 @@ const ChapterForm =(props)=>{
 
       function isValidate(){
         let flag= true;
-        if(JSON.stringify(ImageData) == '[]'){
-            flag = false;
-            Notiflix.Notify.Failure('Please upload thumbnail image.');
-        }
+        // if(JSON.stringify(ImageData) == '[]'){
+        //     flag = false;
+        //     Notiflix.Notify.Failure('Please upload thumbnail image.');
+        // }
         if( Title === undefined || Title == ''){
             flag = false;
             Notiflix.Notify.Failure('Please enter chapter title.')
@@ -76,10 +76,10 @@ const ChapterForm =(props)=>{
             flag = false;
             Notiflix.Notify.Failure('Please enter time duration of chapter.')
         }
-        if( Description=== undefined || Description == ''){
-            flag = false;
-            Notiflix.Notify.Failure('Please enter chapter description.')
-        }
+        // if( Description=== undefined || Description == ''){
+        //     flag = false;
+        //     Notiflix.Notify.Failure('Please enter chapter description.')
+        // }
         return flag;
       }
 
@@ -109,7 +109,7 @@ const ChapterForm =(props)=>{
                     </div>
                 <div className="modal-body">
                     <div className="row">
-                        <div className="col-md-4">
+                        {/* <div className="col-md-4">
                             <div className="form-group mb-3">
                             <label for="validationCustom01">Thumbnail Image<span className="mandatory">*</span></label>
                                 <div className="div1">
@@ -117,8 +117,8 @@ const ChapterForm =(props)=>{
                             
                                 </div>
                             </div>
-                        </div>
-                    <div className="col-md-8">
+                        </div> */}
+                    <div className="col-md-12">
                         <div className="row">
                             <div className="col-md-12" style={{    marginTop: '28px'}}>
                                 <div className="form-group mb-3">
@@ -134,7 +134,7 @@ const ChapterForm =(props)=>{
                                     onChange={(e)=>{ SetDuration(e.target.value) }}/>
                                 </div>
                                 <div className="form-group mb-3">
-                                    <label for="validationCustom01">Description<span className="mandatory">*</span></label>
+                                    <label for="validationCustom01">Description<span className="mandatory"></span></label>
                                    
                                     <textarea type="text" class="form-control" 
                                     rows="4" cols="10"

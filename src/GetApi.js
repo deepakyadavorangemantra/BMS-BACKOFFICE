@@ -4,9 +4,9 @@
 // var urlString = "https://api.beatmysugar.com/BackofficeApi/";
 
 
-//  var urlString = "http://localhost:7000/BackofficeApi/";
+var urlString = "http://localhost:8080/BackofficeApi/";
 
-const urlString = "http://65.0.239.177:8080/BackofficeApi/";
+// const urlString = "http://65.0.239.177:8080/BackofficeApi/";
 
 
 

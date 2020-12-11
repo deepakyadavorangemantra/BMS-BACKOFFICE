@@ -424,9 +424,9 @@ class EduChapter extends Component {
                                 <table id="basic-datatable" className="table dt-responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
+                                        {/* <th>Image</th> */}
                                         <th>Title</th>
-                                        <th>Description</th>
+                                        {/* <th>Description</th> */}
                                         <th>Duration</th>
                                         <th>Status</th>
                                         <th>Updated On</th>
@@ -453,12 +453,13 @@ class EduChapter extends Component {
                                        <script src="assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
                                   
                                        </Helmet> : ''}
-                                           <td><img style={{width:'100px',height: '100px'}} src={data.fld_bgimage} /></td>
+                                           {/* <td><img style={{width:'100px',height: '100px'}} src={data.fld_bgimage} /></td> */}
                                            <td>{data.fld_title}</td>
-                                           <td>{data.fld_description}</td>
+                                           {/* <td>{data.fld_description}</td> */}
                                            <td>{data.fld_duration}</td>
                                            <td style={{color:data.fld_status == 'Active' ? 'green' : 'red'}}><b>{data.fld_status}</b></td>
-                                           <td>{moment(data.fld_updatedon).format('ll')}</td>
+                                           {/* <td>{data.fld_createdon}</td> */}
+                                           <td>{moment(data.fld_createdon).format('ll')}</td>
                                            <td className="tableact"
                                           
                                            ><Trash2

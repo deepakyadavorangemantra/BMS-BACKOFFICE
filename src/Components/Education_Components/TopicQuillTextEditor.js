@@ -6,7 +6,7 @@ import 'react-quill/dist/quill.snow.css';
 
 const TopicReactQuillTextEditor =(props)=>{
   const [ theme, setTheme] = useState('snow');
-  // const [ editorHtml, setEditorHtml ] = useState(props.html);
+  const [ editorHtml, setEditorHtml ] = useState(props.html);
     // constructor (props) {
     //   super(props)
     //   this.state = { editorHtml: '', theme: 'snow' }
@@ -51,7 +51,11 @@ const TopicReactQuillTextEditor =(props)=>{
         <div>
           <ReactQuill 
             theme={ theme}
-            onChange={props.onChange}
+            onChange={
+              
+              (e)=>props.onChange(e)
+              // (html)=>alert(html)
+            }
             value={ props.html }
             modules={Editor.modules}
             formats={Editor.formats}

@@ -75,40 +75,42 @@ class ChapterInfoDetails extends Component {
         },"AddChapterMaster").then((resultAccr) =>
         resultAccr.json().then(obj => {
             if(resultAccr.status == 200 || resultAccr.status == 201){
-            const form = new FormData();
+                let bgimage = ''
+        //     const form = new FormData();
                       
-            form.append('file', chapter_data.ImageData);
-            form.append('foldername' , 'Accreditations')
-            form.append('filename' , chapter_data.title.trim().replace(/\s/g,'-')+'-'+(JSON.parse(JSON.stringify(obj.data[0]))).ChapterId)
+        //     form.append('file', chapter_data.ImageData);
+        //     form.append('foldername' , 'Accreditations')
+        //     form.append('filename' , chapter_data.title.trim().replace(/\s/g,'-')+'-'+(JSON.parse(JSON.stringify(obj.data[0]))).ChapterId)
             
-            fetch(this.state.ImageApiUrl, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Access-Control-Allow-Origin':'*',
-                'Access-Control-Allow-Headers' : '*',
-                'Content-Type': 'application/json',
-              },
-            body: form
-            }).then((image) => {
+        //     fetch(this.state.ImageApiUrl, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Access-Control-Allow-Origin':'*',
+        //         'Access-Control-Allow-Headers' : '*',
+        //         'Content-Type': 'application/json',
+        //       },
+        //     body: form
+        //     }).then((image) => {
             
-            image.json().then(data => ({
-            data: data,
-            status: image.status
-            })
-            ).then(res => {
-                let bgimage = 'https://images.beatmysugar.com/images/Accreditations/'+res.data.Message.split(',')[2].split('=')[1].trim();
-                PostApiCall.postRequest({
+        //     image.json().then(data => ({
+        //     data: data,
+        //     status: image.status
+        //     })
+        //     ).then(res => {
+        //          bgimage = 'https://images.beatmysugar.com/images/Accreditations/'+res.data.Message.split(',')[2].split('=')[1].trim();
+        //         
+        //         PostApiCall.postRequest({
     
-                    id : (JSON.parse(JSON.stringify(obj.data[0]))).ChapterId,
-                    bgimage : bgimage,
-                    updatedby : details[0].fld_staffid,
-                    updatedon : moment().format('lll')
+        //             id : (JSON.parse(JSON.stringify(obj.data[0]))).ChapterId,
+        //             bgimage : bgimage,
+        //             updatedby : details[0].fld_staffid,
+        //             updatedon : moment().format('lll')
                     
                 
-              },"UpdateChapterMasterBgImage").then((results1) => 
-                results1.json().then(obj1 => {  
-                if(results1.status == 200 || results1.status==201){
+        //       },"UpdateChapterMasterBgImage").then((results1) => 
+        //         results1.json().then(obj1 => {  
+        //         if(results1.status == 200 || results1.status==201){
                     chapter_data.fld_chapterid=  (JSON.parse(JSON.stringify(obj.data[0]))).ChapterId;
                     chapter_data.fld_bgimage = bgimage;
                     chapter_data.fld_title = chapter_data.title;
@@ -118,14 +120,14 @@ class ChapterInfoDetails extends Component {
                     this.setState({ show_Topic_and_questions : true,  chapterEditData : chapter_data});
                     this.props.history.push({pathname:'/edu-chapterInfo', state: {  chapterEditData : chapter_data} })
                   // this.props.dispatch(setclearNameAccred())
-                  Notiflix.Loading.Remove();
-                  Notiflix.Notify.Success('Chapter successfully added.')
-                //   window.location.reload()
+                    Notiflix.Loading.Remove();
+                    Notiflix.Notify.Success('Chapter successfully added.')
+        //         //   window.location.reload()
         
-                }
-                }))
-            })
-        })
+        //         }
+        //         }))
+        //     })
+        // })
           
             }else
               {
@@ -270,13 +272,15 @@ class ChapterInfoDetails extends Component {
                     // this.props.setClearArticleSubCategory()
                     Notiflix.Loading.Remove();
                     Notiflix.Notify.Success('Topic successfully added.')
+                    debugger;
                     let TopicsList = this.state.TopicsList;
-                    let topicData = objArticleSub.data.topic;
-                    topicData.contents = objArticleSub.data.contents
+                    let topicData = objArticleSub.data[0];
+                    // topicData.contents = objArticleSub.data.contents
+                    topicData.contents = []
                     TopicsList.push(topicData);
-                    this.setState( { TopicsList : TopicsList, topicEditData: '', show_add_topic: false } );
-                    Notiflix.Loading.Remove();
-                    Notiflix.Notify.Success('Topic successfully updated.')
+                    this.setState( { TopicsList : TopicsList, topicEditData: topicData, show_add_topic: true } );
+                    // Notiflix.Loading.Remove();
+                    // Notiflix.Notify.Success('Topic successfully updated.')
                     
                 }else
                 {
@@ -479,6 +483,7 @@ class ChapterInfoDetails extends Component {
             })
         )
     }
+
 
     updateTpoicListContent =(topicEditData)=>{
 

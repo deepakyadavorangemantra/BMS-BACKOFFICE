@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useRef} from 'react';
 import Notiflix from "notiflix";
 import CKEditor from 'ckeditor4-react';
 import moment from 'moment';
-import {Edit3,Trash2} from 'react-feather';
+import {Edit3,Trash2, Save} from 'react-feather';
 import { confirmAlert } from 'react-confirm-alert'; // 
 import { connectAdvanced } from 'react-redux';
 import PostApiCall from '../../Api';
@@ -19,6 +19,8 @@ const TopicForm =(props)=>{
     const [ Description, SetDescription ] = useState('');
     const [ isActive, SetIsActive ] = useState('Yes');
     const [ check, setCheck ] = useState(false);
+    const childRef = useRef();
+    
 
     useEffect( ()=>{
         if(props.topicEditData !== ''){
@@ -30,7 +32,7 @@ const TopicForm =(props)=>{
             SetOrderno(props.topicEditData ? props.topicEditData.fld_orderno : 0);
             setValues(props.topicEditData ? props.topicEditData.contents : [{ fld_id : '', fld_content : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}])
         }
-     },[props.topicEditData ])
+     },[props.topicEditData ]);
 
      
 
@@ -41,9 +43,23 @@ const TopicForm =(props)=>{
             flag = false;
             Notiflix.Notify.Failure('Please enter topic title.')
         }
+        // if(values.length === 0){
+        //     flag = false;
+        //     Notiflix.Notify.Failure('Please add topic content.')
+        // }
+        return flag;
+      }
+
+      function isValidateContent(){
+        let flag= true;
+   
+        if(Title == ''){
+            flag = false;
+            Notiflix.Notify.Failure('Please enter topic title.')
+        }
         if(values.length === 0){
             flag = false;
-            Notiflix.Notify.Failure('Please enter topic content.')
+            Notiflix.Notify.Failure('Please add topic content.')
         }
         return flag;
       }
@@ -104,7 +120,6 @@ const TopicForm =(props)=>{
                     Notiflix.Notify.Failure('Something went wrong, try again later.')
                 }
             }));
-            // props.updateTpoicListContent(values[i].fld_id);
         }else{
             values.splice(i,1);
             setValues (values);
@@ -118,9 +133,83 @@ const TopicForm =(props)=>{
         if(values.length>0){
             new_order = Math.max.apply(Math, values.map(function(o) { return o.fld_orderno; }))
         }
-        values.push({ id : '', fld_content : '', fld_orderno : new_order+1, createdon  : moment().format('lll'), updatedon : moment().format('lll')});
+        values.push({ fld_id : '', fld_content : '', fld_orderno : new_order+1, createdon  : moment().format('lll'), updatedon : moment().format('lll')});
         setValues(values);
         setCheck(!check);
+    }
+
+    function saveContent(item, index){
+
+        
+        childRef.current.getAlert();
+
+        // if(topicid!=''){
+        //     if(item.fld_content !=''){
+        //             if(item.fld_id === ''){
+        //                 debugger;
+        //                 Notiflix.Loading.Dots('Please wait...');
+        //                 PostApiCall.postRequest ({ 
+        //                         topicid: topicid, 
+        //                         content: item.fld_content, 
+        //                         orderno: item.fld_orderno, 
+        //                         updatedon: moment().format('lll'),
+        //                         status: 1
+        //                     },"AddTopicContent").then((resultTopic) =>
+        //                     resultTopic.json().then(resultTopicContent => {
+        //                         if(resultTopic.status == 200 || resultTopic.status == 201){
+        //                             debugger
+        //                             Notiflix.Loading.Remove();
+        //                             Notiflix.Notify.Success('Content successfully added.')
+        //                             let topicEditData = props.topicEditData;
+        //                             values[index].fld_id = resultTopicContent.data[0].fld_id;
+        //                             topicEditData.contents = resultTopic.values;
+        //                             props.updateTpoicListContent( topicEditData);
+                                
+        //                         }else
+        //                         {
+        //                             Notiflix.Loading.Remove();
+        //                             Notiflix.Notify.Failure(resultTopicContent.data)
+        //                         }
+        //                     })
+        //                 )
+
+        //             }else{
+        //                 Notiflix.Loading.Dots('Please wait...');
+        //                 PostApiCall.postRequest ({ 
+        //                         topicid: topicid, 
+        //                         contentid: item.fld_id,
+        //                         content: item.fld_content, 
+        //                         orderno: item.fld_orderno, 
+        //                         updatedon: moment().format('lll'),
+        //                         status:1
+        //                     },"UpdateTopicContent").then((resultTopic) =>
+        //                     resultTopic.json().then(objArticleSub => {
+        //                         if(resultTopic.status == 200 || resultTopic.status == 201){
+        //                             debugger
+        //                             Notiflix.Loading.Remove();
+        //                             Notiflix.Notify.Success('Content successfully update.')
+        //                             let topicEditData = props.topicEditData;
+        //                             topicEditData.contents = values;
+        //                             props.updateTpoicListContent( topicEditData);
+                                
+        //                         }else
+        //                         {
+        //                             Notiflix.Loading.Remove();
+        //                             Notiflix.Notify.Failure(objArticleSub.data)
+        //                         }
+        //                     })
+        //                 )
+        //             }
+                   
+                    
+                
+        //     }else{
+        //         Notiflix.Notify.Failure('Please add content.')
+        //     }
+        // }else{
+        //     Notiflix.Notify.Failure('Please add topic first !.')
+        // }
+
     }
      
 
@@ -145,11 +234,16 @@ const TopicForm =(props)=>{
                                           
                                     </div> */}
 
-                                <div className="form-group mb-3">
-                                    <label for="validationCustom01">Title<span className="mandatory">*</span></label>
-                                    <input type="text" className="form-control" 
-                                    value={Title}
-                                    onChange={(e)=>{ SetTitle(e.target.value) }}/>
+                                <div style={{ display:'flex'}} className="form-group mb-3">
+                                    <div className="col-md-11">
+                                        <label for="validationCustom01">Title<span className="mandatory">*</span></label>
+                                        <input type="text" className="form-control" 
+                                        value={Title}
+                                        onChange={(e)=>{ SetTitle(e.target.value) }}/>
+                                    </div>
+                                    <div style={{paddingTop: '2%'}} className="col-md-1">
+                                        <button className="btn btn-primary" style={{float:'right'}} onClick={ saveTopic}>Save</button>
+                                    </div>
                                 </div>
                                 
                                 <div className="form-group mb-3">
@@ -164,7 +258,8 @@ const TopicForm =(props)=>{
                                                     <div style={{ padding:'10px', fontWeight:'bold', width : '90%'}}>
                                                         <TopicReactQuillTextEditor 
                                                             html={item.fld_content||''}
-                                                            onChange={(e)=>handleChange(e, i)}
+                                                            onChange={(e)=>handleChange(e,i)}
+                                                            // indexContent = {i}
                                                         />
                                                     </div>
                                                     
@@ -179,6 +274,7 @@ const TopicForm =(props)=>{
                                                     /> */}
                                                 {/* <input type="text" value={el.description||''} onChange={(e)=>handleChange(e, i)} /> */}
                                                     <div style={{ padding:'10px', fontWeight:'bold'}}>
+                                                    <span style={{cursor:'pointer'}}><Save  onClick={()=>{ saveContent(item, i)}} /></span><br/><br/>
                                                     <Trash2
                                                         
                                                         onClick={()=>{
@@ -199,7 +295,9 @@ const TopicForm =(props)=>{
                                                             ]
                                                         });
                                                         }}
-                                                    /></div>
+                                                    />
+                                                   
+                                                    </div>
                                                 </div>     
                                             </div>  
                                             // </li>   
@@ -235,7 +333,7 @@ const TopicForm =(props)=>{
                 </div>
                 <div className="modal-footer">
                 <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.cancleTopicBlock}>Cancle</button>
-                <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ saveTopic}>Save</button>
+                
                     <span>
 
                     </span>
