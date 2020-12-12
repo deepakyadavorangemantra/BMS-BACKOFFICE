@@ -38,6 +38,7 @@ class ChapterInfoDetails extends Component {
     }
 
     handleGetQuestionsData=( fld_chapterid)=>{
+        Notiflix.Loading.Dots('Please wait...');
         GetApiCall.getRequest("ListQuestion?chapterid="+ fld_chapterid).then(resultdes =>
             resultdes.json().then(obj => {
                 this.setState({
@@ -48,6 +49,7 @@ class ChapterInfoDetails extends Component {
     }
 
     handleGetTopicData=( fld_chapterid)=>{
+        Notiflix.Loading.Dots('Please wait...');
         GetApiCall.getRequest("ListTopic?chapterid="+ fld_chapterid).then(resultdes =>
             resultdes.json().then(obj => {
                 this.setState({
@@ -272,7 +274,6 @@ class ChapterInfoDetails extends Component {
                     // this.props.setClearArticleSubCategory()
                     Notiflix.Loading.Remove();
                     Notiflix.Notify.Success('Topic successfully added.')
-                    debugger;
                     let TopicsList = this.state.TopicsList;
                     let topicData = objArticleSub.data[0];
                     // topicData.contents = objArticleSub.data.contents
@@ -486,11 +487,11 @@ class ChapterInfoDetails extends Component {
 
 
     updateTpoicListContent =(topicEditData)=>{
-
+        debugger;
         let TopicsList = this.state.TopicsList;
         let findIndex = this.state.TopicsList.findIndex(item => item.fld_id == topicEditData.fld_id);
         TopicsList[findIndex] = topicEditData;
-        this.setState( { TopicsList : TopicsList } );
+        this.setState( { TopicsList : TopicsList , topicEditData: topicEditData} );
     }
 
     render(){

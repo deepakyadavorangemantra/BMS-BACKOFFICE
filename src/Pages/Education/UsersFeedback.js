@@ -88,6 +88,7 @@ class EduUsersFeedback extends Component {
                                         <th>Sr No.</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Rating</th>
                                         <th>Feedback</th>
                                         <th>Updated On</th>
                                         <th>Action</th>
@@ -115,6 +116,7 @@ class EduUsersFeedback extends Component {
                                             <td>{index+1}</td>
                                             <td>{data.fld_name}</td>
                                             <td>{data.fld_email}</td>
+                                            <td>{data.fld_rating}</td>
                                             <td>{data.fld_feedbacktext}</td>
                                             <td>{moment(data.fld_updatedon).format('ll')}</td>
                                             <td className="tableact"

@@ -9,7 +9,6 @@ import PostApiCall from '../../Api';
 import TopicReactQuillTextEditor from './TopicQuillTextEditor';
 
 const TopicForm =(props)=>{
-
     const [ values, setValues] = useState([{ fld_id : '', fld_content : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}]);
 
     const [ topicTitle, SetTopicTitle ] = useState('Add Topic Chapter');
@@ -84,8 +83,15 @@ const TopicForm =(props)=>{
 
       
     function handleChange( event, i) {
-        values[i].fld_content = event //event.editor.getData();
-        setValues (values);
+        let contentArr = ''
+        if(props.topicEditData.contents && (props.topicEditData.contents.length > values.length)){
+            contentArr = props.topicEditData.contents;
+            contentArr[i].fld_content = event 
+        }else{
+            contentArr =values;
+            contentArr[i].fld_content = event 
+        }
+        setValues (contentArr);
         setCheck(!check);
     }
 
@@ -140,75 +146,73 @@ const TopicForm =(props)=>{
 
     function saveContent(item, index){
 
-        
-        childRef.current.getAlert();
 
-        // if(topicid!=''){
-        //     if(item.fld_content !=''){
-        //             if(item.fld_id === ''){
-        //                 debugger;
-        //                 Notiflix.Loading.Dots('Please wait...');
-        //                 PostApiCall.postRequest ({ 
-        //                         topicid: topicid, 
-        //                         content: item.fld_content, 
-        //                         orderno: item.fld_orderno, 
-        //                         updatedon: moment().format('lll'),
-        //                         status: 1
-        //                     },"AddTopicContent").then((resultTopic) =>
-        //                     resultTopic.json().then(resultTopicContent => {
-        //                         if(resultTopic.status == 200 || resultTopic.status == 201){
-        //                             debugger
-        //                             Notiflix.Loading.Remove();
-        //                             Notiflix.Notify.Success('Content successfully added.')
-        //                             let topicEditData = props.topicEditData;
-        //                             values[index].fld_id = resultTopicContent.data[0].fld_id;
-        //                             topicEditData.contents = resultTopic.values;
-        //                             props.updateTpoicListContent( topicEditData);
+        if(topicid!=''){
+            if(item.fld_content !=''){
+                    if(item.fld_id === ''){
+                        debugger;
+                        Notiflix.Loading.Dots('Please wait...');
+                        PostApiCall.postRequest ({ 
+                                topicid: topicid, 
+                                content: item.fld_content, 
+                                orderno: item.fld_orderno, 
+                                updatedon: moment().format('lll'),
+                                status: 1
+                            },"AddTopicContent").then((resultTopic) =>
+                            resultTopic.json().then(resultTopicContent => {
+                                if(resultTopic.status == 200 || resultTopic.status == 201){
+                                    debugger
+                                    Notiflix.Loading.Remove();
+                                    Notiflix.Notify.Success('Content successfully added.')
+                                    let topicEditData = props.topicEditData;
+                                    values[index].fld_id = resultTopicContent.data[0].fld_id;
+                                    topicEditData.contents = values;
+                                    props.updateTpoicListContent( topicEditData);
                                 
-        //                         }else
-        //                         {
-        //                             Notiflix.Loading.Remove();
-        //                             Notiflix.Notify.Failure(resultTopicContent.data)
-        //                         }
-        //                     })
-        //                 )
+                                }else
+                                {
+                                    Notiflix.Loading.Remove();
+                                    Notiflix.Notify.Failure(resultTopicContent.data)
+                                }
+                            })
+                        )
 
-        //             }else{
-        //                 Notiflix.Loading.Dots('Please wait...');
-        //                 PostApiCall.postRequest ({ 
-        //                         topicid: topicid, 
-        //                         contentid: item.fld_id,
-        //                         content: item.fld_content, 
-        //                         orderno: item.fld_orderno, 
-        //                         updatedon: moment().format('lll'),
-        //                         status:1
-        //                     },"UpdateTopicContent").then((resultTopic) =>
-        //                     resultTopic.json().then(objArticleSub => {
-        //                         if(resultTopic.status == 200 || resultTopic.status == 201){
-        //                             debugger
-        //                             Notiflix.Loading.Remove();
-        //                             Notiflix.Notify.Success('Content successfully update.')
-        //                             let topicEditData = props.topicEditData;
-        //                             topicEditData.contents = values;
-        //                             props.updateTpoicListContent( topicEditData);
+                    }else{
+                        Notiflix.Loading.Dots('Please wait...');
+                        PostApiCall.postRequest ({ 
+                                topicid: topicid, 
+                                contentid: item.fld_id,
+                                content: item.fld_content, 
+                                orderno: item.fld_orderno, 
+                                updatedon: moment().format('lll'),
+                                status:1
+                            },"UpdateTopicContent").then((resultTopic) =>
+                            resultTopic.json().then(objArticleSub => {
+                                if(resultTopic.status == 200 || resultTopic.status == 201){
+                                    debugger
+                                    Notiflix.Loading.Remove();
+                                    Notiflix.Notify.Success('Content successfully update.')
+                                    let topicEditData = props.topicEditData;
+                                    topicEditData.contents = values;
+                                    props.updateTpoicListContent( topicEditData);
                                 
-        //                         }else
-        //                         {
-        //                             Notiflix.Loading.Remove();
-        //                             Notiflix.Notify.Failure(objArticleSub.data)
-        //                         }
-        //                     })
-        //                 )
-        //             }
+                                }else
+                                {
+                                    Notiflix.Loading.Remove();
+                                    Notiflix.Notify.Failure(objArticleSub.data)
+                                }
+                            })
+                        )
+                    }
                    
                     
                 
-        //     }else{
-        //         Notiflix.Notify.Failure('Please add content.')
-        //     }
-        // }else{
-        //     Notiflix.Notify.Failure('Please add topic first !.')
-        // }
+            }else{
+                Notiflix.Notify.Failure('Please add content.')
+            }
+        }else{
+            Notiflix.Notify.Failure('Please add topic first !.')
+        }
 
     }
      
@@ -242,7 +246,7 @@ const TopicForm =(props)=>{
                                         onChange={(e)=>{ SetTitle(e.target.value) }}/>
                                     </div>
                                     <div style={{paddingTop: '2%'}} className="col-md-1">
-                                        <button className="btn btn-primary" style={{float:'right'}} onClick={ saveTopic}>Save</button>
+                                        <button className="btn btn-primary" style={{float:'right'}} onClick={ saveTopic}>{topicid !=''? 'Update':'Save'}</button>
                                     </div>
                                 </div>
                                 
