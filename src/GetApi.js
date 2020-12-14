@@ -6,7 +6,8 @@
 
 // var urlString = "http://localhost:8080/BackofficeApi/";
 
-const urlString = "https://65.0.239.177:8080/BackofficeApi/";
+// const urlString = "https://65.0.239.177:8080/BackofficeApi/";
+const urlString = "https://stagapi.beatmysugar.com/BackofficeApi/"
 
 
 
