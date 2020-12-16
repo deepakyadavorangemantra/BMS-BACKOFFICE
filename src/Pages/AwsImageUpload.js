@@ -17,8 +17,8 @@ function AwsImageUpload() {
       bucketName: 'bmsbucketforimages',
       dirName: '/images/', /* optional */
       region: 'ap-south-1',
-      accessKeyId: 'AKIAUXRQWUVJUYIDJI6T',
-      secretAccessKey: '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',
+      accessKeyId: 'AKIAUXRQWUVJSBSLO47H',
+      secretAccessKey: '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',
       s3Url: 'https://bmsbucketforimages.s3.ap-south-1.amazonaws.com', /* optional */
     };
     const ReactS3Client = new S3(config);
