@@ -111,7 +111,7 @@ const TopicForm =(props)=>{
                         </div>
                 </div>
                 <div className="modal-footer">
-                <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.cancleTopicBlock}>Cancle</button>
+                <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.cancleTopicBlock}>Cancel</button>
                 <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ saveTopic}>Save</button>
                     <span>
 

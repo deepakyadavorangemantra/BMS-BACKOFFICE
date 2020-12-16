@@ -94,7 +94,7 @@ const SetAlertForm =(props)=>{
                 { editDescription === true ? 
                 <div className="modal-footer">
                     { topicid != '' ? 
-                    <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ ()=>{ setShowDescription(false) }}>Cancle</button>:''}
+                    <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ ()=>{ setShowDescription(false) }}>Cancel</button>:''}
                     <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ saveTopic }>{ buttonText }</button>
                     <span>
 

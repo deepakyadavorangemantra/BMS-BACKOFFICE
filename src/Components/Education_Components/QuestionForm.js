@@ -270,7 +270,7 @@ const QuestionForm =(props)=>{
                             </div>
                             <div className="col-md-4">  {/*  onClick={ option.fld_id ? updateOption : AddOptions  }} */}
                             {option.fld_id ?
-                            <button className="btn btn-primary" style={{float:'left', marginTop: '28px', marginRight:'10px'}} onClick={()=>{ SetOption({ fld_optiontext:'', fld_iscorrect:false }) } } ><span>Cancle</span> </button>:''}
+                            <button className="btn btn-primary" style={{float:'left', marginTop: '28px', marginRight:'10px'}} onClick={()=>{ SetOption({ fld_optiontext:'', fld_iscorrect:false }) } } ><span>Cancel</span> </button>:''}
                             <button className="btn btn-primary" style={{float:'left', marginTop: '28px'}} onClick={ option.fld_id ? updateOption : AddOptions  } > {option.fld_id ? 'Update': <span><i className="uil-plus mr-1"></i>Add Opton</span>}  </button>
                             
                             </div>
@@ -319,7 +319,7 @@ const QuestionForm =(props)=>{
                     </div>
                 </div>
                 <div className="modal-footer">
-                    <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.cancleQuestionBlock}>Cancle</button>
+                    <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.cancleQuestionBlock}>Cancel</button>
                     <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ saveQuestion}>{questionid === '' ?'Save':'update'}</button>
                     <span>
 

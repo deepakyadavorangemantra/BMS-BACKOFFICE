@@ -98,7 +98,7 @@ const CongratulationForm =(props)=>{
                         </div>
                 </div>
                 <div className="modal-footer">
-                        <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.closeModel}>Cancle</button>
+                        <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.closeModel}>Cancel</button>
                         <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ saveCongratulation}>{ CongratulationId == '' ? 'Save' : 'Update'}</button>
                     <span>
 

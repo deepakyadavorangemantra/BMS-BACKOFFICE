@@ -106,7 +106,7 @@ const OptionForm =(props)=>{
                     </div>
                 </div>
                 <div className="modal-footer">
-                <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.cancleQuestionBlock}>Cancle</button>
+                <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ props.cancleQuestionBlock}>Cancel</button>
                 <button className="btn btn-primary" type="submit" style={{float:'right'}} onClick={ saveQuestion}>Save</button>
                     <span>
 
