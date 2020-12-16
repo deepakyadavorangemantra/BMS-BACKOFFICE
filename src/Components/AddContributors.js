@@ -18,7 +18,8 @@ import {
     setMobileNumber,
     setEmailAddress,
     setclearcontirbutor
-} from './Actions/ActionType'
+} from './Actions/ActionType';
+import imageConfig from '../Api/imageApi';
 
 const ImgUpload =({
     onChange,
@@ -62,7 +63,7 @@ class AddContributors extends Component {
                 NumRegex: /^[0-9]*$/,
                 MobileRegex : /^[0-9]*$/,
                 EmailRegex :  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+                ImageApiUrl :imageConfig.ImageApiUrl,
                 ImageData : []
                
 
@@ -520,7 +521,8 @@ class AddContributors extends Component {
                             PostApiCall.postRequest({
                   
                                 id : (JSON.parse(JSON.stringify(obj.data[0]))).ContributorId,
-                                photo : 'https://images.beatmysugar.com/images/Contributor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                                photo : res.data.Message.img_url,
+                                // photo : 'https://images.beatmysugar.com/images/Contributor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
                                 updatedby : details[0].fld_staffid,
                                 updatedon : moment().format('lll')
                                 

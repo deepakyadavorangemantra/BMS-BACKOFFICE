@@ -9,6 +9,7 @@ import TopicForm from '../../Components/Education_Components/TopicEditorNew';
 import QuestionListView from '../../Components/Education_Components/QuestionListDrag';
 import QuestionForm from '../../Components/Education_Components/QuestionForm';
 import OptionForm from '../../Components/Education_Components/OptionForm';
+import imageConfig from '../../Api/imageApi';
 // import TopicReactQuillTextEditor from '../../Components/Education_Components/TopicQuillTextEditor';
 
 class ChapterInfoDetails extends Component {
@@ -16,7 +17,7 @@ class ChapterInfoDetails extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
             chapterEditData : this.props.location.state ? this.props.location.state.chapterEditData ? this.props.location.state.chapterEditData : '':'',
             TopicsList : [],
             show_add_topic : false,
@@ -181,7 +182,8 @@ class ChapterInfoDetails extends Component {
                 PostApiCall.postRequest({
 
                   id : chapter_data.id,
-                  bgimage : 'https://images.beatmysugar.com/images/Accreditations/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                  bgimage : res.data.Message.img_url,
+                //   bgimage : 'https://images.beatmysugar.com/images/Accreditations/'+res.data.Message.split(',')[2].split('=')[1].trim(),
                   updatedby : details[0].fld_staffid,
                   updatedon : moment().format('lll')
                   

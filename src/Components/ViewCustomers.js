@@ -4,6 +4,7 @@ import Notiflix from "notiflix";
 import moment from 'moment';
 import GetApiCall from '../GetApi';
 import PostApiCall from '../Api'
+import imageConfig from '../Api/imageApi';
 
 var visible = false;
 
@@ -34,7 +35,8 @@ class CustomerView extends Component {
             Page5 : 'Pending',
             Page6 : 'Pending',
             imagePreviewUrl: 'https://www.adcproductdesign.com/wp-content/uploads/2018/02/Realize-Icon-Blue.png',
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
+
             DecimalRegex : /^(\d*\.?\d{0,2}|\.\d{0,9})$/,
             NumRegex: /^[0-9]*$/,
             AlphaNumericRegex : /^[a-zA-Z0-9]*$/,

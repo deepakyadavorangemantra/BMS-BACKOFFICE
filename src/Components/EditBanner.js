@@ -3,6 +3,7 @@ import Select from 'react-select';
 import Notiflix from 'notiflix';
 import PostApiCall from '../Api';
 import moment from 'moment';
+import imageConfig from '../Api/imageApi';
 
 var width = '100%'
 var height = 300
@@ -93,7 +94,7 @@ export default class AddBanner extends Component {
         imagePreviewUrlCover: '/assets/images/Cover-logo.png',
         imagePreviewUrlCover1: '/assets/images/Cover-logo.png',
 
-        ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+        ImageApiUrl :imageConfig.ImageApiUrl,
       
    
     
@@ -357,7 +358,8 @@ SaveFinal(){
                
                    id : this.state.BannerId,
                    type : 'web',
-                   photo : 'https://images.beatmysugar.com/images/AdBanner/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                   photo : res.data.Message.img_url,
+                //    photo : 'https://images.beatmysugar.com/images/AdBanner/'+res.data.Message.split(',')[2].split('=')[1].trim(),
           
                },"UpdateAdBannerImage").then((results1) => 
                
@@ -415,7 +417,8 @@ PostApiCall.postRequest({
 
     id : this.state.BannerId,
     type : 'mobile',
-    photo : 'https://images.beatmysugar.com/images/AdBanner/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+    photo :  res.data.Message.img_url,
+    // photo : 'https://images.beatmysugar.com/images/AdBanner/'+res.data.Message.split(',')[2].split('=')[1].trim(),
 
 },"UpdateAdBannerImage").then((results1) => 
 

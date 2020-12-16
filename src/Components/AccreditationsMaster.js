@@ -9,6 +9,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import {connect} from 'react-redux';
 import Notiflix from "notiflix";
+import imageConfig from '../Api/imageApi';
 import{
     setNameAccred,
     setclearNameAccred
@@ -73,7 +74,6 @@ var details=JSON.parse(login)
       form.append('file', this.state.ImageData);
       form.append('foldername' , 'Accreditations')
       form.append('filename' , this.props.Accreditationcred.Name.trim().replace(/\s/g,'-')+'-'+(JSON.parse(JSON.stringify(obj.data[0]))).AccreditationId)
-      
       fetch(this.state.ImageApiUrl, {
       method: 'POST',
       body: form
@@ -89,7 +89,8 @@ var details=JSON.parse(login)
           PostApiCall.postRequest({
 
               id : (JSON.parse(JSON.stringify(obj.data[0]))).AccreditationId,
-              logo : 'https://images.beatmysugar.com/images/Accreditations/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+              logo : res.data.Message.img_url,
+              // logo : 'https://images.beatmysugar.com/images/Accreditations/'+res.data.Message.img_url.split(',')[2].split('=')[1].trim(),
               updatedby : details[0].fld_staffid,
               updatedon : moment().format('lll')
               
@@ -128,7 +129,7 @@ var details=JSON.parse(login)
             open:false,
             imagePreviewUrl: 'https://www.adcproductdesign.com/wp-content/uploads/2018/02/Realize-Icon-Blue.png',
             Status : 'Active',
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
             Id : '',
             AccreData: [],
             ImageData : [],
@@ -205,7 +206,7 @@ var details=JSON.parse(login)
                       form.append('file', this.state.ImageData);
                       form.append('foldername' , 'Accreditations')
                       form.append('filename' , this.props.Accreditationcred.Name.trim().replace(/\s/g,'-')+'-'+this.state.Id)
-                      
+                      debugger;
                       fetch(this.state.ImageApiUrl, {
                       method: 'POST',
                       body: form
@@ -216,12 +217,13 @@ var details=JSON.parse(login)
                       status: image.status
                       })
                       ).then(res => {
-            
+                        debugger;
             
                     PostApiCall.postRequest({
-
+                      
                       id : this.state.Id,
-                      logo : 'https://images.beatmysugar.com/images/Accreditations/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                      logo : res.data.Message.img_url,
+                      // logo : 'https://images.beatmysugar.com/images/Accreditations/'+res.data.Message.split(',')[2].split('=')[1].trim(),
                       updatedby : details[0].fld_staffid,
                       updatedon : moment().format('lll')
                       

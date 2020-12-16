@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import Notiflix from "notiflix";
 import moment from 'moment';
 import GetApiCall from '../GetApi';
-import PostApiCall from '../Api'
+import PostApiCall from '../Api';
+import imageConfig from '../Api/imageApi';
 import {
     setemployeeid,
     setname,
@@ -72,7 +73,7 @@ class StaffView extends Component {
             Page5 : 'Pending',
             Page6 : 'Pending',
             imagePreviewUrl: 'https://www.adcproductdesign.com/wp-content/uploads/2018/02/Realize-Icon-Blue.png',
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
             DecimalRegex : /^(\d*\.?\d{0,2}|\.\d{0,9})$/,
             NumRegex: /^[0-9]*$/,
             AlphaNumericRegex : /^[a-zA-Z0-9]*$/,
@@ -1089,7 +1090,8 @@ class StaffView extends Component {
                 PostApiCall.postRequest({
       
                     id : this.state.Staffid,
-                    photo : 'https://images.beatmysugar.com/images/Staff/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                    photo : res.data.Message.img_url,
+                    // photo : 'https://images.beatmysugar.com/images/Staff/'+res.data.Message.split(',')[2].split('=')[1].trim(),
                     updatedby : details[0].fld_staffid,
                     updatedon : moment().format('lll')
                     

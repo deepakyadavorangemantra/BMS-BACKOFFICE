@@ -3,7 +3,8 @@ import CKEditor from 'ckeditor4-react';
 import {connect} from 'react-redux';
 import Notiflix from "notiflix";
 import {XSquare} from 'react-feather';
-import moment from 'moment'
+import moment from 'moment';
+import imageConfig from '../Api/imageApi';
 import{
     
     setfootwearsku,
@@ -152,7 +153,7 @@ class Footwear extends Component {
   
           AddAccess : false,
   
-          ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+          ImageApiUrl :imageConfig.ImageApiUrl,
 
 
           CustomerBasePrice: 0,
@@ -739,7 +740,8 @@ class Footwear extends Component {
       PostApiCall.postRequest({
 
         accessoriesvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-        imageurl : 'https://images.beatmysugar.com/images/Accessories/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+        imageurl : res.data.Message.img_url,
+        // imageurl : 'https://images.beatmysugar.com/images/Accessories/'+res.data.Message.split(',')[2].split('=')[1].trim(),
         updatedon : moment().format('lll'),
         updatedby : details[0].fld_staffid
 
@@ -809,7 +811,8 @@ class Footwear extends Component {
           PostApiCall.postRequest({
       
             accessoriesvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-            imageurl : 'https://images.beatmysugar.com/images/Accessories/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
+            imageurl : res1.data.Message.img_url,
+            // imageurl : 'https://images.beatmysugar.com/images/Accessories/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
             updatedon : moment().format('lll'),
             updatedby : details[0].fld_staffid
       

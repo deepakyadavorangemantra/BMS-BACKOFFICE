@@ -6,6 +6,7 @@ import Notiflix from "notiflix";
 import moment from 'moment';
 import PostApiCall from '../Api'
 import GetApiCall from '../GetApi';
+import imageConfig from '../Api/imageApi';
 import{
     setvendorname,
     setgstin,setvendorpan,
@@ -160,7 +161,7 @@ class VendorView extends Component {
 
             Status : 'Active',
             VendorId : '',
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
 
 
 
@@ -1349,7 +1350,8 @@ OnAddContactPerson(){
             PostApiCall.postRequest({
       
                 vendorid : (JSON.parse(JSON.stringify(obj.data[0]))).VendorId,
-              logo : 'https://images.beatmysugar.com/images/Vendor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                logo : res.data.Message.img_url,
+            //   logo : 'https://images.beatmysugar.com/images/Vendor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
               updatedon : moment().format('lll'),
               updatedby : details[0].fld_staffid
       
@@ -1410,7 +1412,8 @@ OnAddContactPerson(){
             PostApiCall.postRequest({
       
                 vendorid : (JSON.parse(JSON.stringify(obj.data[0]))).VendorId,
-                cheque : 'https://images.beatmysugar.com/images/Vendor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                cheque :  res.data.Message.img_url,
+                // cheque : 'https://images.beatmysugar.com/images/Vendor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
               updatedon : moment().format('lll'),
               updatedby : details[0].fld_staffid
       

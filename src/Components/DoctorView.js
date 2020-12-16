@@ -34,6 +34,7 @@ import moment from 'moment';
 import GetApiCall from '../GetApi';
 import {Edit3,Trash2,Monitor} from 'react-feather';
 import PostApiCall from '../Api';
+import imageConfig from '../Api/imageApi';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
@@ -71,7 +72,7 @@ class DoctorView extends Component {
             NumRegex: /^[0-9]*$/,
             MobileRegex : /^[0-9]*$/,
             EmailRegex :  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
             imagePreviewUrl: 'https://talentview.asia/wp-content/uploads/Wait-Staff-Icon-2.png',
             ImageData : [],
             TitleData: [

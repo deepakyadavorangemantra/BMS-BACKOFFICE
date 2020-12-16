@@ -13,6 +13,8 @@ import{
     setclearfoodcategory
 }
 from './Actions/ActionType';
+import imageConfig from '../Api/imageApi';
+
 
 const ImgUpload =({
   onChange,
@@ -88,7 +90,7 @@ class FoodCategory extends Component {
             openedit : false,
             imagePreviewUrl: 'https://www.adcproductdesign.com/wp-content/uploads/2018/02/Realize-Icon-Blue.png',
             ImageData : [],
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
             AccessorieslistData : [],
             Status : 'Active',
             AccessoriesId : '',
