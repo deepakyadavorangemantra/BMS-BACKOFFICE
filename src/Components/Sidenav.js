@@ -46,7 +46,7 @@ import VendorList from './VendorList'
 import DoctorList from './DoctorList'
 import DietitianList from './DietitianList'
 import { BrowserRouter as Router, Route, Switch, Link, a } from 'react-router-dom'
-import {FileText, Home,Briefcase, User,Layout,Users,Grid,Lock,Gift,BookOpen,PlusCircle,Clipboard,File,LogOut,Archive,LifeBuoy, Bookmark, Eye, CheckCircle,RotateCcw,X,PieChart, Mail,Image} from 'react-feather';
+import {FileText, Home,Briefcase, User,Layout,Users,Grid,Lock,Gift,BookOpen,PlusCircle,Clipboard,File,LogOut,Archive,LifeBuoy, Bookmark, Eye, CheckCircle,RotateCcw,X,PieChart, Mail,Image,MessageSquare} from 'react-feather';
 // import { Route,BrowserRouter as Router,Switch,a} from "react-router-dom";
 // import {Home,Briefcase, User,Layout,Users,Grid,Lock,Gift,BookOpen,PlusCircle,Clipboard,File,LogOut,Archive,LifeBuoy, Bookmark, } from 'react-feather';
 import Routes from './Routes';
@@ -174,6 +174,11 @@ import covidEssentialGrid from './CovidEssentialGrid';
 import AddCovidEssential from './AddCovidEssential';
 import CovidVarient from './CovidVariantList';
 import AddCovidVariant from './AddCovidVariant';
+
+
+import TestimonialsList from './TestimonialsList';
+import AddTestimonialMaster from './AddTestimonialMaster';
+import ViewTestimonialMaster from './ViewTestimonialMaster';
 
 class Sidenav extends React.Component {
 
@@ -538,6 +543,12 @@ class Sidenav extends React.Component {
                             <span style={{paddingLeft:'3px'}}>SMS </span>
                         </a>
                     </li>
+                      <li>
+                                <a href='/testimonialmanagementlist'>
+                                     <MessageSquare/>
+                                     <span style={{paddingLeft:'3px'}}>Testimonials</span>
+                                 </a>
+                             </li>
 
                    
 
@@ -772,6 +783,13 @@ class Sidenav extends React.Component {
         <Route exact path='/addnewcovidvariant' component={AddCovidVariant}></Route>
         <Route exact path='/viewcovidessentialstitemmaster' component={ViewCovidEssentialsItem}></Route>
         <Route exact path='/viewcovidvariant' component={ViewCovidVariant}></Route>
+
+        
+        <Route exact path='/testimonialmanagementlist' component={TestimonialsList}></Route>
+        <Route exact path='/addtestimonialsitemmaster' component={AddTestimonialMaster}></Route>
+        <Route exact path='/viewtestimonialmaster' component={ViewTestimonialMaster}></Route>
+
+
        </Switch>
       
         </Router>
