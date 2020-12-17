@@ -185,6 +185,7 @@ import ChapterInfoDetails from '../Pages/Education/ChapterInfoDetails';
 import EduUsersFeedback from '../Pages/Education/UsersFeedback';
 import GiftHamperDelivery from '../Pages/Education/GiftHamperDelivery';
 import SetAlert from '../Pages/Education/SetAlert';
+import Teaser from '../Pages/Education/Teaser';
 
 class Sidenav extends React.Component {
 
@@ -544,7 +545,7 @@ class Sidenav extends React.Component {
                        </li> */}
 
 
-                        {/* <li>
+                        <li>
                             <a onClick={()=>{ this.setState({ expandEducation : !this.state.expandEducation}) } } aria-expanded="true" class=" mm-active" >
                                 <Users/>
                                 <span> Education Module </span>
@@ -570,7 +571,7 @@ class Sidenav extends React.Component {
                                     <Link to='/edu-setalert'>SetAlert</Link>
                                 </li>        
                             </ul>
-                        </li>   */}
+                        </li>  
                        <li>
                        <a href='/bmssms'>
                             <Mail/>
@@ -823,6 +824,8 @@ class Sidenav extends React.Component {
         <Route exact path='/edu-feedback' component={EduUsersFeedback}></Route>
         <Route exact path='/edu-gifthamperdelivery' component={GiftHamperDelivery}></Route>
         <Route exact path='/edu-setalert' component={SetAlert}></Route>
+        <Route exact path='/edu-teaser' component={Teaser}></Route>
+        
 
        </Switch>
       
