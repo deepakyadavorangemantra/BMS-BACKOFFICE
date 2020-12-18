@@ -209,7 +209,8 @@ class Sidenav extends React.Component {
                 <LifeBuoy/>,
                 <CheckCircle />,
                 <Gift/>,
-                <Image />
+                <Image />,
+                <MessageSquare/>
                 
             ]
         }
@@ -543,12 +544,13 @@ class Sidenav extends React.Component {
                             <span style={{paddingLeft:'3px'}}>SMS </span>
                         </a>
                     </li>
-                      <li>
+
+                      {/* <li>
                                 <a href='/testimonialmanagementlist'>
                                      <MessageSquare/>
                                      <span style={{paddingLeft:'3px'}}>Testimonials</span>
                                  </a>
-                             </li>
+                             </li> */}
 
                    
 

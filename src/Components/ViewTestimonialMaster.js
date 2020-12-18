@@ -40,6 +40,7 @@ const ViewTestimonialMaster=()=> {
     const [ImageApiUrl ,setImageApiUrl] = useState('https://images.beatmysugar.com/api/Image/SaveImage')
     const [id,setid] = useState('')
 
+    const [AddAccess, setAddAccess] = useState(false)
 
     useEffect(() => {
         // Notiflix.Loading.Dots('');
@@ -56,7 +57,43 @@ const ViewTestimonialMaster=()=> {
          setname(TestimonialData.fld_name)
         
          
-       
+         var login=localStorage.getItem('LoginDetail');
+         var details=JSON.parse(login)
+ 
+         PostApiCall.postRequest({
+   
+             staffid : details[0].fld_staffid,
+         
+           },"GetUserSubMenuAccessRights").then((resultssub) => 
+           
+             // const objs = JSON.parse(result._bodyText)
+             resultssub.json().then(objsub => {  
+             if(resultssub.status == 200 || resultssub.status==201){
+ 
+            var filteredRights = objsub.data;
+                 // console.log(filteredRights)
+         
+                 var con = 0
+                 for(var i = 0 ; i< filteredRights.length ;i++){
+    
+                     if(filteredRights[i].fld_menuname == 'Edit Testimonial'){
+         
+                       if(filteredRights[i].fld_access == 1){
+               
+                         setAddAccess(true)
+                       }
+                     }
+                    
+                   con = con + 1
+                   if(con == filteredRights.length){
+                       Notiflix.Loading.Remove();
+                   }
+                 }
+         
+ 
+             }
+ 
+         }))
         //  Notiflix.Loading.Remove()
       },[]);
 
@@ -369,6 +406,7 @@ const ViewTestimonialMaster=()=> {
 
                                                                          
                                                                             <button className="btn btn-secondary sw-btn-next"
+                                                                                disabled={!AddAccess}
                                                                             //  onClick={()=>{
                                                        
                                                                             //     setState({

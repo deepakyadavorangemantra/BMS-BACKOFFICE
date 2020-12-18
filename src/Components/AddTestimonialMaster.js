@@ -39,13 +39,62 @@ const AddTestimonialMaster=()=> {
     const [name, setname] = useState('')
     const [ImageApiUrl ,setImageApiUrl] = useState('https://images.beatmysugar.com/api/Image/SaveImage')
     
-
+    const [AddAccess, setAddAccess] = useState(false)
 
 
   const  ratingChanged = (newRating) => {
         setnewRating(newRating)
         console.log(newRating)
       };
+
+
+      useEffect(() => {
+        Notiflix.Loading.Dots('');
+
+        var login=localStorage.getItem('LoginDetail');
+        var details=JSON.parse(login)
+
+        PostApiCall.postRequest({
+  
+            staffid : details[0].fld_staffid,
+        
+          },"GetUserSubMenuAccessRights").then((resultssub) => 
+          
+            // const objs = JSON.parse(result._bodyText)
+            resultssub.json().then(objsub => {  
+            if(resultssub.status == 200 || resultssub.status==201){
+
+           var filteredRights = objsub.data;
+                // console.log(filteredRights)
+        
+                var con = 0
+                for(var i = 0 ; i< filteredRights.length ;i++){
+   
+                    if(filteredRights[i].fld_menuname == 'Add Testimonial'){
+        
+                      if(filteredRights[i].fld_access == 1){
+              
+                      setAddAccess(true)
+                      }
+                    }
+                   
+                  con = con + 1
+                  if(con == filteredRights.length){
+                      Notiflix.Loading.Remove();
+                  }
+                }
+        
+
+            }
+
+        }))
+        
+         
+       
+        //  Notiflix.Loading.Remove()
+      },[]);
+
+
 
     // const  reviewForm=()=>{
     //     return(
@@ -348,6 +397,7 @@ const AddTestimonialMaster=()=> {
 
                                                                          
                                                                             <button className="btn btn-secondary sw-btn-next"
+                                                                            disabled={!AddAccess}
                                                                             //  onClick={()=>{
                                                        
                                                                             //     setState({

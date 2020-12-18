@@ -37,6 +37,47 @@ class TestimonialsList extends Component {
                 })
                Notiflix.Loading.Remove();
               }))
+
+
+              var login=localStorage.getItem('LoginDetail');
+              var details=JSON.parse(login)
+      
+              PostApiCall.postRequest({
+        
+                  staffid : details[0].fld_staffid,
+              
+                },"GetUserSubMenuAccessRights").then((resultssub) => 
+                
+                  // const objs = JSON.parse(result._bodyText)
+                  resultssub.json().then(objsub => {  
+                  if(resultssub.status == 200 || resultssub.status==201){
+      
+                 var filteredRights = objsub.data;
+                      // console.log(filteredRights)
+              
+                      var con = 0
+                      for(var i = 0 ; i< filteredRights.length ;i++){
+         
+                          if(filteredRights[i].fld_menuname == 'Add Testimonial'){
+              
+                            if(filteredRights[i].fld_access == 1){
+                    
+                             this.setState({
+                               AddAccess : true
+                             })
+                            }
+                          }
+                         
+                        con = con + 1
+                        if(con == filteredRights.length){
+                            Notiflix.Loading.Remove();
+                        }
+                      }
+              
+      
+                  }
+      
+              }))
             }
  
     render(){
@@ -63,7 +104,7 @@ class TestimonialsList extends Component {
                 </div>
                     </div> 
 
-                    <div class="row">
+                    <div class="row" style={{display : this.state.AddAccess ? '' : 'none'}}>
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
