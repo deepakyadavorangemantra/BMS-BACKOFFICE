@@ -543,7 +543,7 @@ class Sidenav extends React.Component {
                             <span style={{paddingLeft:'3px'}}>SMS </span>
                         </a>
                     </li>
-                      <li>
+                        <li>
                                 <a href='/testimonialmanagementlist'>
                                      <MessageSquare/>
                                      <span style={{paddingLeft:'3px'}}>Testimonials</span>
@@ -701,7 +701,7 @@ class Sidenav extends React.Component {
 
         <Route exact path='/offerlist' component={OfferGrid}></Route>
         <Route exact path='/addoffer' component={AddOffer}></Route>
-        <Route exact path='/offerView' component={OfferView}></Route>
+        <Route exact path='/viewnewoffer' component={OfferView}></Route>
         
         <Route exact path='/neworders' component={NewOrderList}></Route>
         <Route exact path='/vieworder' component={NewOrderView}></Route>
