@@ -517,11 +517,11 @@ class ChapterInfoDetails extends Component {
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-body">
-                                    <div className="col text-right">
+                                    {/* <div className="col text-right">
                                         <button onClick={()=>{ this.props.history.push({ state : { chapterid : this.state.chapterEditData.fld_chapterid}, pathname : '/edu-teaser'}); }} className="btn btn-primary" id="btn-new-event" >
                                             <i className="uil-plus mr-1"></i>TEASER
                                         </button><br/>
-                                    </div> 
+                                    </div>  */}
                                     <div className="row align-items-center">
                                         <ChapterForm 
                                             chapterEditData={this.state.chapterEditData}

@@ -11,7 +11,7 @@ import TopicReactQuillTextEditor from '../../Components/Education_Components/Top
 
 const Teaser =(props)=>{
     const [ values, setValues] = useState([
-        // { fld_id : '', fld_title : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}
+        // { fld_id : '', fld_content : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}
     ]);
     const [ title , SetTitle] = useState('Add Teaser');
     const [ chapterid , SetChapterid] = useState('');
@@ -23,23 +23,23 @@ const Teaser =(props)=>{
     
 
     useEffect( ()=>{
-        let state = props.location.state;
-        debugger;
-        console.log(state.chapterid);
-            SetChapterid(state.chapterid)
-            getTeaserData(state.chapterid);        
+        // let state = props.location.state;
+        // console.log(state.chapterid);
+        // SetChapterid(state.chapterid)
+        getTeaserData();        
      },[]);
 
-    function getTeaserData(chapterid){
+    function getTeaserData(){
         Notiflix.Loading.Dots('Please wait...');
-        GetApiCall.getRequest("GetTeaserByChapter?chapterid="+chapterid).then(resultdes =>
-            resultdes.json().then(obj => {
+        // GetApiCall.getRequest("GetTeaserByChapter?chapterid="+chapterid).then(resultdes =>
+        GetApiCall.getRequest("GetTeaserContentAll").then(resultdes =>
+        resultdes.json().then(obj => {
                 debugger;
                 if(obj.data.length>0){
                     setValues(obj.data);
                     SetTitle(' Update Teaser')
                 }else{
-                    setValues([{ fld_id : '', fld_title : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}]);
+                    setValues([{ fld_id : '', fld_content : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}]);
                     SetTitle(' Add Teaser')
                 }
                               
@@ -52,7 +52,7 @@ const Teaser =(props)=>{
     function handleChange( event, i) {
             if(values.length>0){
                 let contentArr =values;
-                contentArr[i].fld_title = event 
+                contentArr[i].fld_content = event 
                 setValues (contentArr);
             }
     }
@@ -93,22 +93,22 @@ const Teaser =(props)=>{
         if(contentArr.length>0){
             new_order = Math.max.apply(Math, contentArr.map(function(o) { return o.fld_orderno; }))
         }
-        contentArr.push({ fld_id : '', fld_title : '', fld_orderno : new_order+1, createdon  : moment().format('lll'), updatedon : moment().format('lll')});
+        contentArr.push({ fld_id : '', fld_content : '', fld_orderno : new_order+1, createdon  : moment().format('lll'), updatedon : moment().format('lll')});
         setValues(contentArr);
         setCheck(!check);
     }
 
     function saveContent(item, index){
-        if(item.fld_title !=''){
+        if(item.fld_content !=''){
             if(item.fld_id === ''){
                 Notiflix.Loading.Dots('Please wait...');
                 PostApiCall.postRequest ({ 
                         chapterid: chapterid,
-                        title: item.fld_title, 
+                        content: item.fld_content, 
                         // orderno: item.fld_orderno, 
                         createdon: moment().format('lll'),
                         status: 1
-                    },"AddTeaser").then((resultTopic) =>
+                    },"addTeasercontent").then((resultTopic) =>
                     resultTopic.json().then(resultTopicContent => {
                         if(resultTopic.status == 200 || resultTopic.status == 201){
                             
@@ -128,12 +128,12 @@ const Teaser =(props)=>{
                 Notiflix.Loading.Dots('Please wait...');
                 PostApiCall.postRequest ({ 
                         // topicid: topicid, 
-                        fld_id: item.fld_id,
-                        fld_title: item.fld_title, 
+                        contentid: item.fld_id,
+                        content: item.fld_content, 
                         // orderno: item.fld_orderno, 
                         updatedon: moment().format('lll'),
                         status:1
-                    },"UpdateTeaser").then((resultTopic) =>
+                    },"UpdateTeaserContent").then((resultTopic) =>
                     resultTopic.json().then(objArticleSub => {
                         if(resultTopic.status == 200 || resultTopic.status == 201){
                             Notiflix.Loading.Remove();
@@ -164,7 +164,7 @@ const Teaser =(props)=>{
                             <div className="col-md-12">
                                 <nav aria-label="breadcrumb" className="float-right mt-1">
                                     <ol className="breadcrumb">
-                                        <li className="breadcrumb-item"><a href="#">Chapter Module</a></li>
+                                        <li className="breadcrumb-item"><a href='/edu-chapter'>Chapter Module</a></li>
                                         <li className="breadcrumb-item active" aria-current="page">Teaser</li>
                                     </ol>
                                 </nav>
@@ -184,10 +184,10 @@ const Teaser =(props)=>{
                                                     // <li>
                                                     <div className="col-md-12">
                                                         <div style={{ display:'flex', marginTop:'10px'}} key={i}>
-                                                            <label style={{ padding:'10px', fontWeight:'bold'}} for="validationCustom01">{item.fld_orderno}. </label>
+                                                            {/* <label style={{ padding:'10px', fontWeight:'bold'}} for="validationCustom01">{item.fld_orderno}. </label> */}
                                                             <div style={{ padding:'10px', fontWeight:'bold', width : '100%'}}>
                                                                 <TopicReactQuillTextEditor 
-                                                                    html={item.fld_title||''}
+                                                                    html={item.fld_content||''}
                                                                     onChange={(e)=>handleChange(e,i)}
                                                                     // indexContent = {i}
                                                                 />
