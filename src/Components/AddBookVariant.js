@@ -35,7 +35,7 @@ import {Edit3,Trash2,Monitor} from 'react-feather';
 import {XSquare} from 'react-feather';
 import PostApiCall from '../Api';
 import moment from 'moment'
-
+import imageConfig from '../Api/imageApi';
 
 var arr = []
 var arr2 = [];
@@ -148,7 +148,7 @@ class Books extends Component {
         AddAccess : false,
 
 
-        ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+        ImageApiUrl :imageConfig.ImageApiUrl,
         }
     }
 
@@ -621,7 +621,8 @@ onChangeMeta(metadescription){
       PostApiCall.postRequest({
 
         bookvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-        imageurl : 'https://images.beatmysugar.com/images/Book/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+        imageurl :  res.data.Message.img_url,
+        // imageurl : 'https://images.beatmysugar.com/images/Book/'+res.data.Message.split(',')[2].split('=')[1].trim(),
         updatedon : moment().format('lll'),
         updatedby : details[0].fld_staffid
 
@@ -691,7 +692,8 @@ onChangeMeta(metadescription){
           PostApiCall.postRequest({
       
             bookvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-            imageurl : 'https://images.beatmysugar.com/images/Book/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
+            imageurl : res1.data.Message.img_url,
+            // imageurl : 'https://images.beatmysugar.com/images/Book/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
             updatedon : moment().format('lll'),
             updatedby : details[0].fld_staffid
       

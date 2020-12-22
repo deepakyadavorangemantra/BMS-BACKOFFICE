@@ -27,6 +27,7 @@ import {XSquare} from 'react-feather';
 import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
 import {Edit3,Trash2,Monitor} from 'react-feather';
+import imageConfig from '../Api/imageApi';
 
        const ImgUpload =({
         onChange,
@@ -160,7 +161,7 @@ class AddVendor extends Component {
             AddAccess : false,
 
             Status : 'Active',
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
 
 
             MerchantId :''
@@ -1173,7 +1174,8 @@ OnAddContactPerson(){
             PostApiCall.postRequest({
       
                 vendorid : (JSON.parse(JSON.stringify(obj.data[0]))).VendorId,
-              logo : 'https://images.beatmysugar.com/images/Vendor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                logo : res.data.Message.img_url,
+            //   logo : 'https://images.beatmysugar.com/images/Vendor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
               updatedon : moment().format('lll'),
               updatedby : details[0].fld_staffid
       
@@ -1234,7 +1236,8 @@ OnAddContactPerson(){
             PostApiCall.postRequest({
       
                 vendorid : (JSON.parse(JSON.stringify(obj.data[0]))).VendorId,
-                cheque : 'https://images.beatmysugar.com/images/Vendor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                logo : res.data.Message.img_url,
+                // cheque : 'https://images.beatmysugar.com/images/Vendor/'+res.data.Message.split(',')[2].split('=')[1].trim(),
               updatedon : moment().format('lll'),
               updatedby : details[0].fld_staffid
       

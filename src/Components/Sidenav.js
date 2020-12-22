@@ -174,6 +174,17 @@ import covidEssentialGrid from './CovidEssentialGrid';
 import AddCovidEssential from './AddCovidEssential';
 import CovidVarient from './CovidVariantList';
 import AddCovidVariant from './AddCovidVariant';
+//.................. Education Module .......................//
+import EduChapter from '../Pages/Education/Chapter';
+import EduCongratulations from '../Pages/Education/Congratulations';
+import EduDashboard from '../Pages/Education/Dashboard';
+import EduQuestion from '../Pages/Education/Question';
+import EduTopics from '../Pages/Education/Topics';
+import EduReminders from '../Pages/Education/Reminders';
+import ChapterInfoDetails from '../Pages/Education/ChapterInfoDetails';
+import EduUsersFeedback from '../Pages/Education/UsersFeedback';
+import GiftHamperDelivery from '../Pages/Education/GiftHamperDelivery';
+import SetAlert from '../Pages/Education/SetAlert';
 
 
 import TestimonialsList from './TestimonialsList';
@@ -538,6 +549,34 @@ class Sidenav extends React.Component {
                            </a>
                        </li> */}
 
+
+                        {/* <li>
+                            <a onClick={()=>{ this.setState({ expandEducation : !this.state.expandEducation}) } } aria-expanded="true" class=" mm-active" >
+                                <Users/>
+                                <span> Education Module </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-active " style={{ height : this.state.expandEducation=== true ?'131px !important':'140px', display: this.state.expandEducation=== true ? 'block':'none'}} >
+                                <li>
+                                    <Link to='/edu-dashboard'>  Dashboard </Link>
+                                </li>
+                                <li>
+                                    <Link to='/edu-chapter'>  Chapters </Link>
+                                </li>
+                                <li>
+                                    <Link to='/edu-congratulations'>Congratulations</Link>
+                                </li>
+                                <li>
+                                    <Link to='/edu-feedback'>Feedback</Link>
+                                </li>
+                                <li>
+                                    <Link to='/edu-gifthamperdelivery'>Gift Hamper</Link>
+                                </li>               
+                                <li>
+                                    <Link to='/edu-setalert'>SetAlert</Link>
+                                </li>        
+                            </ul>
+                        </li>   */}
                        <li>
                        <a href='/bmssms'>
                             <Mail/>
@@ -791,6 +830,17 @@ class Sidenav extends React.Component {
         <Route exact path='/addtestimonialsitemmaster' component={AddTestimonialMaster}></Route>
         <Route exact path='/viewtestimonialmaster' component={ViewTestimonialMaster}></Route>
 
+        {/* Education Module */}
+
+        <Route exact path='/edu-chapter' component={EduChapter}></Route>
+        <Route exact path='/edu-congratulations' component={EduCongratulations}></Route>
+        <Route exact path='/edu-dashboard' component={EduDashboard}></Route>
+        <Route exact path='/edu-question' component={EduQuestion}></Route>
+        <Route exact path='/edu-topics' component={EduTopics}></Route>
+        <Route exact path='/edu-chapterInfo' component={ChapterInfoDetails}></Route>
+        <Route exact path='/edu-feedback' component={EduUsersFeedback}></Route>
+        <Route exact path='/edu-gifthamperdelivery' component={GiftHamperDelivery}></Route>
+        <Route exact path='/edu-setalert' component={SetAlert}></Route>
 
        </Switch>
       

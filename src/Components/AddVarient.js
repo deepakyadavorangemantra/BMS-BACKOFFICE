@@ -41,6 +41,7 @@ from './Actions/ActionType';
 import GetApiCall from '../GetApi'
 import {Edit3,Trash2,Monitor} from 'react-feather';
 import PostApiCall from '../Api';
+import imageConfig from '../Api/imageApi';
 
 var arr = []
 var arr2 = [];
@@ -156,7 +157,7 @@ class FoodVariant extends Component {
 
         AddAccess : false,
 
-        ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+        ImageApiUrl :imageConfig.ImageApiUrl,
 
 
         CustomerBasePrice: 0,
@@ -753,7 +754,8 @@ nextlabel5(){
       PostApiCall.postRequest({
 
         foodvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-        imageurl : 'https://images.beatmysugar.com/images/Food/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+        imageurl : res.data.Message.img_url,
+        // imageurl : 'https://images.beatmysugar.com/images/Food/'+res.data.Message.split(',')[2].split('=')[1].trim(),
         updatedon : moment().format('lll'),
         updatedby : details[0].fld_staffid
 
@@ -823,7 +825,8 @@ nextlabel5(){
           PostApiCall.postRequest({
       
             foodvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-            imageurl : 'https://images.beatmysugar.com/images/Food/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
+            // imageurl : 'https://images.beatmysugar.com/images/Food/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
+            imageurl : res1.data.Message.img_url,
             updatedon : moment().format('lll'),
             updatedby : details[0].fld_staffid
       

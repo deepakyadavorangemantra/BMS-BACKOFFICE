@@ -35,6 +35,9 @@ from './Actions/ActionType';
 import {Edit3,Trash2,Monitor} from 'react-feather';
 import GetApiCall from '../GetApi';
 import PostApiCall from '../Api';
+
+import imageConfig from '../Api/imageApi';
+
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
@@ -156,7 +159,7 @@ class ViewSocksVariant extends Component {
           VariantId : '',
           SKU : '',
   
-          ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+        ImageApiUrl :imageConfig.ImageApiUrl,
 
 
           IsVisible : false,
@@ -883,7 +886,8 @@ class ViewSocksVariant extends Component {
       PostApiCall.postRequest({
 
         socksvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-        imageurl : 'https://images.beatmysugar.com/images/Socks/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+        imageurl : res.data.Message.img_url,
+        // imageurl : 'https://images.beatmysugar.com/images/Socks/'+res.data.Message.split(',')[2].split('=')[1].trim(),
         updatedon : moment().format('lll'),
         updatedby : details[0].fld_staffid
 
@@ -971,7 +975,8 @@ class ViewSocksVariant extends Component {
           PostApiCall.postRequest({
       
             socksvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-            imageurl : 'https://images.beatmysugar.com/images/Socks/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
+            imageurl : res1.data.Message.img_url,
+            // imageurl : 'https://images.beatmysugar.com/images/Socks/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
             updatedon : moment().format('lll'),
             updatedby : details[0].fld_staffid
       

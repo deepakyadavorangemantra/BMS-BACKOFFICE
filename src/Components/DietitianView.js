@@ -34,6 +34,7 @@ import moment from 'moment';
 import GetApiCall from '../GetApi';
 import {Edit3,Trash2,Monitor} from 'react-feather';
 import PostApiCall from '../Api';
+import imageConfig from '../Api/imageApi';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
@@ -71,7 +72,8 @@ class DietitianView extends Component {
             NumRegex: /^[0-9]*$/,
             MobileRegex : /^[0-9]*$/,
             EmailRegex :  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
+
         
             imagePreviewUrl: 'https://talentview.asia/wp-content/uploads/Wait-Staff-Icon-2.png',
             ImageData : [],
@@ -512,8 +514,8 @@ class DietitianView extends Component {
                                 ).then(res => {
                           
                                 //  console.log(i)
-
-                                 cert.push(res.data.Message.split(',')[2].split('=')[1].trim())
+                                cert.push(res.data.Message.img_url)
+                                //  cert.push(res.data.Message.split(',')[2].split('=')[1].trim())
                           
                                  count = count + 1
             
@@ -549,7 +551,8 @@ class DietitianView extends Component {
         PostApiCall.postRequest({
                           
             id : data[i],
-            certificate : 'https://images.beatmysugar.com/images/DietitianCertificate/'+cert[i],
+            certificate : cert[i],
+            // certificate : 'https://images.beatmysugar.com/images/DietitianCertificate/'+cert[i],
             updatedby : details[0].fld_staffid,
             updatedon : moment().format('lll')
             
@@ -809,7 +812,8 @@ class DietitianView extends Component {
             PostApiCall.postRequest({
   
                 id : this.state.DoctorId,
-                consent : 'https://images.beatmysugar.com/images/DietitianConsent/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                consent : res.data.Message.img_url,
+                // consent : 'https://images.beatmysugar.com/images/DietitianConsent/'+res.data.Message.split(',')[2].split('=')[1].trim(),
                 updatedby : details[0].fld_staffid,
                 updatedon : moment().format('lll')
                 
@@ -863,7 +867,8 @@ else{
             PostApiCall.postRequest({
   
                 id : this.state.DoctorId,
-                photo : 'https://images.beatmysugar.com/images/Dietitian/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                photo : res.data.Message.img_url,
+                // photo : 'https://images.beatmysugar.com/images/Dietitian/'+res.data.Message.split(',')[2].split('=')[1].trim(),
                 updatedby : details[0].fld_staffid,
                 updatedon : moment().format('lll')
                 

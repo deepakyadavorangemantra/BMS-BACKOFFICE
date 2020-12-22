@@ -68,7 +68,7 @@ class Login extends React.Component {
                         localStorage.setItem('OldPassword',JSON.stringify(this.props.loginCredentials.Password))
                         localStorage.setItem('LoginDetail',JSON.stringify(obj.data))
                       
-                         Notiflix.Loading.Remove()
+                         Notiflix.Loading.Remove();
                         window.location.href='/dashboard'
                     }
                     else{

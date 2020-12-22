@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 import GetApiCall from '../GetApi';
 import PostApiCall from '../Api';
 import moment from 'moment';
+import imageConfig from '../Api/imageApi';
 
 const ImgUpload = ({
     onChange,
@@ -58,7 +59,7 @@ class BlogView extends Component {
             Page4: 'Pending',
             imagePreviewUrl: 'https://www.adcproductdesign.com/wp-content/uploads/2018/02/Realize-Icon-Blue.png',
             imagePreviewUrlCover: 'assets/images/blog.png',
-            ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+            ImageApiUrl :imageConfig.ImageApiUrl,
             Show: 'Yes',
             Tags : [],
 
@@ -293,7 +294,8 @@ class BlogView extends Component {
             PostApiCall.postRequest({
   
                 id : this.state.ArticleId,
-                photo : 'https://images.beatmysugar.com/images/Article/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                photo : res.data.Message.img_url,
+                // photo : 'https://images.beatmysugar.com/images/Article/'+res.data.Message.split(',')[2].split('=')[1].trim(),
                 updatedby : details[0].fld_staffid,
                 updatedon : moment().format('lll')
                 
@@ -347,7 +349,8 @@ class BlogView extends Component {
             PostApiCall.postRequest({
   
                 id : this.state.ArticleId,
-                photo : 'https://images.beatmysugar.com/images/Article/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+                photo : res.data.Message.img_url,
+                // photo : 'https://images.beatmysugar.com/images/Article/'+res.data.Message.split(',')[2].split('=')[1].trim(),
                 updatedby : details[0].fld_staffid,
                 updatedon : moment().format('lll')
                 
