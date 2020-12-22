@@ -399,6 +399,12 @@ class EduChapter extends Component {
                         <div className="card">
                             <div className="card-body">
                                 <div className="row align-items-center">
+                                        <div className="col "> 
+                                          <button onClick={()=>{ this.props.history.push({  pathname : '/edu-teaser'}); }} className="btn btn-primary" id="btn-new-event" >
+                                              <i className="uil-plus mr-1"></i>TEASER
+                                          </button>
+                                        </div>
+                                                
                                         <div className="col text-right">
                                         <button 
                                         onClick={()=>{
