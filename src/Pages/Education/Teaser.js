@@ -136,6 +136,7 @@ const Teaser =(props)=>{
                     },"UpdateTeaserContent").then((resultTopic) =>
                     resultTopic.json().then(objArticleSub => {
                         if(resultTopic.status == 200 || resultTopic.status == 201){
+                            debugger;
                             Notiflix.Loading.Remove();
                             Notiflix.Notify.Success('Content successfully update.');
                             values[index] = objArticleSub.data[0]
