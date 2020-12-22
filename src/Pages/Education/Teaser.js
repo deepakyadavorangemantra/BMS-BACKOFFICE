@@ -11,9 +11,10 @@ import TopicReactQuillTextEditor from '../../Components/Education_Components/Top
 
 const Teaser =(props)=>{
     const [ values, setValues] = useState([
-        // { fld_id : '', fld_content : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}
+        // { fld_id : '', fld_title : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}
     ]);
-
+    const [ title , SetTitle] = useState('Add Teaser');
+    const [ chapterid , SetChapterid] = useState('');
     const [ check, setCheck]=useState(false)
 
     
@@ -22,14 +23,26 @@ const Teaser =(props)=>{
     
 
     useEffect( ()=>{
-            getTeaserData();        
+        let state = props.location.state;
+        debugger;
+        console.log(state.chapterid);
+            SetChapterid(state.chapterid)
+            getTeaserData(state.chapterid);        
      },[]);
 
-    function getTeaserData(){
+    function getTeaserData(chapterid){
         Notiflix.Loading.Dots('Please wait...');
-        GetApiCall.getRequest("GetTeaserContentAll").then(resultdes =>
+        GetApiCall.getRequest("GetTeaserByChapter?chapterid="+chapterid).then(resultdes =>
             resultdes.json().then(obj => {
-                setValues(obj.data);              
+                debugger;
+                if(obj.data.length>0){
+                    setValues(obj.data);
+                    SetTitle(' Update Teaser')
+                }else{
+                    setValues([{ fld_id : '', fld_title : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}]);
+                    SetTitle(' Add Teaser')
+                }
+                              
                Notiflix.Loading.Remove();
             }));
      }
@@ -39,7 +52,7 @@ const Teaser =(props)=>{
     function handleChange( event, i) {
             if(values.length>0){
                 let contentArr =values;
-                contentArr[i].fld_content = event 
+                contentArr[i].fld_title = event 
                 setValues (contentArr);
             }
     }
@@ -80,26 +93,25 @@ const Teaser =(props)=>{
         if(contentArr.length>0){
             new_order = Math.max.apply(Math, contentArr.map(function(o) { return o.fld_orderno; }))
         }
-        contentArr.push({ fld_id : '', fld_content : '', fld_orderno : new_order+1, createdon  : moment().format('lll'), updatedon : moment().format('lll')});
+        contentArr.push({ fld_id : '', fld_title : '', fld_orderno : new_order+1, createdon  : moment().format('lll'), updatedon : moment().format('lll')});
         setValues(contentArr);
         setCheck(!check);
     }
 
     function saveContent(item, index){
-        if(item.fld_content !=''){
+        if(item.fld_title !=''){
             if(item.fld_id === ''){
-                debugger;
                 Notiflix.Loading.Dots('Please wait...');
                 PostApiCall.postRequest ({ 
-                        topicid: topicid, 
-                        content: item.fld_content, 
-                        orderno: item.fld_orderno, 
+                        chapterid: chapterid,
+                        title: item.fld_title, 
+                        // orderno: item.fld_orderno, 
                         createdon: moment().format('lll'),
                         status: 1
-                    },"AddTeaserContent").then((resultTopic) =>
+                    },"AddTeaser").then((resultTopic) =>
                     resultTopic.json().then(resultTopicContent => {
                         if(resultTopic.status == 200 || resultTopic.status == 201){
-                            debugger
+                            
                             Notiflix.Loading.Remove();
                             Notiflix.Notify.Success('Content successfully added.');
                             values[index].fld_id = resultTopicContent.data[0].fld_id;
@@ -115,16 +127,15 @@ const Teaser =(props)=>{
             }else{
                 Notiflix.Loading.Dots('Please wait...');
                 PostApiCall.postRequest ({ 
-                        topicid: topicid, 
-                        contentid: item.fld_id,
-                        content: item.fld_content, 
-                        orderno: item.fld_orderno, 
+                        // topicid: topicid, 
+                        fld_id: item.fld_id,
+                        fld_title: item.fld_title, 
+                        // orderno: item.fld_orderno, 
                         updatedon: moment().format('lll'),
                         status:1
-                    },"UpdateTeaserContent").then((resultTopic) =>
+                    },"UpdateTeaser").then((resultTopic) =>
                     resultTopic.json().then(objArticleSub => {
                         if(resultTopic.status == 200 || resultTopic.status == 201){
-                            debugger
                             Notiflix.Loading.Remove();
                             Notiflix.Notify.Success('Content successfully update.');
                             values[index] = objArticleSub.data[0]
@@ -174,14 +185,17 @@ const Teaser =(props)=>{
                                                     <div className="col-md-12">
                                                         <div style={{ display:'flex', marginTop:'10px'}} key={i}>
                                                             <label style={{ padding:'10px', fontWeight:'bold'}} for="validationCustom01">{item.fld_orderno}. </label>
-                                                            <div style={{ padding:'10px', fontWeight:'bold', width : '90%'}}>
+                                                            <div style={{ padding:'10px', fontWeight:'bold', width : '100%'}}>
                                                                 <TopicReactQuillTextEditor 
-                                                                    html={item.fld_content||''}
+                                                                    html={item.fld_title||''}
                                                                     onChange={(e)=>handleChange(e,i)}
                                                                     // indexContent = {i}
                                                                 />
+                                                            </div> </div> 
+                                                            <div style={{ padding:'10px', fontWeight:'bold', width : '100%'}}>
+                                                            <button className="btn btn-primary" type="submit" style={{marginTop:'10px', marginLeft:'3%'}}onClick={()=>{ saveContent(item, i)} }>{title}</button>
                                                             </div>
-                                                            <div style={{ padding:'10px', fontWeight:'bold'}}>
+                                                            {/* <div style={{ padding:'10px', fontWeight:'bold'}}>
                                                             <span style={{cursor:'pointer'}}><Save  onClick={()=>{ saveContent(item, i)}} /></span><br/><br/>
                                                             <Trash2
                                                                 
@@ -205,13 +219,14 @@ const Teaser =(props)=>{
                                                                 }}
                                                             />
                                                         
-                                                            </div>
-                                                        </div>     
+                                                            </div> */}
+                                                           
                                                     </div>  
                                                     // </li>   
                                                 )}   
                                                 
-                                                <button className="btn btn-primary" type="submit" style={{marginTop:'10px', marginLeft:'3%'}} onClick={ ()=> addClick()}>{ values.length > 0 ?'Add more':'Add Content'}</button>
+                                                {/* <button className="btn btn-primary" type="submit" style={{marginTop:'10px', marginLeft:'3%'}} onClick={ ()=> addClick()}>{ values.length > 0 ?'Add more':'Add Content'}</button> */}
+                                                
                                             </div>
                                     </div>
 {/*                                 

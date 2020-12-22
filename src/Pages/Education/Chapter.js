@@ -402,14 +402,6 @@ class EduChapter extends Component {
                                         {/* <div className="col text-right"> </div> */}
                                            
                                         <div className="col text-right">
-                                        <button style={{ marginRight:'10px'}}
-                                            onClick={()=>{
-                                                
-                                                this.props.history.push('/edu-teaser');
-                                            }}
-                                            className="btn btn-primary" id="btn-new-event" data-toggle="modal"><i
-                                                    className="uil-plus mr-1"></i>TEASER</button>
-                                       
                                         <button 
                                         onClick={()=>{
                                             // this.setState({
