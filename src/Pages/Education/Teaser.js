@@ -15,7 +15,7 @@ const Teaser =(props)=>{
     ]);
     const [ title , SetTitle] = useState('Add Teaser');
     const [ chapterid , SetChapterid] = useState('');
-    const [ check, setCheck]=useState(false)
+    const [ check, setCheck]=useState(false);
 
     
     const [ topicid, SetTopicid ] = useState('');
@@ -34,7 +34,6 @@ const Teaser =(props)=>{
         // GetApiCall.getRequest("GetTeaserByChapter?chapterid="+chapterid).then(resultdes =>
         GetApiCall.getRequest("GetTeaserContentAll").then(resultdes =>
         resultdes.json().then(obj => {
-                debugger;
                 if(obj.data.length>0){
                     setValues(obj.data);
                     SetTitle(' Update Teaser')
@@ -69,7 +68,7 @@ const Teaser =(props)=>{
                 if(results.status == 200 || results.status==201){
                     values.splice(i,1);
                     setValues (values);
-                    // setCheck(!check);
+                    setCheck(!check);
                         Notiflix.Loading.Remove()
                         Notiflix.Notify.Success('Content successfully deleted.')
                     
@@ -90,9 +89,9 @@ const Teaser =(props)=>{
     function addClick(){
         let new_order= values.length;
         let contentArr =values;
-        if(contentArr.length>0){
-            new_order = Math.max.apply(Math, contentArr.map(function(o) { return o.fld_orderno; }))
-        }
+        // if(contentArr.length>0){
+        //     new_order = Math.max.apply(Math, contentArr.map(function(o) { return o.fld_orderno; }))
+        // }
         contentArr.push({ fld_id : '', fld_content : '', fld_orderno : new_order+1, createdon  : moment().format('lll'), updatedon : moment().format('lll')});
         setValues(contentArr);
         setCheck(!check);
@@ -111,7 +110,6 @@ const Teaser =(props)=>{
                     },"addTeasercontent").then((resultTopic) =>
                     resultTopic.json().then(resultTopicContent => {
                         if(resultTopic.status == 200 || resultTopic.status == 201){
-                            
                             Notiflix.Loading.Remove();
                             Notiflix.Notify.Success('Content successfully added.');
                             values[index].fld_id = resultTopicContent.data[0].fld_id;
@@ -136,10 +134,9 @@ const Teaser =(props)=>{
                     },"UpdateTeaserContent").then((resultTopic) =>
                     resultTopic.json().then(objArticleSub => {
                         if(resultTopic.status == 200 || resultTopic.status == 201){
-                            debugger;
                             Notiflix.Loading.Remove();
                             Notiflix.Notify.Success('Content successfully update.');
-                            values[index] = objArticleSub.data[0]
+                            values[index] = objArticleSub.data
                             setValues(values);
                         
                         }else
@@ -186,17 +183,17 @@ const Teaser =(props)=>{
                                                     <div className="col-md-12">
                                                         <div style={{ display:'flex', marginTop:'10px'}} key={i}>
                                                             {/* <label style={{ padding:'10px', fontWeight:'bold'}} for="validationCustom01">{item.fld_orderno}. </label> */}
-                                                            <div style={{ padding:'10px', fontWeight:'bold', width : '100%'}}>
+                                                            <div style={{ padding:'10px', fontWeight:'bold', width : '90%'}}>
                                                                 <TopicReactQuillTextEditor 
                                                                     html={item.fld_content||''}
                                                                     onChange={(e)=>handleChange(e,i)}
                                                                     // indexContent = {i}
                                                                 />
-                                                            </div> </div> 
-                                                            <div style={{ padding:'10px', fontWeight:'bold', width : '100%'}}>
+                                                            </div> 
+                                                            {/* <div style={{ padding:'10px', fontWeight:'bold', width : '100%'}}>
                                                             <button className="btn btn-primary" type="submit" style={{marginTop:'10px', marginLeft:'3%'}}onClick={()=>{ saveContent(item, i)} }>{title}</button>
-                                                            </div>
-                                                            {/* <div style={{ padding:'10px', fontWeight:'bold'}}>
+                                                            </div> */}
+                                                            <div style={{ padding:'10px', fontWeight:'bold'}}>
                                                             <span style={{cursor:'pointer'}}><Save  onClick={()=>{ saveContent(item, i)}} /></span><br/><br/>
                                                             <Trash2
                                                                 
@@ -220,13 +217,13 @@ const Teaser =(props)=>{
                                                                 }}
                                                             />
                                                         
-                                                            </div> */}
-                                                           
+                                                            </div>
+                                                        </div> 
                                                     </div>  
                                                     // </li>   
                                                 )}   
                                                 
-                                                {/* <button className="btn btn-primary" type="submit" style={{marginTop:'10px', marginLeft:'3%'}} onClick={ ()=> addClick()}>{ values.length > 0 ?'Add more':'Add Content'}</button> */}
+                                                <button className="btn btn-primary" type="submit" style={{marginTop:'10px', marginLeft:'3%'}} onClick={ ()=> addClick()}>{ values.length > 0 ?'Add more':'Add Content'}</button>
                                                 
                                             </div>
                                     </div>
