@@ -180,6 +180,10 @@ import TestimonialsList from './TestimonialsList';
 import AddTestimonialMaster from './AddTestimonialMaster';
 import ViewTestimonialMaster from './ViewTestimonialMaster';
 
+
+import ShippingCharges from './ShippingCharges';
+
+
 class Sidenav extends React.Component {
 
     constructor(props){
@@ -209,7 +213,8 @@ class Sidenav extends React.Component {
                 <LifeBuoy/>,
                 <CheckCircle />,
                 <Gift/>,
-                <Image />
+                <Image />,
+                <MessageSquare/>
                 
             ]
         }
@@ -543,12 +548,13 @@ class Sidenav extends React.Component {
                             <span style={{paddingLeft:'3px'}}>SMS </span>
                         </a>
                     </li>
-                        <li>
+
+                      {/* <li>
                                 <a href='/testimonialmanagementlist'>
                                      <MessageSquare/>
                                      <span style={{paddingLeft:'3px'}}>Testimonials</span>
                                  </a>
-                             </li>
+                             </li> */}
 
                    
 
@@ -558,6 +564,13 @@ class Sidenav extends React.Component {
                                 <span style={{paddingLeft:'3px'}}>Festive Offers</span>
                             </a>
                         </li> */}
+
+                        <li>
+                        <a href='/shipping_charges'>
+                             <LifeBuoy/>
+                             <span style={{paddingLeft:'3px'}}>Shipping Charges </span>
+                         </a>
+                     </li>
 
                     <li>
                            <a href='/changepassword'>
@@ -789,6 +802,7 @@ class Sidenav extends React.Component {
         <Route exact path='/addtestimonialsitemmaster' component={AddTestimonialMaster}></Route>
         <Route exact path='/viewtestimonialmaster' component={ViewTestimonialMaster}></Route>
 
+        <Route exact path='/shipping_charges' component={ShippingCharges}></Route>
 
        </Switch>
       
