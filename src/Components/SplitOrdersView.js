@@ -541,7 +541,7 @@ if(results1.status == 200 || results1.status==201){
                           {
                           this.setState({
                             VendorDeductAmount : text.target.value,
-                            BMSNewSplit : parseFloat(this.state.TotalSplitAmount - text.target.value).toFixed(2),
+                            BMSNewSplit : parseFloat(parseFloat(this.state.TotalSplitAmount)-parseFloat(this.state.VendorCurrentSplit-text.target.value)).toFixed(2),
                             VendorNewSplit:parseFloat(this.state.VendorCurrentSplit-text.target.value).toFixed(2)
                           })
         
