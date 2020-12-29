@@ -10,10 +10,10 @@ class TextEditor extends Component{
         super(props)
         this.state = {
             value : '',
-        }
+        } 
     }
     onChange=(data)=>{
-        debugger;
+        debugger; 
         this.setState({value:data})
     }
   render(){
@@ -45,6 +45,7 @@ class TextEditor extends Component{
     }
 
     return(
+      <div style={{ marginTop: '157px', marginLeft:'100px', display: 'block' }}>
           <CKEditor
             required
             editor={ClassicEditor}
@@ -55,6 +56,7 @@ class TextEditor extends Component{
               this.onChange(data)
             }}
           />
+          </div>
     )
   }
 }

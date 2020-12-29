@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
+// import { ImageResize } from 'quill-image-resize-module'
+// Quill.register('modules/imageResize', ImageResize)
 import 'react-quill/dist/quill.snow.css';
 
 // class TopicReactQuillTextEditor extends React.Component {
@@ -23,6 +25,11 @@ const TopicReactQuillTextEditor =(props)=>{
     
         let  Editor={};
          Editor.modules = {
+          
+            // imageResize: {
+            //   displaySize: true
+            //   // parchment: Quill.import('parchment')
+            // },
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
               ['blockquote', 'code-block'],

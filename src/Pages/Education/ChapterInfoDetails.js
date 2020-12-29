@@ -5,7 +5,7 @@ import Notiflix from "notiflix";
 import moment from 'moment';
 import GetApiCall from '../../GetApi';
 import PostApiCall from '../../Api';
-import TopicForm from '../../Components/Education_Components/TopicEditorNew';
+import TopicForm from '../../Components/Education_Components/TopicEditorWithDrag';
 import QuestionListView from '../../Components/Education_Components/QuestionListDrag';
 import QuestionForm from '../../Components/Education_Components/QuestionForm';
 import OptionForm from '../../Components/Education_Components/OptionForm';
@@ -489,11 +489,34 @@ class ChapterInfoDetails extends Component {
 
 
     updateTpoicListContent =(topicEditData)=>{
-        debugger;
         let TopicsList = this.state.TopicsList;
         let findIndex = this.state.TopicsList.findIndex(item => item.fld_id == topicEditData.fld_id);
         TopicsList[findIndex] = topicEditData;
         this.setState( { TopicsList : TopicsList , topicEditData: topicEditData} );
+    }
+
+    setTopicContentOrderChange=(topicEditData, changeOrderList)=>{
+        debugger;
+        Notiflix.Loading.Dots('Please wait...');
+        var login=localStorage.getItem('LoginDetail');
+            var details=JSON.parse(login)
+
+            PostApiCall.postRequest ({
+                data: changeOrderList
+            },"UpdateTopicContentOrder").then((resultTopic) =>
+            resultTopic.json().then(objArticleSub => {
+                if(resultTopic.status == 200 || resultTopic.status == 201){
+                    this.updateTpoicListContent(topicEditData)
+                    Notiflix.Loading.Remove();
+                    Notiflix.Notify.Success('Topic successfully updated.')
+                    
+                }else
+                {
+                    Notiflix.Loading.Remove();
+                    Notiflix.Notify.Failure('Went something wrong!')
+                }
+            })
+        )
     }
 
     render(){
@@ -547,6 +570,7 @@ class ChapterInfoDetails extends Component {
                                             updateTopicData={this.updateTopicData}
                                             saveTopicData={this.saveTopicData}
                                             updateTpoicListContent={this.updateTpoicListContent}
+                                            setTopicContentOrderChange={this.setTopicContentOrderChange}
                                             /><br/>
                                     </div>
                                     

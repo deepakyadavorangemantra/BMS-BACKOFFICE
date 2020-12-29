@@ -81,7 +81,7 @@ const QuestionListView =( props)=> {
             <tbody>
             {QuestionList.length == 0 ? 
                 <tr>
-                    <td colSpan={5} style={{textAlign:'center'}}>No Topics Available this chapter</td></tr> : 
+                    <td colSpan={5} style={{textAlign:'center'}}>No Questions Available this chapter</td></tr> : 
                     ''} 
                 {QuestionList.sort((a, b) => a.fld_orderno - b.fld_orderno)
                 .map((data) => (

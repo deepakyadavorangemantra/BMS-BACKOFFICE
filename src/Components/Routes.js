@@ -3,7 +3,7 @@ import { Route } from "react-router-dom"
 import Login from './Login'
 import Sidenav from './Sidenav';
 import AwsImageUpload from '../Pages/AwsImageUpload';
-
+import TextEditor from '../Components/Education_Components/TopicTextEditor'
 
 
 
@@ -12,6 +12,7 @@ const Routes = () => {
         <div> 
         <Route exact path='/' component={Login}></Route>
         <Route exact path='/awsimageupload' component={AwsImageUpload}></Route>
+        <Route exact path='/textEditor' component={TextEditor}></Route>
         <Route exact path='/dashboard' component={Sidenav}></Route>
         {window.location.pathname != '/' && window.location.pathname != '/dashboard' ? <Sidenav></Sidenav> : <Route/> }
     
