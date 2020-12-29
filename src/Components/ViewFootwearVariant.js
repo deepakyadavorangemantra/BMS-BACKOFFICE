@@ -205,7 +205,7 @@ class ViewFootwearVariant extends Component {
 
         var vardt = localStorage.getItem('FootwearVariantDetails')
         var VariantData = JSON.parse(vardt)
-
+console.log(VariantData)
 
         this.props.setfootwearvarient(VariantData.fld_name)
         this.props.setfootwearitemsize(VariantData.fld_sizeid)
@@ -314,7 +314,7 @@ class ViewFootwearVariant extends Component {
                 }
                 
             }
-
+console.log(qua1)
             this.setState({
                 Photos : qua1,
                 imageCount : cn
