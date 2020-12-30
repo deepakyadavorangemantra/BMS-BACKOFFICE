@@ -75,6 +75,9 @@ const ChapterForm =(props)=>{
         if( Duration === undefined || Duration == ''){
             flag = false;
             Notiflix.Notify.Failure('Please enter time duration of chapter.')
+        }else if( !Duration.match(/^([01]\d|2[0-3]):?([0-5]\d)$/) ){
+            flag = false;
+            Notiflix.Notify.Failure('Please enter valid time format .')
         }
         // if( Description=== undefined || Description == ''){
         //     flag = false;
@@ -129,9 +132,12 @@ const ChapterForm =(props)=>{
                                 </div>
                                 <div className="form-group mb-3">
                                     <label for="validationCustom01">Duration<span className="mandatory">*</span></label>
-                                    <input type="time" className="form-control" 
+                                    {/* <input type="time" class="without_ampm"
                                     value={Duration}
-                                    onChange={(e)=>{ SetDuration(e.target.value) }}/>
+                                    onChange={(e)=>{ SetDuration(e.target.value) }}/> */}
+                                    <input type="text" value={Duration} className="form-control"
+                                    onChange={(e)=>{ SetDuration(e.target.value) }} /> ex: 02:22
+                                 
                                 </div>
                                 <div className="form-group mb-3">
                                     <label for="validationCustom01">Description<span className="mandatory"></span></label>
