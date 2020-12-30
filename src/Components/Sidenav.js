@@ -226,7 +226,8 @@ class Sidenav extends React.Component {
                 <CheckCircle />,
                 <Gift/>,
                 <Image />,
-                <MessageSquare/>
+                <MessageSquare/>,
+                <LifeBuoy/>
                 
             ]
         }
@@ -605,12 +606,7 @@ class Sidenav extends React.Component {
                             </a>
                         </li> */}
 
-                        <li>
-                        <a href='/shipping_charges'>
-                             <LifeBuoy/>
-                             <span style={{paddingLeft:'3px'}}>Shipping Charges </span>
-                         </a>
-                     </li>
+                       
 
                     <li>
                            <a href='/changepassword'>
