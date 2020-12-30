@@ -1,10 +1,13 @@
+
+
+
+
 import React, { Component, Fragment } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-
+import imageConfig from '../../Api/imageApi';
 // import { getToken } from "../services/auth"
-const ImageApiUrl = 'https://images.beatmysugar.com/api/Image/SaveImage';
-const GetImageApiUrl = `https://images.beatmysugar.com/images/`;
+
 class TextEditor extends Component{
     constructor(props){
         super(props)
@@ -36,16 +39,25 @@ class TextEditor extends Component{
           '|',
           'imageUpload',
           'undo',
-          'redo'
-        ]
+          'redo',
+        ],
+        
       },
+      image: {
+        toolbar: [
+            'imageStyle:full',
+            'imageStyle:side',
+            '|',
+            'imageTextAlternative'
+        ]
+    },
       table: {
         contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
       }
     }
 
     return(
-      <div style={{ marginTop: '157px', marginLeft:'100px', display: 'block' }}>
+      <div style={{ marginTop: '157px', marginLeft:'20%', display: 'block' }}>
           <CKEditor
             required
             editor={ClassicEditor}
@@ -94,7 +106,7 @@ class MyUploadAdapter {
     // Example implementation using XMLHttpRequest.
     _initRequest() {
         const xhr = this.xhr = new XMLHttpRequest();
-        xhr.open('POST', ImageApiUrl, true);
+        xhr.open('POST', imageConfig.ImageApiUrl, true);
         xhr.responseType = 'json';        
     }
 
@@ -115,7 +127,8 @@ class MyUploadAdapter {
             // If the upload is successful, resolve the upload promise with an object containing
             // at least the "default" URL, pointing to the image on the server.
             resolve({
-                default: response.s3Url
+              
+                default: response.Message.img_url
             });
         } );
 
