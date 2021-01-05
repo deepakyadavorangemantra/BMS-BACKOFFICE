@@ -108,7 +108,7 @@ class BooksGrid extends Component {
                         </div>
                     </div> 
 
-                    <div class="row" style={{display : this.state.AddAccess ? '' : 'none'}}>
+                    <div class="row" style={{display : this.state.AddAccess ? '' : ''}}>
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
@@ -153,6 +153,27 @@ class BooksGrid extends Component {
                                         
                                     </tr>
                                 </thead>
+
+                                {/* <tbody>
+                              <tr>
+                                  <td>#123</td>
+                                  <td>{"The Benefits of Ragi"} 
+                                      <br/><a class="variant-list"
+                                      onClick={()=>{
+                                       
+                                       
+                                        window.location.href = "/bookvariantlist"
+                                    }}
+                                > 2 VariantAvailable ( <span style={{color:'red'}}>0 Pending</span>, <span style={{color:'green'}}>0 Approved</span> )</a>
+                                     </td>
+                                     <td>Pablo Caplin</td>
+                                     <td>HW Wellness Solutions Pvt Ltd</td>
+                                     <td>12072100</td>
+                                     <td>Approved</td>
+                                  <td><Edit3/></td>
+                              </tr>
+                                 </tbody> */}
+
                                 <tbody>
                                 {this.state.BookData.length == 0 ? 
                                 <tr><td colSpan={7} style={{textAlign:'center'}}>No Book Item Master Available</td></tr> : 
@@ -197,7 +218,7 @@ class BooksGrid extends Component {
                                 <span  >
                                 <Edit3/>
                                     </span>
-                                    {/* &nbsp;&nbsp;<Trash2/> */}
+                                  
                                     </div> &nbsp;&nbsp;
                                      </td>
                                   
@@ -210,6 +231,7 @@ class BooksGrid extends Component {
                                     
                                    
                                     </tbody>
+                              
                                </table>
                                     </div>
                                 </div>
