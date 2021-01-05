@@ -40,9 +40,7 @@ class SplitOrdersView extends React.Component
           SpecialRegex: /[-!$%^&*()_+|~=`"{}\[\]:\/;<>?,.@#]/,
           EmailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
           UrlRegex: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
-    
-
-            VendorOrders : [],
+           VendorOrders : [],
             VendorOrderDetail : [],
             open : false,
 
@@ -57,8 +55,12 @@ class SplitOrdersView extends React.Component
             VendOid : '',
             Vendetid : '',
 
+
             ShipChargeToVendor : true,
-            VendorDeductAmount:0
+            VendorDeductAmount:0,
+            VendOid2 : '',
+            Vendetid2 : '',
+            openedit:false,
 
         }
     }
@@ -600,7 +602,9 @@ if(results1.status == 200 || results1.status==201){
                   dt2[this.state.Vendetid].fld_vendornewamount = this.state.VendorNewSplit
                   dt2[this.state.Vendetid].fld_bmsnewamount = this.state.BMSNewSplit
                   dt2[this.state.Vendetid].fld_adjustreason = this.state.AdjustmentReason
-                // console.log(dt)
+                  dt2[this.state.Vendetid].fld_vednordeductamount = this.state.VendorDeductAmount
+                
+                  // console.log(dt)
         
                 this.setState({
                   VendorOrders : dt,
@@ -614,6 +618,7 @@ if(results1.status == 200 || results1.status==201){
                   VendOid : '',
                   Vendetid : '',
                   AdjustmentReason : '',
+                  VendorDeductAmount:0
                  
                 })
         
@@ -633,6 +638,173 @@ if(results1.status == 200 || results1.status==201){
          
         </div>
             </Modal>
+
+
+            {/*Update Adjust Payment*
+
+            <Modal class="modal-content"  
+            open={this.state.openedit}
+            onClose={()=>{
+                this.setState({openedit : false})
+              }}
+           
+             center>
+        
+            <div class="modal-content modelcontent2">
+              <div class="modal-header">
+                <h4 class="modal-title">View Adjust Vendor Payment</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="validationCustom01">BMS Split Amount<span class="mandatory">*</span></label>
+                        <input type="text" class="form-control"  
+                        disabled
+                        value={this.state.BMSCurrentSplit}
+                        />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="validationCustom01">Vendor Split Amount <span class="mandatory">*</span></label>
+                        <input type="text" class="form-control"  
+                        disabled
+                        value={this.state.VendorCurrentSplit}
+                        />
+                    </div>
+                </div>
+        
+               
+        
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="validationCustom01">BMS Split Amount (*New)<span class="mandatory">*</span></label>
+                        <input type="text" class="form-control" 
+                        disabled 
+                        value={this.state.BMSNewSplit}
+                        />
+                    </div>
+                </div>
+        
+                <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="validationCustom01">Vendor Split Amount (*New)<span class="mandatory">*</span></label>
+                    <input type="text" class="form-control"  
+                    value={this.state.VendorNewSplit}
+                    disabled 
+                     />
+                </div>
+            </div>
+        
+        
+                <div class="col-md-12">
+                    <div class="form-group mb-3">
+                        <label for="validationCustom01">Vendor Adjustment Amount<span class="mandatory">*</span></label>
+                        <input type="text" class="form-control"  
+                        value={this.state.VendorDeductAmount}
+                        onChange={(text)=>{
+        
+                          if(this.state.DecimalRegex.test(text.target.value))
+                          {
+                          this.setState({
+                            VendorDeductAmount : text.target.value,
+                            BMSNewSplit : parseFloat(parseFloat(this.state.TotalSplitAmount)-parseFloat(this.state.VendorCurrentSplit-text.target.value)).toFixed(2),
+                            VendorNewSplit:parseFloat(this.state.VendorCurrentSplit-text.target.value).toFixed(2)
+                          })
+        
+                        }
+                        }}
+                        />
+                    </div>
+                </div>
+        
+        
+                <div class="col-md-12">
+                    <div class="form-group mb-3">
+                        <label for="validationCustom01">Adjustment Reason<span class="mandatory">*</span></label>
+                        <textarea class="form-control" 
+                        onChange={(text)=>{
+                          this.setState({
+                            AdjustmentReason : text.target.value
+                          })
+                        }}
+                        value={this.state.AdjustmentReason}
+                        />
+                    </div>
+                </div>
+        
+                </div>
+               
+              </div>
+              <div class="modal-footer">
+              <button class="btn btn-primary" type="submit" style={{float:'right'}}  onClick={()=>{
+                 this.setState({
+                  openedit : false,
+                  BMSCurrentSplit : 0,
+                  VendorCurrentSplit : 0,
+                  BMSNewSplit : 0,
+                  VendorNewSplit : 0,
+                  TotalSplitAmount : 0,
+                  VendOid2 : '',
+                  Vendetid2 : '',
+                  AdjustmentReason : '',
+                  VendorDeductAmount:0
+                })
+            }}>Close</button>
+             
+              <button class="btn btn-primary" type="submit" style={{float:'right'}}
+              onClick={()=>{
+                if(this.state.VendorDeductAmount != ''){
+                  if(this.state.AdjustmentReason != ''){
+        
+                  var dt = [...this.state.VendorOrders]
+                  var dt2 = [...dt[this.state.VendOid2].VenDet]
+        
+                  // console.log(dt2[this.state.Vendetid])
+        
+                  // console.log(dt[this.state.VendOid])
+        
+                  dt2[this.state.Vendetid2].fld_vendornewamount = this.state.VendorNewSplit
+                  dt2[this.state.Vendetid2].fld_bmsnewamount = this.state.BMSNewSplit
+                  dt2[this.state.Vendetid2].fld_adjustreason = this.state.AdjustmentReason
+                  dt2[this.state.Vendetid2].fld_vednordeductamount = this.state.VendorDeductAmount
+                
+                // console.log(dt)
+        
+                this.setState({
+                  VendorOrders : dt,
+                  openedit : false,
+        
+                  BMSCurrentSplit : 0,
+                  VendorCurrentSplit : 0,
+                  BMSNewSplit : 0,
+                  VendorNewSplit : 0,
+                  TotalSplitAmount : 0,
+                  VendOid2 : '',
+                  Vendetid2 : '',
+                  AdjustmentReason : '',
+                  VendorDeductAmount:0
+                 
+                })
+        
+        
+              }else{
+                Notiflix.Notify.Failure('Please enter adjustment reason/comments.')
+              }
+                }else{
+                  Notiflix.Notify.Failure('Please enter Vendor Split amount after adjustment.')
+                }
+              }}
+              >Update</button>
+                <span>
+        
+                </span>
+              </div>
+         
+        </div>
+            </Modal>
+ End Update Adjust Payment */}
             
             <div class="content">
               <div class="container-fluid">
@@ -960,11 +1132,18 @@ cellpadding="0">
                                            VendOid : i,
                                            Vendetid : index,
                                            open : true,
+                                           BMSNewSplit: data.fld_bmsnewamount,
+                                           VendorNewSplit:data.fld_vendornewamount,
+                                           AdjustmentReason:data.fld_adjustreason,
+                                           VendorDeductAmount:data.fld_vednordeductamount
+
+
                                         
                                           
                                          })
                                        }}
                                        >Adjust Payment</button>
+
                                              </td>               
                                 
                                          
@@ -1210,7 +1389,8 @@ cellpadding="0">
             newbmssplitamount : data1.fld_vendornewamount == undefined ? 0 : data1.fld_bmsnewamount,
             updatedon : moment().format('lll'),
             updatedby : 0,
-            adjustreason : data1.fld_adjustreason
+            adjustreason : data1.fld_adjustreason,
+            vednordeductamount:data1.fld_vednordeductamount
         
         },"AddVendorSplitLog").then((results2) => 
         
