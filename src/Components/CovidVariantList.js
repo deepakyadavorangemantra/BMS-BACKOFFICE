@@ -144,7 +144,7 @@ console.log(MasterData.fld_id)
                         <div class="card-body">
                             <div class="row align-items-center">
                             <div class="col ">
-                            <a href='/covidandhealthessentiallist'>
+                            <a href='/covidessentialsmasterlist'>
                             <button 
                             
                             class="btn btn-primary" id="btn-new-event"><i

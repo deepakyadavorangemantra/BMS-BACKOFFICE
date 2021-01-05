@@ -180,6 +180,10 @@ import TestimonialsList from './TestimonialsList';
 import AddTestimonialMaster from './AddTestimonialMaster';
 import ViewTestimonialMaster from './ViewTestimonialMaster';
 
+
+import ShippingCharges from './ShippingCharges';
+
+
 class Sidenav extends React.Component {
 
     constructor(props){
@@ -210,7 +214,8 @@ class Sidenav extends React.Component {
                 <CheckCircle />,
                 <Gift/>,
                 <Image />,
-                <MessageSquare/>
+                <MessageSquare/>,
+                <LifeBuoy/>
                 
             ]
         }
@@ -561,6 +566,8 @@ class Sidenav extends React.Component {
                             </a>
                         </li> */}
 
+                       
+
                     <li>
                            <a href='/changepassword'>
                                 <Lock/>
@@ -703,7 +710,7 @@ class Sidenav extends React.Component {
 
         <Route exact path='/offerlist' component={OfferGrid}></Route>
         <Route exact path='/addoffer' component={AddOffer}></Route>
-        <Route exact path='/offerView' component={OfferView}></Route>
+        <Route exact path='/viewnewoffer' component={OfferView}></Route>
         
         <Route exact path='/neworders' component={NewOrderList}></Route>
         <Route exact path='/vieworder' component={NewOrderView}></Route>
@@ -791,6 +798,7 @@ class Sidenav extends React.Component {
         <Route exact path='/addtestimonialsitemmaster' component={AddTestimonialMaster}></Route>
         <Route exact path='/viewtestimonialmaster' component={ViewTestimonialMaster}></Route>
 
+        <Route exact path='/shipping_charges' component={ShippingCharges}></Route>
 
        </Switch>
       
