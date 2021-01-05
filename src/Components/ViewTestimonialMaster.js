@@ -41,6 +41,7 @@ const ViewTestimonialMaster=()=> {
     const [id,setid] = useState('')
 
     const [AddAccess, setAddAccess] = useState(false)
+    const [ApproveAccess, setApproveAccess] = useState(false)
 
     useEffect(() => {
         // Notiflix.Loading.Dots('');
@@ -82,7 +83,13 @@ const ViewTestimonialMaster=()=> {
                
                          setAddAccess(true)
                        }
-                     }
+                     }  if(filteredRights[i].fld_menuname == 'Approve Testimonial'){
+         
+                        if(filteredRights[i].fld_access == 1){
+                
+                          setApproveAccess(true)
+                        }
+                      }
                     
                    con = con + 1
                    if(con == filteredRights.length){
@@ -415,6 +422,17 @@ const ViewTestimonialMaster=()=> {
                                                                             //     })
                                                                             //   }}
                                                                               onClick={SaveProduct}>Update Testimonial</button>
+
+                                                                            <button className="btn btn-secondary sw-btn-next"
+                                                                                disabled={!ApproveAccess}
+                                                                            //  onClick={()=>{
+                                                       
+                                                                            //     setState({
+                                                                            //         PageTitle : '5',
+                                                                            //         Page4 : 'Done'
+                                                                            //     })
+                                                                            //   }}
+                                                                              onClick={SaveProduct}>Approve Testimonial</button>
                                                                         </div>
                                                                     </div> 
                                                                        
