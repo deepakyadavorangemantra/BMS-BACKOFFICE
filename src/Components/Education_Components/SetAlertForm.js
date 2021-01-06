@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Notiflix from "notiflix";
 import CKEditor from 'ckeditor4-react';
-
+import ImageUploadModel from '../../Pages/Education/ImageUploadModel';
 const SetAlertForm =(props)=>{
     const [  topicTitle, SetTopicTitle ] = useState('Add Alert');
     const [  buttonText, setButtonText ] = useState('Save');
@@ -105,7 +105,7 @@ const SetAlertForm =(props)=>{
                     <button className="btn btn-primary" style={{float:'right'}} onClick={()=>{ setShowDescription(true) }}>Edit</button>
                 </div>
                 }
-              
+              <ImageUploadModel folder='alertMessage'/>
                 </div>
             </React.Fragment>
         )

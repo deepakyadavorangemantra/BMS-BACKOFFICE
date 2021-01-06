@@ -10,6 +10,7 @@ import QuestionListView from '../../Components/Education_Components/QuestionList
 import QuestionForm from '../../Components/Education_Components/QuestionForm';
 import OptionForm from '../../Components/Education_Components/OptionForm';
 import imageConfig from '../../Api/imageApi';
+import ImageUploadModel from './ImageUploadModel';
 // import TopicReactQuillTextEditor from '../../Components/Education_Components/TopicQuillTextEditor';
 
 class ChapterInfoDetails extends Component {
@@ -629,7 +630,11 @@ class ChapterInfoDetails extends Component {
                                 </div>
                             </div>
                         </div> : ''}
+
+                      
                     </div>
+                </div>
+                <div><ImageUploadModel folder='topicContent'/>
                 </div>
             </div> 
         )

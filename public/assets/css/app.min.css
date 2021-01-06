@@ -4389,3 +4389,23 @@ div#apexcharts15hly9ud{
 	appearance: none;
 	margin: -10px; 
   }
+  .content-my-float{
+	z-index: 999;
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#507dc0;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	cursor: pointer;
+}
+.my-float{
+	margin-top:22px;
+	color:#FFF;
+}
+.my-copy{
+	color:#FFF;
+}

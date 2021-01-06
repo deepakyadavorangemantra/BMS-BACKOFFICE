@@ -8,7 +8,7 @@ import { connectAdvanced } from 'react-redux';
 import PostApiCall from '../../Api';
 import GetApiCall from '../../GetApi';
 import TopicReactQuillTextEditor from '../../Components/Education_Components/TopicQuillTextEditor';
-
+import ImageUploadModel from './ImageUploadModel';
 const Teaser =(props)=>{
     const [ values, setValues] = useState([
         // { fld_id : '', fld_content : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}
@@ -51,7 +51,7 @@ const Teaser =(props)=>{
     function handleChange( event, i) {
             if(values.length>0){
                 let contentArr =values;
-                contentArr[i].fld_content = event 
+                contentArr[i].fld_content = event.editor.getData()  
                 setValues (contentArr);
             }
     }
@@ -184,11 +184,18 @@ const Teaser =(props)=>{
                                                         <div style={{ display:'flex', marginTop:'10px'}} key={i}>
                                                             {/* <label style={{ padding:'10px', fontWeight:'bold'}} for="validationCustom01">{item.fld_orderno}. </label> */}
                                                             <div style={{ padding:'10px', fontWeight:'bold', width : '90%'}}>
-                                                                <TopicReactQuillTextEditor 
+                                                                {/* <TopicReactQuillTextEditor 
                                                                     html={item.fld_content||''}
                                                                     onChange={(e)=>handleChange(e,i)}
                                                                     // indexContent = {i}
-                                                                />
+                                                                /> */}
+                                                                <CKEditor
+                                                                config={{
+                                                                    extraPlugins: "justify,font,colorbutton",
+                                                                    }}
+                                                                data={item.fld_content||''}
+                                                                onChange={(e)=>handleChange(e,i)}
+                                                            />
                                                             </div> 
                                                             {/* <div style={{ padding:'10px', fontWeight:'bold', width : '100%'}}>
                                                             <button className="btn btn-primary" type="submit" style={{marginTop:'10px', marginLeft:'3%'}}onClick={()=>{ saveContent(item, i)} }>{title}</button>
@@ -247,6 +254,7 @@ const Teaser =(props)=>{
                         </div>
                         </div>
                     </div>
+                    <ImageUploadModel folder='teaser'/>
                 </div>
             </React.Fragment>
         )
