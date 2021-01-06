@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Notiflix from "notiflix";
 import CKEditor from 'ckeditor4-react';
+import ImageUploadModel from '../../Pages/Education/ImageUploadModel';
 
 const CongratulationForm =(props)=>{
     const [  pageTitle, SetPageTitle ] = useState('Add Congratulation');
@@ -10,7 +11,6 @@ const CongratulationForm =(props)=>{
     const [ isActive, SetIsActive ] = useState('Yes');
 
     useEffect( ()=>{
-        debugger;
         if(props.CongratulationsEditData !== ''){
             SetPageTitle('Update Congratulation')
             SetCongratulationId( props.CongratulationsEditData ? props.CongratulationsEditData.fld_id : '');
@@ -104,7 +104,7 @@ const CongratulationForm =(props)=>{
 
                     </span>
                 </div>
-              
+                <ImageUploadModel folder='congratulation'/>
                 </div>
             </React.Fragment>
         )

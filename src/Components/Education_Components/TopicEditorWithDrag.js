@@ -83,13 +83,14 @@ const TopicForm =(props)=>{
 
       
     function handleChange( event, i) {
+        debugger;
         let contentArr = ''
         if(props.topicEditData.contents && (props.topicEditData.contents.length > values.length)){
             contentArr = props.topicEditData.contents;
-            contentArr[i].fld_content = event 
+            contentArr[i].fld_content = event.editor.getData() 
         }else{
             contentArr =values;
-            contentArr[i].fld_content = event 
+            contentArr[i].fld_content = event.editor.getData() 
         }
         setValues (contentArr);
         setCheck(!check);
@@ -310,11 +311,20 @@ const TopicForm =(props)=>{
                                                 <div className="col-md-12">
                                                     <div style={{ display:'flex', marginTop:'10px'}} key={i}>
                                                         <label style={{ padding:'10px', fontWeight:'bold'}} for="validationCustom01">{item.fld_orderno}. </label>
-                                                        <div style={{ padding:'10px', fontWeight:'bold', width : '90%'}}>
+                                                        {/* <div style={{ padding:'10px', fontWeight:'bold', width : '90%'}}>
                                                             <TopicReactQuillTextEditor 
                                                                 html={item.fld_content||''}
                                                                 onChange={(e)=>handleChange(e,i)}
                                                                 // indexContent = {i}
+                                                            />
+                                                        </div> */}
+                                                        <div className="niceeditors">
+                                                            <CKEditor
+                                                                config={{
+                                                                    extraPlugins: "justify,font,colorbutton",
+                                                                    }}
+                                                                data={item.fld_content||''}
+                                                                onChange={(e)=>handleChange(e,i)}
                                                             />
                                                         </div>
                                                         
