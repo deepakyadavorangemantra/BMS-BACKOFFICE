@@ -838,6 +838,7 @@ class Sidenav extends React.Component {
         <Route exact path='/addtestimonialsitemmaster' component={AddTestimonialMaster}></Route>
         <Route exact path='/viewtestimonialmaster' component={ViewTestimonialMaster}></Route>
 
+        <Route exact path='/shipping_charges' component={ShippingCharges}></Route>
         {/* Education Module */}
 
         <Route exact path='/edu-chapter' component={EduChapter}></Route>
@@ -851,7 +852,7 @@ class Sidenav extends React.Component {
         <Route exact path='/edu-setalert' component={SetAlert}></Route>
         <Route exact path='/edu-teaser' component={Teaser}></Route>
         
-        <Route exact path='/shipping_charges' component={ShippingCharges}></Route>
+    
 
        </Switch>
       
