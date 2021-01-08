@@ -556,7 +556,7 @@ class Sidenav extends React.Component {
                        </li> */}
 
 
-                        <li>
+                        {/* <li>
                             <a onClick={()=>{ this.setState({ expandEducation : !this.state.expandEducation}) } } aria-expanded="true" class=" mm-active" >
                                 <Users/>
                                 <span> Education Module </span>
@@ -582,7 +582,7 @@ class Sidenav extends React.Component {
                                     <Link to='/edu-setalert'>SetAlert</Link>
                                 </li>        
                             </ul>
-                        </li>  
+                        </li>   */}
                        <li>
                        <a href='/bmssms'>
                             <Mail/>
