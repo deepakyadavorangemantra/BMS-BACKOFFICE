@@ -46,7 +46,7 @@ import VendorList from './VendorList'
 import DoctorList from './DoctorList'
 import DietitianList from './DietitianList'
 import { BrowserRouter as Router, Route, Switch, Link, a } from 'react-router-dom'
-import {FileText, Home,Briefcase, User,Layout,Users,Grid,Lock,Gift,BookOpen,PlusCircle,Clipboard,File,LogOut,Archive,LifeBuoy, Bookmark, Eye, CheckCircle,RotateCcw,X,PieChart, Mail,Image,MessageSquare} from 'react-feather';
+import {FileText, Home,Briefcase, User,Layout,Users,Grid,Lock,Gift,BookOpen,PlusCircle,Clipboard,File,LogOut,Archive,LifeBuoy, Bookmark, Eye, CheckCircle,RotateCcw,X,PieChart, Mail,Image,MessageSquare, Key} from 'react-feather';
 // import { Route,BrowserRouter as Router,Switch,a} from "react-router-dom";
 // import {Home,Briefcase, User,Layout,Users,Grid,Lock,Gift,BookOpen,PlusCircle,Clipboard,File,LogOut,Archive,LifeBuoy, Bookmark, } from 'react-feather';
 import Routes from './Routes';
@@ -182,6 +182,11 @@ import ViewTestimonialMaster from './ViewTestimonialMaster';
 
 
 import ShippingCharges from './ShippingCharges';
+
+
+import PromoCodeGrid from './Unique_promoCode-Grid'
+import AddPromoCode from './Add-New-PromoCode'
+import View_UniquePromocode from './View_UniquePromocode';
 
 
 class Sidenav extends React.Component {
@@ -566,6 +571,13 @@ class Sidenav extends React.Component {
                             </a>
                         </li> */}
 
+                        <li>
+                        <a href='/uniquepromocodelist'>
+                             <Key/>
+                             <span style={{paddingLeft:'3px'}}>Unique Promo Code</span>
+                         </a>
+                     </li>
+
                        
 
                     <li>
@@ -799,6 +811,11 @@ class Sidenav extends React.Component {
         <Route exact path='/viewtestimonialmaster' component={ViewTestimonialMaster}></Route>
 
         <Route exact path='/shipping_charges' component={ShippingCharges}></Route>
+
+        <Route exact path='/uniquepromocodelist' component={PromoCodeGrid}></Route>
+        <Route exact path='/adduniquepromocode' component={AddPromoCode}></Route>
+        <Route exact path='/viewuniquepromocode' component={View_UniquePromocode}></Route>
+     
 
        </Switch>
       

@@ -34,8 +34,7 @@ import GetApiCall from '../GetApi';
 import {Edit3,Trash2,Monitor} from 'react-feather';
 import {XSquare} from 'react-feather';
 import PostApiCall from '../Api';
-import moment from 'moment';
-import imageConfig from '../Api/imageApi'
+import moment from 'moment'
 
 
 var arr = []
@@ -158,8 +157,8 @@ class Books extends Component {
         VendorBasePrice : 0,
         BMSDiscount : 0,
 
-        ImageApiUrl :imageConfig.ImageApiUrl,
-        // ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+
+        ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
         }
     }
 
@@ -469,7 +468,7 @@ class Books extends Component {
              amt=parseFloat(this.state.VendorSellingPrice-(this.props.bookcredential.DiscountPer*this.state.VendorSellingPrice)/100).toFixed(2)
 
             }
-            this.props.setbookdiscountprice(amt)
+            this.props.setbookdiscountprice(parseFloat(price.target.value-(this.props.bookcredential.DiscountPer*price.target.value)/100).toFixed(2))
 
 
             var cusbasepr = parseFloat(amt/(1+(this.state.MasterData.fld_gstpercent/100))).toFixed(2)
@@ -501,7 +500,7 @@ class Books extends Component {
             amt=parseFloat(this.state.VendorSellingPrice-(discount.target.value*this.state.VendorSellingPrice)/100).toFixed(2)
 
         }
-        this.props.setbookdiscountprice(amt)
+        this.props.setbookdiscountprice(parseFloat(this.props.bookcredential.Price-(discount.target.value*this.props.bookcredential.Price)/100).toFixed(2))
 
 
         var cusbasepr = parseFloat(amt/(1+(this.state.MasterData.fld_gstpercent/100))).toFixed(2)
@@ -535,13 +534,13 @@ class Books extends Component {
         if((this.props.setbookdiscount(discountprice.target.value))){
         this.props.setbookdiscountprice(discountprice.target.value)
 
-        if(this.state.MarginOn == 'Maximum Retail Price (MRP)'){
-        this.props.setbookdiscount(parseFloat(((this.props.bookcredential.Price-discountprice.target.value)/this.props.bookcredential.Price)*100).toFixed(2))
-        }else
-        {
-        this.props.setbookdiscount(parseFloat(((this.state.VendorSellingPrice-discountprice.target.value)/this.state.VendorSellingPrice)*100).toFixed(2))
+        // if(this.state.MarginOn == 'Maximum Retail Price (MRP)'){
+        this.props.setbookdiscount(parseFloat(((this.props.bookcredential.Price-discountprice.target.value)/this.props.foodcredential.Price)*100).toFixed(2))
+        // }else
+        // {
+        // this.props.setfooddiscount(parseFloat(((this.state.VendorSellingPrice-discountprice.target.value)/this.state.VendorSellingPrice)*100).toFixed(2))
 
-        }
+        // }
 
         var cusbasepr = parseFloat(discountprice.target.value/(1+(this.state.MasterData.fld_gstpercent/100))).toFixed(2)
 
@@ -573,6 +572,7 @@ class Books extends Component {
 
     }
 }
+
    
     nextlabel3(){
         if(this.props.bookcredential.Price!=''){
@@ -721,13 +721,12 @@ onChangeMeta(metadescription){
     })
     ).then(res => {
    
-      console.log(obj.data[0])
+      // console.log(obj.data[0])
 
       PostApiCall.postRequest({
 
         bookvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-        imageurl:res.data.Message.img_url,
-        // imageurl : 'https://images.beatmysugar.com/images/Book/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+        imageurl : 'https://images.beatmysugar.com/images/Book/'+res.data.Message.split(',')[2].split('=')[1].trim(),
         updatedon : moment().format('lll'),
         updatedby : details[0].fld_staffid
 
@@ -757,7 +756,7 @@ onChangeMeta(metadescription){
 
 
     OnAddProductImages(obj){
-// console.log('Image')
+
         var login=localStorage.getItem('LoginDetail');
         var details=JSON.parse(login)
       
@@ -767,14 +766,14 @@ onChangeMeta(metadescription){
       
         for(var i =0 ; i <this.state.Photos.length;i++){
       
-          console.log(this.state.Photos)
+          // console.log(this.state.Photos)
          
       
           if(this.state.Photos[i].value != ''){
       
             const form1 = new FormData();
       
-            console.log(this.state.Photos[i].data)
+            // console.log(this.state.Photos[i].data)
          
         form1.append('file', this.state.Photos[i].data);
         form1.append('foldername' , 'Book')
@@ -791,13 +790,13 @@ onChangeMeta(metadescription){
         status: image1.status
         })
         ).then(res1 => {
-        console.log(res1.data)
+        // console.log(res.data)
       
       
           PostApiCall.postRequest({
       
             bookvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-            imageurl:res1.data.Message.img_url,
+            imageurl : 'https://images.beatmysugar.com/images/Book/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
             updatedon : moment().format('lll'),
             updatedby : details[0].fld_staffid
       
