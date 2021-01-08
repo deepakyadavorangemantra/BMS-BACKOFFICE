@@ -9,7 +9,7 @@ import PostApiCall from '../../Api';
 import TopicReactQuillTextEditor from './TopicQuillTextEditor';
 
 const TopicForm =(props)=>{
-    const [ values, setValues] = useState([{ fld_id : '', fld_content : '', fld_orderno : 1, createdon  : moment().format('lll'), updatedon : moment().format('lll')}]);
+    const [ values, setValues] = useState([]);
 
     const [ topicTitle, SetTopicTitle ] = useState('Add Topic Chapter');
     const [ topicid, SetTopicid ] = useState('');
