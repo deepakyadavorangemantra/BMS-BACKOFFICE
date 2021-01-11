@@ -677,7 +677,7 @@ class ViewBookVariant extends Component {
         this.props.setbookdiscountprice(discountprice.target.value)
 
         // if(this.state.MarginOn == 'Maximum Retail Price (MRP)'){
-        this.props.setbookdiscount(parseFloat(((this.props.bookcredential.Price-discountprice.target.value)/this.props.foodcredential.Price)*100).toFixed(2))
+        this.props.setbookdiscount(parseFloat(((this.props.bookcredential.Price-discountprice.target.value)/this.props.bookcredential.Price)*100).toFixed(2))
         // }else
         // {
         // this.props.setfooddiscount(parseFloat(((this.state.VendorSellingPrice-discountprice.target.value)/this.state.VendorSellingPrice)*100).toFixed(2))

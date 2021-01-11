@@ -1,10 +1,10 @@
 
-// var urlString = "https://stagapi.beatmysugar.com/BackofficeApi/";
+var urlString = "https://stagapi.beatmysugar.com/BackofficeApi/";
 
 // var urlString = "http://localhost:5000/BackofficeApi/";
 
 // const urlString = "https://65.0.239.177:8080/BackofficeApi/";
-const urlString = "https://stagapi.beatmysugar.com/BackofficeApi/";
+//const urlString = "https://stagapi.beatmysugar.com/BackofficeApi/";
 
 
 
