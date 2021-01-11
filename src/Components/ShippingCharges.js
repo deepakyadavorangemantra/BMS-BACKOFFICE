@@ -4,6 +4,7 @@ import Footer from './Footer'
 import PostApiCall from "../Api";
 import Notiflix from "notiflix";
 import {Edit3,Eye,Trash2,Monitor} from 'react-feather';
+import Select from 'react-select';
 
 import GetApiCall from '../GetApi'
 import moment from 'moment'
@@ -30,6 +31,10 @@ export default function ShippingCharges() {
     {label : 'Covid Essentials',value:'Covid'},
     {label : 'Food',value:'Food'},
     {label : 'Footwear',value:'Footwear'},
+    {label : 'Socks',value:'Socks'},])
+    const [Option, setOption] = useState([
+    
+   
     {label : 'Socks',value:'Socks'},])
    
     const [showOnWebsite,setshowOnWebsite] = useState('Yes')
@@ -113,17 +118,18 @@ const SaveHandler=(e)=>{
     e.preventDefault()
 
     
-//   console.log(state.vertical,state.shipping,state.quantity,showOnWebsite)
+  console.log(state.vertical,state.shipping,state.quantity,showOnWebsite)
   
 
-        if(state.vertical!==undefined){
-            if(state.product!==undefined){
-            
-            if(state.shipping!==undefined){
-      
-          if(state.quantity!==undefined){
-      
-          if(showOnWebsite!==''){
+if(state.vertical!==undefined&&state.vertical!==''&&state.vertical!==null){
+  if(state.product!==undefined && state.product!= ''&&state.product!= null){
+  
+  if(state.shipping!==undefined&&state.shipping!==''&&state.shipping!==null){
+
+if(state.quantity!==undefined&&state.quantity!==''&&state.quantity!==null){
+
+if(showOnWebsite!==''&&showOnWebsite!==undefined&&showOnWebsite!==null){
+
             Notiflix.Loading.Dots('Please wait...');
 
             var login=localStorage.getItem('LoginDetail');
@@ -132,8 +138,8 @@ const SaveHandler=(e)=>{
 
                 vertical:state.vertical,
                 
-                 productid : state.product,
-                 productname : productData.filter(val => val.value == state.product)[0].label,
+                 productid : state.product.value,
+                 productname : productData.filter(val => val.value == state.product.value)[0].label,
                  shippingCharges : state.shipping,
                  quantity : state.quantity,
                  showonwebsite : showOnWebsite,
@@ -265,7 +271,7 @@ console.log(data.fld_productid)
  setupdatedProductId(data.fld_id)
     setState({...state,
     
-    product:data.fld_productid,
+    product:{value:data.fld_productid,label:data.fld_productname},
     productName:data.fld_productname,
     shipping:data.fld_shippingCharges,
     vertical:data.fld_vertical,
@@ -280,16 +286,16 @@ const updatedSubmitHandler=(e)=>{
     e.preventDefault()
 
    
-       
+       console.log(state.vertical)
 
-        if(state.vertical!==undefined){
-            if(state.product!==undefined && state.product!= ''){
+        if(state.vertical!==undefined&&state.vertical!==''&&state.vertical!==null){
+            if(state.product!==undefined && state.product!= ''&&state.product!= null){
             
-            if(state.shipping!==undefined){
+            if(state.shipping!==undefined&&state.shipping!==''&&state.shipping!==null){
       
-          if(state.quantity!==undefined){
+          if(state.quantity!==undefined&&state.quantity!==''&&state.quantity!==null){
       
-          if(showOnWebsite!==''){
+          if(showOnWebsite!==''&&showOnWebsite!==undefined&&showOnWebsite!==null){
 
             Notiflix.Loading.Dots('Please wait...');
 
@@ -299,8 +305,8 @@ const updatedSubmitHandler=(e)=>{
                 id:updatedProductId,
                 vertical:state.vertical,
                 
-                 productid : state.product,
-                 productname : productData.filter(val => val.value == state.product)[0].label,
+                 productid : state.product.value,
+                 productname : productData.filter(val => val.value == state.product.value)[0].label,
                  shippingCharges : state.shipping,
                  quantity : state.quantity,
                  showonwebsite : showOnWebsite,
@@ -365,6 +371,19 @@ const updatedSubmitHandler=(e)=>{
 
 }
 
+let options=[]
+options=[...productData&&productData.map(schedule => {
+  // console.log(schedule)
+  return { value: schedule.value, label: schedule.label }
+
+
+}
+ 
+
+
+)]
+console.log(options)
+
     return (
         <div>
           
@@ -372,7 +391,8 @@ const updatedSubmitHandler=(e)=>{
     open={state.open}
     onClose={()=>{
     //   props.setclearfoodcategory()
-      setState({open : false})
+      setState({...state,
+        open : false})
     }}
      center>
 
@@ -427,10 +447,31 @@ const updatedSubmitHandler=(e)=>{
         <div class="col-md-6">
         <div class="form-group mb-3">
             <label for="validationCustom01">Product<span class="mandatory">*</span></label>
+            <Select
              
-                <select name={state.productName}  className={`form-control ${state.touched1&&state.product==''?'is-invalid':''}`}
+            options={state.vertical!==undefined&&state.vertical!==''&&state.vertical!==null?[...productData&&productData.map(schedule => (
+              { value: schedule.value, label: schedule.label }
+
+            
+          )
+          )]:[]}
+                value={state.product}
+                onChange={(value)=>{
+                  console.log(value)
+                    setState({...state,product:value,
+                  })
+                 
+              }}
+                
+           
+              isSearchable={true}
+              isClearable={true}  />
+
+
+
+                {/* <select name={state.productName}  className={`form-control ${state.touched1&&state.product==''?'is-invalid':''}`}
                   value={state.product} onChange={(e)=>{
-                    console.log(e.target.children)
+                    // console.log(e.target.children)
                       setState({...state,product:e.target.value,
                     })
                    
@@ -439,7 +480,8 @@ const updatedSubmitHandler=(e)=>{
                     setState({
                         ...state,
                         touched1:true})
-                }}>
+                }}     >
+                  
                                  <option  value='' label='Select Product' >Select Product</option>
                                  {productData&&productData.map(schedule => (
                                                                                         <option
@@ -453,6 +495,7 @@ const updatedSubmitHandler=(e)=>{
                                                                                     )
                                                                                     )}
                 </select>
+            */}
             </div>
       </div>
         
@@ -558,10 +601,13 @@ const updatedSubmitHandler=(e)=>{
         <div class="form-group mb-3">
             <label for="validationCustom01">Vertical<span class="mandatory">*</span></label>
               
+
+
+
                 <select  class={`form-control ${state.touched4&&state.vertical==''?'is-invalid':''}`}
                   value={state.vertical} onChange={(e)=>{
                     
-                      setState({...state,vertical:e.target.valuestate,product:"Select Product"})
+                      setState({...state,vertical:e.target.value,product:"Select Product"})
                    
                 }}
                 onBlur={e=>{
@@ -589,8 +635,29 @@ const updatedSubmitHandler=(e)=>{
         <div class="col-md-6">
         <div class="form-group mb-3">
             <label for="validationCustom01">Product<span class="mandatory">*</span></label>
-              {}
-                <select   className={`form-control ${state.touched1&&state.product==''?'is-invalid':''}`}
+           
+
+            <Select
+             
+             options={state.vertical!==undefined&&state.vertical!==''&&state.vertical!==null?[...productData&&productData.map(schedule => (
+               { value: schedule.value, label: schedule.label }
+ 
+             
+           )
+           )]:[]}
+                 value={state.product}
+                 onChange={(value)=>{
+                   // console.log(e.target.children)
+                     setState({...state,product:value,
+                   })
+                  
+               }}
+                 
+            
+               isSearchable={true}
+               isClearable={true}  />
+
+                {/* <select   className={`form-control ${state.touched1&&state.product==''?'is-invalid':''}`}
                   value={state.product} onChange={(e)=>{
                     // console.log(e.target.children)
                       setState({...state,product:e.target.value,
@@ -613,7 +680,7 @@ const updatedSubmitHandler=(e)=>{
                                                                                         </option>
                                                                                     )
                                                                                     )}
-                </select>
+                </select> */}
             </div>
       </div>
         
@@ -750,7 +817,7 @@ const updatedSubmitHandler=(e)=>{
                                         <button 
                                         onClick={()=>{
   
-                                        setState({
+                                        setState({...state,
                                                     open : true
                                                 })
 
@@ -792,7 +859,8 @@ const updatedSubmitHandler=(e)=>{
                                      <td style={{textAlign:'center'}}>{data.fld_quantity}</td>
                                      <td style={{textAlign:'center'}}>{data.fld_showonwebsite=='Yes'?<Monitor className='text-success'/>:<Monitor className='text-danger' />}</td>
                                      <td><div class="align-self-center tableact d-flex" style={{ textAlign: 'center'}}
-                                       >
+                                    
+                                     >
                                  <span className='d-inline'  onClick={()=>{
                                         
                                        updatedHandler(data)

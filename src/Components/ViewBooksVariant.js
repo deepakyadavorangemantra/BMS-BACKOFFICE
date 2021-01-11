@@ -35,7 +35,6 @@ import {Edit3,Trash2,Monitor} from 'react-feather';
 import {XSquare} from 'react-feather';
 import PostApiCall from '../Api';
 import moment from 'moment'
-import imageConfig from '../Api/imageApi'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
@@ -151,8 +150,8 @@ class ViewBookVariant extends Component {
         SKU : '',
         MasterData : [],
 
-        // ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
-        ImageApiUrl :imageConfig.ImageApiUrl,
+        ImageApiUrl : 'https://images.beatmysugar.com/api/Image/SaveImage',
+
 
         VendorPricing : [],
         Name : '',
@@ -611,7 +610,7 @@ class ViewBookVariant extends Component {
              amt=parseFloat(this.state.VendorSellingPrice-(this.props.bookcredential.DiscountPer*this.state.VendorSellingPrice)/100).toFixed(2)
 
             }
-            this.props.setbookdiscountprice(amt)
+            this.props.setbookdiscountprice(parseFloat(price.target.value-(this.props.bookcredential.DiscountPer*price.target.value)/100).toFixed(2))
 
 
             var cusbasepr = parseFloat(amt/(1+(this.state.MasterData.fld_gstpercent/100))).toFixed(2)
@@ -643,7 +642,7 @@ class ViewBookVariant extends Component {
             amt=parseFloat(this.state.VendorSellingPrice-(discount.target.value*this.state.VendorSellingPrice)/100).toFixed(2)
 
         }
-        this.props.setbookdiscountprice(amt)
+        this.props.setbookdiscountprice(parseFloat(this.props.bookcredential.Price-(discount.target.value*this.props.bookcredential.Price)/100).toFixed(2))
 
 
         var cusbasepr = parseFloat(amt/(1+(this.state.MasterData.fld_gstpercent/100))).toFixed(2)
@@ -677,13 +676,13 @@ class ViewBookVariant extends Component {
         if((this.props.setbookdiscount(discountprice.target.value))){
         this.props.setbookdiscountprice(discountprice.target.value)
 
-        if(this.state.MarginOn == 'Maximum Retail Price (MRP)'){
-        this.props.setbookdiscount(parseFloat(((this.props.bookcredential.Price-discountprice.target.value)/this.props.bookcredential.Price)*100).toFixed(2))
-        }else
-        {
-        this.props.setbookdiscount(parseFloat(((this.state.VendorSellingPrice-discountprice.target.value)/this.state.VendorSellingPrice)*100).toFixed(2))
+        // if(this.state.MarginOn == 'Maximum Retail Price (MRP)'){
+        this.props.setbookdiscount(parseFloat(((this.props.bookcredential.Price-discountprice.target.value)/this.props.foodcredential.Price)*100).toFixed(2))
+        // }else
+        // {
+        // this.props.setfooddiscount(parseFloat(((this.state.VendorSellingPrice-discountprice.target.value)/this.state.VendorSellingPrice)*100).toFixed(2))
 
-        }
+        // }
 
         var cusbasepr = parseFloat(discountprice.target.value/(1+(this.state.MasterData.fld_gstpercent/100))).toFixed(2)
 
@@ -715,6 +714,7 @@ class ViewBookVariant extends Component {
 
     }
 }
+
 
    
     nextlabel3(){
@@ -871,9 +871,7 @@ onChangeMeta(metadescription){
       PostApiCall.postRequest({
 
         bookvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-        imageurl:res.data.Message.img_url,
-       
-        // imageurl : 'https://images.beatmysugar.com/images/Book/'+res.data.Message.split(',')[2].split('=')[1].trim(),
+        imageurl : 'https://images.beatmysugar.com/images/Book/'+res.data.Message.split(',')[2].split('=')[1].trim(),
         updatedon : moment().format('lll'),
         updatedby : details[0].fld_staffid
 
@@ -961,9 +959,7 @@ onChangeMeta(metadescription){
           PostApiCall.postRequest({
       
             bookvariantid : (JSON.parse(JSON.stringify(obj.data[0]))).VariantId,
-            imageurl:res1.data.Message.img_url,
-       
-            // imageurl : 'https://images.beatmysugar.com/images/Book/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
+            imageurl : 'https://images.beatmysugar.com/images/Book/'+res1.data.Message.split(',')[2].split('=')[1].trim(),
             updatedon : moment().format('lll'),
             updatedby : details[0].fld_staffid
       
