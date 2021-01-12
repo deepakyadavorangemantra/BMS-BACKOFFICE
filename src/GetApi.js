@@ -8,6 +8,7 @@ const urlString = "https://stagapi.beatmysugar.com/BackofficeApi/";
 
 
 
+
 const GetApiCall = {
   getRequest(url) {
 
