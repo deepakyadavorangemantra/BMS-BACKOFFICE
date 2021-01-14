@@ -159,7 +159,7 @@ class AssignStaffRights extends React.Component {
 
               count = count + 1
 
-              if(count == 62){
+              if(count == 170){
                 Notiflix.Loading.Remove()
                 window.location.reload()
                Notiflix.Notify.Success('Access Rights Updated.')
