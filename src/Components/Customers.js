@@ -39,8 +39,9 @@ const Dropdown=() =>{
         <div className="dropdown-menu">
           <button onClick={()=>{setState({...state,extractData:false,categoryValue:"All Customers",category:"All Customers"})}} className="dropdown-item bg-white text-dark" >All Customers</button>
           <button onClick={()=>{setState({...state,extractData:false,categoryValue:"Products Ordered",category:"Products Ordered"})}} className="dropdown-item bg-white text-dark" >Product Ordered</button>
-          <button onClick={()=>{setState({...state,extractData:false,categoryValue:"Products Not Orderd",category:"Products Not Ordered"})}} className="dropdown-item bg-white text-dark" >Product Not Ordered</button>
           <button onClick={()=>{setState({...state,extractData:false,categoryValue:"Items On Cart",category:"Items On Cart"})}} className="dropdown-item bg-white text-dark" >Items On Cart</button>
+          <button onClick={()=>{setState({...state,extractData:false,categoryValue:"Verified Email",category:"Verified Email"})}} className="dropdown-item bg-white text-dark" >Verified Email</button>
+          <button onClick={()=>{setState({...state,extractData:false,categoryValue:"Not Verified Email",category:"Not Verified Email"})}} className="dropdown-item bg-white text-dark" >Not Verified Email</button>
 
          </div>
       </div>
@@ -119,11 +120,12 @@ if(state.categoryValue==="No Category Selected"){
       
           GetApiCall.getRequest("GetCustomerDataReports").then(resultdes =>
             resultdes.json().then(obj => {
+                
               setCustomeredData(obj.data)
               
     
                Notiflix.Loading.Remove()
-                // console.log(obj.data)
+                console.log(obj.data)
             }))
          
 
@@ -147,7 +149,7 @@ if(state.categoryValue==="No Category Selected"){
            
             if(state.startDate!==null&&state.endDate!==null){
                 CustomerData=CustomeredData&&CustomeredData.filter(customer=>{
-                 console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
+                //  console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
                 if(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll'))){
                           totalOrdersPlaced+=customer.fld_ordercount
                 
@@ -180,7 +182,7 @@ if(state.categoryValue==="No Category Selected"){
            
             if(state.startDate!==null&&state.endDate!==null){
                 CustomerData=CustomeredData&&CustomeredData.filter(customer=>{
-                 console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
+                //  console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
                 if(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll'))){
                   if(customer.fld_ordercount>0){
                     totalOrdersPlaced+=customer.fld_ordercount
@@ -216,7 +218,7 @@ if(state.categoryValue==="No Category Selected"){
            
             if(state.startDate!==null&&state.endDate!==null){
                 CustomerData=CustomeredData&&CustomeredData.filter(customer=>{
-                 console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
+                //  console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
                 if(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll'))){
                     if(customer.fld_ordercount<=0){
                         totalOrdersPlaced+=customer.fld_ordercount
@@ -246,11 +248,79 @@ if(state.categoryValue==="No Category Selected"){
 
 
            }
+        if(state.categoryValue==="Verified Email"){
+           
+            if(state.startDate!==null&&state.endDate!==null){
+                CustomerData=CustomeredData&&CustomeredData.filter(customer=>{
+                //  console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
+                if(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll'))){
+                    if(customer.fld_emailverified==='Yes'){
+                        totalOrdersPlaced+=customer.fld_ordercount
+
+                        return customer
+                        }
+                 }
+                    
+
+                 }
+                 
+                 )
+              
+            }
+            else if(state.startDate===null&&state.endDate===null) {
+                CustomerData=CustomeredData&&CustomeredData.filter(customer=>{
+                    if(customer.fld_emailverified==='Yes'){
+                        totalOrdersPlaced+=customer.fld_ordercount
+
+                        return customer
+                        }
+                })
+
+            }
+
+
+
+
+           }
+        if(state.categoryValue==="Not Verified Email"){
+           
+            if(state.startDate!==null&&state.endDate!==null){
+                CustomerData=CustomeredData&&CustomeredData.filter(customer=>{
+                //  console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
+                if(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll'))){
+                    if(customer.fld_emailverified==='No'){
+                        totalOrdersPlaced+=customer.fld_ordercount
+
+                        return customer
+                        }
+                 }
+                    
+
+                 }
+                 
+                 )
+              
+            }
+            else if(state.startDate===null&&state.endDate===null) {
+                CustomerData=CustomeredData&&CustomeredData.filter(customer=>{
+                    if(customer.fld_emailverified==='No'){
+                        totalOrdersPlaced+=customer.fld_ordercount
+
+                        return customer
+                        }
+                })
+
+            }
+
+
+
+
+           }
         if(state.categoryValue==="Items On Cart"){
            
             if(state.startDate!==null&&state.endDate!==null){
                 CustomerData=CustomeredData&&CustomeredData.filter(customer=>{
-                 console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
+                //  console.log(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll')));
                 if(moment(moment(customer.fld_updatedon).format('ll')).isBetween(moment(state.startDate).format('ll'),moment(state.endDate).format('ll'))){
 
                     if(customer.fld_cartcount>0){
@@ -301,7 +371,7 @@ if(state.categoryValue==="No Category Selected"){
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                            <table class="table">
+                            <table class="table" style={{background:'#fff'}}>
 
                             <thead>
                                     <tr>
@@ -309,6 +379,7 @@ if(state.categoryValue==="No Category Selected"){
                 <th>Registration Date</th>
                 <th>Mobile Number</th>
                 <th>Email ID</th>
+                <th>Verified Email</th>
                 <th>Date of Birth</th>
                 <th>Total Orders Placed</th>
                 <th>Items on Cart</th>
@@ -318,9 +389,10 @@ if(state.categoryValue==="No Category Selected"){
                 </thead>
                         <tbody>
                             {CustomerData.map(customer=>{
+                               
 
                             return  <CustomersExtraGrids customerName={customer.fld_name} registrationDate={customer.fld_updatedon} mobileNum={customer.fld_mobile} 
-                            email={customer.fld_email} dob={customer.fld_dob} orderedPlaced={customer.fld_ordercount} itemOnCart={customer.fld_cartcount} totalSales={customer.fld_orderamount}
+                            email={customer.fld_email} emailverified={customer.fld_emailverified} dob={customer.fld_dob} orderedPlaced={customer.fld_ordercount} itemOnCart={customer.fld_cartcount} totalSales={customer.fld_orderamount}
                 />
                             })
                     }   
@@ -472,5 +544,3 @@ return (
                                  
     )
 }
-
-

@@ -34,7 +34,7 @@ class OfferGrid extends Component {
               GetApiCall.getRequest("Get_UniquePromoCodeList").then(resultdes =>
                   resultdes.json().then(obj => {
                  
-                  // console.log(obj.data)
+                  console.log(obj.data)
                   let tempVendorName=[]
                   let tempOfferName=[]
                   obj.data.map(data=>{
