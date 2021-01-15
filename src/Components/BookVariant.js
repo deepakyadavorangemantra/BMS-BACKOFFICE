@@ -38,7 +38,7 @@ class BookVariant extends Component {
                MasterId : MasterData.fld_id,
                MasterData : MasterData
            })
-           // console.log(MasterData)
+           console.log(MasterData)
    
            PostApiCall.postRequest({
 
@@ -53,6 +53,7 @@ class BookVariant extends Component {
             
               if(results1.status == 200 || results1.status==201){
 
+                console.log(obj.data)
                this.setState({
                    VariantData : obj.data
                })

@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
         <td>{this.props.registrationDate}</td>
         <td>{this.props.mobileNum}</td>
         <td>{this.props.email}</td>
+        <td>{this.props.emailverified}</td>
         <td>{this.props.dob}</td>
         <td>{this.props.orderedPlaced}</td>
         <td>{this.props.itemOnCart}</td>

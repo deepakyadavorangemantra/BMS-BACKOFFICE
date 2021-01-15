@@ -107,14 +107,14 @@ class Dashboard extends React.Component {
         
 
           
-        saleSseries1: [],
+        saleSseries1: [10,20,30,40,50,60],
         saleSoptions1: {
           chart: {
             width: 380,
             type: 'pie',
           },
         //   colors: ['#507dc0', '#507dc0', '#507dc0'],
-          labels: ['Food', 'Footwear', 'Socks'],
+          labels: ['Accessories','Book','Covid Essential','Food', 'Footwear', 'Socks'],
           responsive: [{
             breakpoint: 480,
             options: {
@@ -217,6 +217,21 @@ class Dashboard extends React.Component {
                     ReturnData:[],
 
                     MonthWiseSales:[],
+                    TotalAccessoriesItem:'',
+                    AccessoriesActive:'',
+                    AccessoriesActiveVariant:'',
+                    
+                    TotalBooksItem:'',
+                    BooksActive:'',
+                    BooksActiveVariant:'',
+                    TotalCovidItem:'',
+                    CovidActive:'',
+                    CovidActiveVariant:''
+
+
+
+
+
         
         };
       }
@@ -238,6 +253,7 @@ class Dashboard extends React.Component {
             "Get_BackOfficeDashboardCount_ByDate_NewBackoffice"
           ).then((results) =>
             results.json().then((obj) => {
+                // console.log(obj.data)
                  const categories=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July','Aug','Sep','Oct','Nov','Dec']
                  
                 
@@ -260,13 +276,25 @@ class Dashboard extends React.Component {
                         // saleSseries[i]=Math.floor(Math.random()*10)
                     }
                     if(i===0){
-                        saleSseries[i]=obj.data[0].TotalFoodItem
+                        saleSseries[i]=obj.data[0].TotalAccessoriesItem
                     }
                     else if(i==1){
-                        saleSseries[i]=obj.data[0].TotalFootwearItem
+                        saleSseries[i]=obj.data[0].TotalBooksItem
 
                     } 
                     else if(i==2){
+                        saleSseries[i]=obj.data[0].TotalCovidItem
+
+                    }   
+                    else if(i==3){
+                        saleSseries[i]=obj.data[0].TotalFoodItem
+
+                    }   
+                    else if(i==4){
+                        saleSseries[i]=obj.data[0].TotalFootwearItem
+
+                    }   
+                    else if(i==5){
                         saleSseries[i]=obj.data[0].TotalSocksItem
 
                     }                   
@@ -300,6 +328,7 @@ class Dashboard extends React.Component {
                     TotalFoodItem:obj.data[0].TotalFoodItem,
                     FoodActive:obj.data[0].TotalFoodActiveProduct,
                     ActiveVariants:obj.data[0].TotalFoodVariantActiveProduct,
+       
                     TotalFootwearItem:obj.data[0].TotalFootwearItem,
                     FootwearActive:obj.data[0].TotalFootwearActiveProduct,
                     FootwearActiveVariant:obj.data[0].TotalFootwearVariantActiveProduct,
@@ -308,11 +337,23 @@ class Dashboard extends React.Component {
                     SocksActive:obj.data[0].TotalSocksActiveProduct,
                     SocksActiveVariant:obj.data[0].TotalSocksVariantActiveProduct,
 
+                    TotalBooksItem:obj.data[0].TotalBooksItem,
+                    BooksActive:obj.data[0].TotalBooksActiveProduct,
+                    BooksActiveVariant:obj.data[0].TotalBooksVariantActiveProduct,
 
-                TotalProductItem:parseFloat(obj.data[0].TotalFoodItem+obj.data[0].TotalFootwearItem+obj.data[0].TotalSocksItem),
-                TotalActiveProduct:parseFloat(obj.data[0].TotalFoodActiveProduct+obj.data[0].TotalFootwearActiveProduct+obj.data[0].TotalSocksActiveProduct),
-                TotalVariant:parseFloat(obj.data[0].TotalFoodVaritantItem+obj.data[0].TotalFootwearVaritantItem+obj.data[0].TotalSocksVaritantItem),
-                TotalActivVariant:parseFloat(obj.data[0].TotalFoodVariantActiveProduct+obj.data[0].TotalFootwearVariantActiveProduct+obj.data[0].TotalSocksVariantActiveProduct),
+                    TotalCovidItem:obj.data[0].TotalCovidItem,
+                    CovidActive:obj.data[0].TotalCovidActiveProduct,
+                    CovidActiveVariant:obj.data[0].TotalCovidVariantActiveProduct,
+
+                    TotalAccessoriesItem:obj.data[0].TotalAccessoriesItem,
+                    AccessoriesActive:obj.data[0].TotalAccessoriesActiveProduct,
+                    AccessoriesActiveVariant:obj.data[0].TotalAccessoriesVariantActiveProduct,
+
+
+                TotalProductItem:parseFloat(obj.data[0].TotalFoodItem+obj.data[0].TotalFootwearItem+obj.data[0].TotalSocksItem+obj.data[0].TotalBooksItem+obj.data[0].TotalCovidItem+obj.data[0].TotalAccessoriesItem),
+                TotalActiveProduct:parseFloat(obj.data[0].TotalFoodActiveProduct+obj.data[0].TotalFootwearActiveProduct+obj.data[0].TotalSocksActiveProduct+obj.data[0].TotalAccessoriesActiveProduct+obj.data[0].TotalBooksActiveProduct+obj.data[0].TotalCovidActiveProduct),
+                TotalVariant:parseFloat(obj.data[0].TotalFoodVaritantItem+obj.data[0].TotalFootwearVaritantItem+obj.data[0].TotalSocksVaritantItem+obj.data[0].TotalBooksVaritantItem+obj.data[0].TotalAccessoriesVaritantItem+obj.data[0].TotalCovidVaritantItem),
+                TotalActivVariant:parseFloat(obj.data[0].TotalFoodVariantActiveProduct+obj.data[0].TotalFootwearVariantActiveProduct+obj.data[0].TotalSocksVariantActiveProduct+obj.data[0].TotalAccessoriesVariantActiveProduct+obj.data[0].TotalBooksVariantActiveProduct+obj.data[0].TotalCovidVariantActiveProduct),
 
 
                 //  =====================Vendors===========
@@ -327,7 +368,6 @@ class Dashboard extends React.Component {
 
      }
        ))
-
 
      
        GetApiCall.getRequest("Get_BackOfficeDashboardTop5Order_NewBackoffice").then(resultdes =>
@@ -627,7 +667,7 @@ class Dashboard extends React.Component {
                     <div className="card-body">
                     <h5 className="card-title mt-0 mb-0 header-title">Total Products</h5>
                     <div id="chart">
-               <ReactApexChart options={this.state.saleSoptions1} series={this.state.saleSseries1} type="pie" width={420} style={{marginLeft:'24%'}} />
+               <ReactApexChart options={this.state.saleSoptions1} series={this.state.saleSseries1} type="pie" width={460} style={{marginLeft:'13%'}} />
           </div>
                     </div>
                 </div>
@@ -793,6 +833,111 @@ class Dashboard extends React.Component {
                             </div>
                         </div>
                           </div>
+                          
+                          <div className="col-xl-4">
+                          <div className="card">
+                              <div className="card-body p-0">
+                                  <h5 className="card-title header-title border-bottom p-3 mb-0">Accessories</h5>
+                                 
+                                  <div className="media px-3 py-4 border-bottom">
+                                      <div className="media-body">
+                                          <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.TotalAccessoriesItem}</h4>
+                                          <span className="text-muted">Total Items</span>
+                                      </div>
+                                      <i data-feather="users" className="align-self-center icon-dual icon-lg"></i>
+                                  </div>
+
+                                
+                                  <div className="media px-3 py-4 border-bottom">
+                                      <div className="media-body">
+                                          <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.AccessoriesActive}</h4>
+                                          <span className="text-muted">Active Products</span>
+                                      </div>
+                                      <i data-feather="image" className="align-self-center icon-dual icon-lg"></i>
+                                  </div>
+
+                                 
+                                  <div className="media px-3 py-4">
+                                      <div className="media-body">
+                                          <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.AccessoriesActiveVariant}</h4>
+                                          <span className="text-muted">Active Variants</span>
+                                      </div>
+                                      <i data-feather="shopping-bag" className="align-self-center icon-dual icon-lg"></i>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      
+                      <div className="col-xl-4">
+                      <div className="card">
+                          <div className="card-body p-0">
+                              <h5 className="card-title header-title border-bottom p-3 mb-0">Book</h5>
+                             
+                              <div className="media px-3 py-4 border-bottom">
+                                  <div className="media-body">
+                                      <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.TotalBooksItem}</h4>
+                                      <span className="text-muted">Total Items</span>
+                                  </div>
+                                  <i data-feather="users" className="align-self-center icon-dual icon-lg"></i>
+                              </div>
+
+                            
+                              <div className="media px-3 py-4 border-bottom">
+                                  <div className="media-body">
+                                      <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.BooksActive}</h4>
+                                      <span className="text-muted">Active Products</span>
+                                  </div>
+                                  <i data-feather="image" className="align-self-center icon-dual icon-lg"></i>
+                              </div>
+
+                             
+                              <div className="media px-3 py-4">
+                                  <div className="media-body">
+                                      <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.BooksActiveVariant}</h4>
+                                      <span className="text-muted">Active Variants</span>
+                                  </div>
+                                  <i data-feather="shopping-bag" className="align-self-center icon-dual icon-lg"></i>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  
+                  <div className="col-xl-4">
+                  <div className="card">
+                      <div className="card-body p-0">
+                          <h5 className="card-title header-title border-bottom p-3 mb-0">Covid Essentials</h5>
+                         
+                          <div className="media px-3 py-4 border-bottom">
+                              <div className="media-body">
+                                  <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.TotalCovidItem}</h4>
+                                  <span className="text-muted">Total Items</span>
+                              </div>
+                              <i data-feather="users" className="align-self-center icon-dual icon-lg"></i>
+                          </div>
+
+                        
+                          <div className="media px-3 py-4 border-bottom">
+                              <div className="media-body">
+                                  <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.CovidActive}</h4>
+                                  <span className="text-muted">Active Products</span>
+                              </div>
+                              <i data-feather="image" className="align-self-center icon-dual icon-lg"></i>
+                          </div>
+
+                         
+                          <div className="media px-3 py-4">
+                              <div className="media-body">
+                                  <h4 className="mt-0 mb-1 font-size-22 font-weight-normal">{this.state.CovidActiveVariant}</h4>
+                                  <span className="text-muted">Active Variants</span>
+                              </div>
+                              <i data-feather="shopping-bag" className="align-self-center icon-dual icon-lg"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
                       <div className="col-xl-4">
                                 <div className="card">
                                     <div className="card-body p-0">

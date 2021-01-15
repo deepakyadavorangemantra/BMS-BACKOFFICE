@@ -188,6 +188,8 @@ import PromoCodeGrid from './Unique_promoCode-Grid'
 import AddPromoCode from './Add-New-PromoCode'
 import View_UniquePromocode from './View_UniquePromocode';
 
+import UniquePromocodeReport from './Unique_PromoCode_Report';
+import MasterShippingcharge from './Master_ShippingCharge';
 
 class Sidenav extends React.Component {
 
@@ -432,6 +434,8 @@ class Sidenav extends React.Component {
                              
                                         <li> <a href='/venderfacilitiesonmaster'>Vender Facilities Master</a></li>
                                 <li> <a href='/venderlicenseonmaster'>Vendor License Master</a></li>
+                                <li> <a href='/ordershippingcharge'>Order Shipping Charge</a></li>
+                               
                             
         
         
@@ -456,6 +460,7 @@ class Sidenav extends React.Component {
                                     {/* <li><a href='/itemcomparision'>Item Comparision of Sales by Month</a></li> */}
                                     <li><a href='/vendors'>Vendors</a></li>
                                     <li><a href='/ordersettlement'>Settlement Report</a></li>
+                                    <li><a href='/uniquepromo-codereport'>Unique Promo Code Report</a></li>
                                     </ul>
 
                                     :
@@ -815,6 +820,8 @@ class Sidenav extends React.Component {
         <Route exact path='/uniquepromocodelist' component={PromoCodeGrid}></Route>
         <Route exact path='/adduniquepromocode' component={AddPromoCode}></Route>
         <Route exact path='/viewuniquepromocode' component={View_UniquePromocode}></Route>
+        <Route exact path='/uniquepromo-codereport' component={UniquePromocodeReport}></Route>
+        <Route exact path='/ordershippingcharge' component={MasterShippingcharge}></Route>
      
 
        </Switch>

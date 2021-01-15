@@ -286,6 +286,7 @@ const   Dropdown2=() =>{
           <span className="sr-only">Toggle Dropdown</span>
         </button>
         <div className="dropdown-menu">
+        
           <button onClick={()=>{setState({...state,extractData:false,categoryValue:"Food",category:"Food"})}} className="dropdown-item bg-white text-dark" >Food</button>
           <button onClick={()=>{setState({...state,extractData:false,categoryValue:"Footware",category:"Footware"})}} className="dropdown-item bg-white text-dark" >Footwear</button>
           <button onClick={()=>{setState({...state,extractData:false,categoryValue:"Socks",category:"Socks"})}} className="dropdown-item bg-white text-dark" >Socks</button>
