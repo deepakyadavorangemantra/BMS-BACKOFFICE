@@ -23,7 +23,7 @@ class OfferGrid extends Component {
            
               Notiflix.Loading.Dots('');
     
-              GetApiCall.getRequest("Get_NewOffer").then(resultdes =>
+              GetApiCall.getRequest("GetOffer").then(resultdes =>
                   resultdes.json().then(obj => {
                  
                   console.log(obj.data)
@@ -38,34 +38,6 @@ class OfferGrid extends Component {
 
                   
                 }
-
-
-//                 fld_allOrder: "no"
-// fld_bankName: "sbi"
-// fld_bankOffer: "no"
-// fld_brandid: 2
-// fld_caption: "offercode"
-// fld_categoryid: 3
-// fld_code: "hgdhs"
-// fld_description: "ghg"
-// fld_discount: 20
-// fld_enddate: "10-10-2020"
-// fld_firstOrder: "no"
-// fld_freeGift: "no"
-// fld_freeShipping: "no"
-// fld_maximumamount: 1
-// fld_maximumdiscountprice: 24
-// fld_minimumProduct: null
-// fld_minimumamount: 30
-// fld_newofferid: 1
-// fld_oneTime: "yes"
-// fld_showonwebsite: "no"
-// fld_startdate: "ghg"
-// fld_termscondition: "ghd"
-// fld_updatedby: 2
-// fld_updatedon: "31-10-2020"
-// fld_vendorid: 1
-// fld_vertical: "Food"
          
          
      
@@ -82,12 +54,12 @@ class OfferGrid extends Component {
                         <div class="col-md-12">
                             <nav aria-label="breadcrumb" class="float-right mt-1">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">New Offer Management</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">New Offer List
+                                    <li class="breadcrumb-item"><a href="#">Offer Management</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Offer List
                                     </li>
                                 </ol>
                             </nav>
-                            <h4 class="mb-1 mt-0">New Offer List
+                            <h4 class="mb-1 mt-0">Offer List
                             </h4>
                         </div>
                     </div> 
@@ -122,7 +94,7 @@ class OfferGrid extends Component {
                                 <table id="basic-datatable" class="table dt-responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Offer Caption</th>
+                                        <th>Offer Name</th>
                                         <th>Code</th>
                                         <th>Price(%)</th>
                                         <th>Max Discount(Rs.)</th>
@@ -166,9 +138,9 @@ class OfferGrid extends Component {
                                        <script src="assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
                                   
                                        </Helmet> : ''}
-                                            <td>{data.fld_caption}</td>
+                                            <td>{data.fld_name}</td>
                                            <td>{data.fld_code}</td>
-                                           <td>{data.fld_discount}</td>
+                                           <td>{data.fld_pricepercent}</td>
                                            <td>{data.fld_maximumdiscountprice}</td>
                                            <td>{data.fld_startdate}</td>
                                            <td>{data.fld_enddate}</td>
