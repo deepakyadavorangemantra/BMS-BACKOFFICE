@@ -241,7 +241,7 @@ class  OfferView extends Component {
                                         <nav aria-label="breadcrumb" class="float-right mt-1">
                                             <ol class="breadcrumb">
                                                 <li class="breadcrumb-item"><a href="#">Offer Management</a></li>
-                                                <li class="breadcrumb-item"><a href="/ooferlist">Offer List</a></li>
+                                                <li class="breadcrumb-item"><a href="/offerlist">Offer List</a></li>
                                                 <li class="breadcrumb-item active" aria-current="page">View Offer</li>
                                             </ol>
                                         </nav>
