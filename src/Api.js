@@ -2,7 +2,7 @@
 //  var urlString = "http://localhost:5000/BackofficeApi/";
 // var urlString = "https://stagapi.beatmysugar.com/BackofficeApi/";
 // var urlString = "https://api.beatmysugar.com/BackofficeApi/";
-var urlString = "https://api.iitpl.com/BackofficeApi/";
+var urlString = "https://devapi.beatmysugar.com//BackofficeApi/";
 
 const PostApiCall = {
   postRequest(userData,url) {
