@@ -863,36 +863,27 @@ else
     FinalAssign(){
 
 
+    
       Notiflix.Loading.Dots('');
 
-      var sum= this.state.SelectedProduct.length > 0 ? parseFloat(this.state.SelectedProduct.map(info => ((((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100))-(this.state.MainOrder.fld_offerpercent == '' || this.state.MainOrder.fld_offerpercent == null ? 0 : ((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100)))*this.state.MainOrder.fld_offerpercent/100)))+((((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100))-(this.state.MainOrder.fld_offerpercent == '' || this.state.MainOrder.fld_offerpercent == null ? 0 : ((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100)))*this.state.MainOrder.fld_offerpercent/100)))*(info.fld_taxpercent/100)))).reduce((prev, next) => parseFloat(prev) + parseFloat(next))).toFixed(2) : 0
+      var sum2= this.state.SelectedProduct.length > 0 ? parseFloat(this.state.SelectedProduct.map(info => ((((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100))-(this.state.MainOrder.fld_offerpercent == '' || this.state.MainOrder.fld_offerpercent == null ? 0 : ((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100)))*this.state.MainOrder.fld_offerpercent/100)))+((((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100))-(this.state.MainOrder.fld_offerpercent == '' || this.state.MainOrder.fld_offerpercent == null ? 0 : ((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100)))*this.state.MainOrder.fld_offerpercent/100)))*(info.fld_taxpercent/100)))).reduce((prev, next) => parseFloat(prev) + parseFloat(next))) : 0
 
+      var sum1 = parseFloat(this.state.SelectedProduct.map(info => info.fld_shippingcharge).reduce((prev, next) => parseFloat(prev) + parseFloat(next)))
+
+      var sum = sum1 + sum2
       // for(var i = 0;i<this.state.SelectedProduct.length;i++){
 
       //   sum = sum + this.state.SelectedProduct[i].fld_quantity*this.state.SelectedProduct[i].fld_price
 
       // }
 
-      var shipcharge = ((this.state.ShipAssignedTo != '' ? parseFloat(this.state.MainOrder.fld_shippingcharges).toFixed() : parseFloat(0).toFixed()))
+      var shipcharge = ((this.state.ShipAssignedTo != '' ? parseFloat(this.state.MainOrder.fld_shippingcharges - this.state.MainOrder.fld_shippingoncart).toFixed() : parseFloat(0).toFixed()))
   
       var codcharge = ((this.state.ShipAssignedTo != '' ? parseFloat(this.state.MainOrder.fld_coddeliverycharges).toFixed() : parseFloat(0).toFixed()))
 
-      
       var net = parseFloat(parseInt(shipcharge)  +
       parseInt(codcharge) +
       parseFloat(sum)).toFixed(2)
-      // if(this.state.MainOrder.fld_offerpercent != null ) {
-      //  net = parseInt(shipcharge)  +
-      //   parseInt(codcharge) +
-      //   sum 
-      //   -  sum*(parseFloat((this.state.MainOrder.fld_offerpercent)).toFixed())/100
-      // }else
-      // { 
-      //  net = parseInt(shipcharge)  +
-      //   parseInt(codcharge) +
-      //   sum
-    
-      // }
 
       PostApiCall.postRequest({
 
@@ -900,7 +891,7 @@ else
         offerpercent : this.state.MainOrder.fld_offerpercent,
         orderid : this.state.MainOrder.fld_orderid,
         offeramount :  this.state.SelectedProduct.length > 0 ? parseFloat(this.state.SelectedProduct.map(info => (this.state.MainOrder.fld_offerpercent == '' || this.state.MainOrder.fld_offerpercent == null ? 0 : parseFloat(((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100)))*this.state.MainOrder.fld_offerpercent/100).toFixed(2))).reduce((prev, next) => parseFloat(prev) + parseFloat(next))).toFixed(2) : 0,
-        shippingcharges : this.state.ShipAssignedTo != '' ? this.state.MainOrder.fld_shippingcharges : 0 ,
+        shippingcharges : shipcharge + sum1,
         coddeliverycharges : this.state.ShipAssignedTo != '' ? this.state.MainOrder.fld_coddeliverycharges : 0,
         orderdate : moment().format('ll'),
         ordervalue : sum,
@@ -951,7 +942,7 @@ else
         offerpercent : this.state.MainOrder.fld_offerpercent,
         orderid : this.state.MainOrder.fld_orderid,
         offeramount : this.state.SelectedProduct.length > 0 ? parseFloat(this.state.SelectedProduct.map(info => (this.state.MainOrder.fld_offerpercent == '' || this.state.MainOrder.fld_offerpercent == null ? 0 : parseFloat(((info.fld_price*info.fld_quantity)/(1+(info.fld_taxpercent/100)))*this.state.MainOrder.fld_offerpercent/100).toFixed(2))).reduce((prev, next) => parseFloat(prev) + parseFloat(next))).toFixed(2) : 0,
-        shippingcharges : shipcharge,
+        shippingcharges : shipcharge + sum1,
         coddeliverycharges : codcharge,
         orderdate : moment().format('ll'),
         ordervalue : sum,
@@ -1018,7 +1009,9 @@ else
                 orderid : this.state.SelectedProduct[j].fld_orderid,
                 shipvendorid : this.state.ShipAssignedTo != '' ? this.state.SelectedVendor : 0,
                 mrp : this.state.SelectedProduct[j].fld_mrp,
-                vendorsellingprice : this.state.SelectedProduct[j].fld_vendorsellingprice
+                vendorsellingprice : this.state.SelectedProduct[j].fld_vendorsellingprice,
+                shippingcharge : this.state.SelectedProduct[j].fld_shippingcharge
+        
         
         },"AddVendorOrderDetail").then((results1) => 
         
