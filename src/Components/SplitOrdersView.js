@@ -600,10 +600,10 @@ if(results1.status == 200 || results1.status==201){
                   // console.log(dt[this.state.VendOid])
         
                   dt2[this.state.Vendetid].fld_vendornewamount = this.state.VendorNewSplit
-                  dt2[this.state.Vendetid].fld_bmsnewamount = this.state.BMSNewSplit
-                  dt2[this.state.Vendetid].fld_adjustreason = this.state.AdjustmentReason
-                  dt2[this.state.Vendetid].fld_vednordeductamount = this.state.VendorDeductAmount
-                
+                dt2[this.state.Vendetid].fld_bmsnewamount = this.state.BMSNewSplit
+                dt2[this.state.Vendetid].fld_adjustreason = this.state.AdjustmentReason
+                dt2[this.state.Vendetid].fld_vednordeductamount = this.state.VendorDeductAmount
+            
                   // console.log(dt)
         
                 this.setState({
@@ -925,53 +925,55 @@ cellpadding="0">
                                       <td>{(index+1)}.</td>
                                           <td>{data.fld_hsncode}</td>
                                          <td>{data.fld_name}</td> 
-                                          <td>{data.fld_quantity}</td>
-                                          <td> &#8377;{parseFloat((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))).toFixed(2)}</td>
-                                          <td> &#8377;{ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : parseFloat(((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100).toFixed(2)}</td>
-                                      <td>&#8377;{parseFloat((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))).toFixed(2)}</td>
-                                          <td> {data.fld_taxpercent}%</td>
-                                          <td> &#8377;{parseFloat((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)).toFixed(2)}</td>
-                                          <td> &#8377;{parseFloat((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100))).toFixed(2)}</td>
-                                      <td>&#8377;
-                                        {data.fld_vendornewamount == undefined ?
-                                      parseFloat((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))).toFixed(2)
-                                    :
-                                    <span>
-                                      <strike>
-                                        {parseFloat((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))).toFixed(2)}
-                                        </strike><br/>
-                                      &#8377;{data.fld_vendornewamount}
-                                    </span>
-                                    
-                                    }</td>
-                                      <td>&#8377;{data.fld_vendornewamount == undefined ?
-                                      parseFloat(((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100))))).toFixed(2)
-                                      :
-                                      <span>
+                                         <td>{data.fld_quantity}</td>
+                                            <td> &#8377;{parseFloat((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))).toFixed(2)}</td>
+                                            <td> &#8377;{ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : parseFloat(((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100).toFixed(2)}</td>
+                                        <td>&#8377;{parseFloat((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))).toFixed(2)}</td>
+                                            <td> {data.fld_taxpercent}%</td>
+                                            <td> &#8377;{parseFloat((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)).toFixed(2)}</td>
+                                            <td> &#8377;{parseFloat((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100))).toFixed(2)}</td>
+                                        <td>&#8377;
+                                            {data.fld_vendornewamount == undefined ?
+                                        parseFloat((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))).toFixed(2)
+                                        :
+                                        <span>
                                         <strike>
-                                          {
-                                      parseFloat(((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100))))).toFixed(2)
-                                          }
-                                          </strike><br/>
-                                      &#8377;{data.fld_bmsnewamount}
-                                    </span>
-                                    
-                                    }</td>
+                                            {parseFloat((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))).toFixed(2)}
+                                            </strike><br/>
+                                        &#8377;{data.fld_vendornewamount}
+                                        </span>
+                                        
+                                        }</td>
+                                        <td>&#8377;{data.fld_vendornewamount == undefined ?
+                                        parseFloat(((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100))))).toFixed(2)
+                                        :
+                                        <span>
+                                            <strike>
+                                            {
+                                        parseFloat(((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100))))).toFixed(2)
+
+                                            }
+                                            </strike><br/>
+                                        &#8377;{data.fld_bmsnewamount}
+                                        </span>
+                                        
+                                        }</td>
                                     <td>{data.fld_adjustreason}</td>
                                           <td>
                                            <button class="btn btn-primary" type="submit" style={{float:'right'}}
                                        onClick={()=>{
                                          this.setState({
-                                           BMSCurrentSplit : parseFloat(((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100))))).toFixed(2),
-                                           VendorCurrentSplit : parseFloat((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))).toFixed(2),
-                                           TotalSplitAmount : parseFloat((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100))).toFixed(2),
-                                           VendOid : i,
-                                           Vendetid : index,
-                                           open : true,
-                                           BMSNewSplit: data.fld_bmsnewamount,
-                                           VendorNewSplit:data.fld_vendornewamount,
-                                           AdjustmentReason:data.fld_adjustreason,
-                                           VendorDeductAmount:data.fld_vednordeductamount
+                                            BMSCurrentSplit : parseFloat(((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100))))).toFixed(2),
+                                            VendorCurrentSplit : parseFloat((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))).toFixed(2),
+                                            TotalSplitAmount : parseFloat((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100))).toFixed(2),
+                                            VendOid : i,
+                                            Vendetid : index,
+                                            open : true,
+                                            BMSNewSplit: data.fld_bmsnewamount,
+                                            VendorNewSplit:data.fld_vendornewamount,
+                                            AdjustmentReason:data.fld_adjustreason,
+                                            VendorDeductAmount:data.fld_vednordeductamount
+                                    
                                         })
                                        }}
                                        >Adjust Payment</button>
@@ -1020,70 +1022,69 @@ cellpadding="0">
                                   
                                       <tbody>
                                       {this.state.VendorOrders.map((ord, index)=>(
-                                                 
-                                                 
-                                             
-                                          <tr key={index} >
-                                                   <td>{ord.vendorname}</td>
-                                                   <td>{ord.merchantid}</td>
-                                    
-                                                   <td>{ ord.VenDet != undefined && ord.VenDet.length > 0  ?  parseFloat(((ord.VenDet.map(data => 
-                                                    data.fld_vendornewamount == undefined ?
-                                                    (((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))))
-                                                    : parseFloat(data.fld_vendornewamount)
-                                                    ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))))+ parseFloat(this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2)
-                                                     : 0}
-                                                   <span style={{float : 'right',display:ord.fld_shippingcharges == 0 || ord.fld_shippingcharges ==null || ord.fld_shippingcharges ==undefined ? 'none' : ''}}> <input type="checkbox"
-                                                   onChange={()=>{
-                                
-                                                    if(this.state.ShipChargeToVendor){
-                                
-                                                      this.setState({
-                                                        ShipChargeToVendor : false
-                                                      })
-                                
-                                                    }else{
-                                
-                                                      this.setState({
-                                                        ShipChargeToVendor : true
-                                                      })
-                                                    }
-                                
-                                
-                                                   }}
-                                                   checked={this.state.ShipChargeToVendor}
-                                                   ></input>{' '}<label for="fname">Assign Shipping Charge</label></span>
-                                                     </td>
-                                                     
-                                                   <td>{ord.VenDet != undefined && ord.VenDet.length > 0  ?  parseFloat(ord.VenDet.map(data => 
-                                                      data.fld_vendornewamount == undefined ?
-                                                    (((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))))
-                                                    : parseFloat(data.fld_bmsnewamount)
-                                                    ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))+ parseFloat(!this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2) : 0}
-                                                   <span style={{float : 'right',display:ord.fld_shippingcharges == 0 || ord.fld_shippingcharges ==null || ord.fld_shippingcharges ==undefined ? 'none' : ''}}> <input type="checkbox"
-                                                    onChange={()=>{
-                                
-                                                      if(this.state.ShipChargeToVendor){
-                                  
-                                                        this.setState({
-                                                          ShipChargeToVendor : false
-                                                        })
-                                  
-                                                      }else{
-                                  
-                                                        this.setState({
-                                                          ShipChargeToVendor : true
-                                                        })
-                                                      }
-                                  
-                                  
-                                                     }}
-                                                     checked={!this.state.ShipChargeToVendor}
-                                                   ></input>{' '}<label for="fname">Assign Shipping Charge</label></span></td>
-                                
-                                         
-                                        
-                                          </tr>
+                                     
+             
+          <tr key={index} >
+          <td>{ord.vendorname}</td>
+          <td>{ord.merchantid}</td>
+
+          <td>{ ord.VenDet != undefined && ord.VenDet.length > 0  ?  parseFloat(((ord.VenDet.map(data => 
+           data.fld_vendornewamount == undefined ?
+           (((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100))))) : (data.fld_price[1]-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))))
+           : parseFloat(data.fld_vendornewamount)
+           ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))))+ parseFloat(this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2)
+            : 0}
+          <span style={{float : 'right',display:ord.fld_shippingcharges == 0 || ord.fld_shippingcharges ==null || ord.fld_shippingcharges ==undefined ? 'none' : ''}}> <input type="checkbox"
+          onChange={()=>{
+
+           if(this.state.ShipChargeToVendor){
+
+             this.setState({
+               ShipChargeToVendor : false
+             })
+
+           }else{
+
+             this.setState({
+               ShipChargeToVendor : true
+             })
+           }
+
+
+          }}
+          checked={this.state.ShipChargeToVendor}
+          ></input>{' '}<label for="fname">Assign Shipping Charge</label></span>
+            </td>
+            
+          <td>{ord.VenDet != undefined && ord.VenDet.length > 0  ?  parseFloat(ord.VenDet.map(data => 
+             data.fld_vendornewamount == undefined ?
+           (((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100))))) : (data.fld_price[1]-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))))
+           : parseFloat(data.fld_bmsnewamount)
+           ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))+ parseFloat(!this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2) : 0}
+          <span style={{float : 'right',display:ord.fld_shippingcharges == 0 || ord.fld_shippingcharges ==null || ord.fld_shippingcharges ==undefined ? 'none' : ''}}> <input type="checkbox"
+           onChange={()=>{
+
+             if(this.state.ShipChargeToVendor){
+
+               this.setState({
+                 ShipChargeToVendor : false
+               })
+
+             }else{
+
+               this.setState({
+                 ShipChargeToVendor : true
+               })
+             }
+
+
+            }}
+            checked={!this.state.ShipChargeToVendor}
+          ></input>{' '}<label for="fname">Assign Shipping Charge</label></span></td>
+
+
+
+ </tr>        
                                 
                                     
                                   ))}
@@ -1136,18 +1137,18 @@ cellpadding="0">
             merchantdet.push(
                 {"merchantId":ord.MerchantId,"splitAmount":ord.fld_netcost,"aggregatorSubTransactionId":ord.fld_ordernumber,
                 "aggregatorCharges":parseFloat(ord.VenDet.map(data => 
-                  data.fld_vendornewamount == undefined ?
-                  (((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))))
-                  : parseFloat(data.fld_bmsnewamount)
-                  ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))+ parseFloat(!this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2)
-                ,"aggregatorDiscount":"0","sellerDiscount":"0","CODAmount":"0",
+                    data.fld_vendornewamount == undefined ?
+                    (((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord.fld_offerpercent == '' || ord.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100))))) : (data.fld_price[1]-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))))
+                    : parseFloat(data.fld_bmsnewamount)
+                    ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))+ parseFloat(!this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2)
+                     ,"aggregatorDiscount":"0","sellerDiscount":"0","CODAmount":"0",
                 "splitDetails":"Payment-Split" ,
                 "amountToBeSettled":parseFloat(((ord.VenDet.map(data => 
-                  data.fld_vendornewamount == undefined ?
-                  (((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))))
-                  : parseFloat(data.fld_vendornewamount)
-                  ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))))+ parseFloat(this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2)
-      }
+                    data.fld_vendornewamount == undefined ?
+                    (((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100))))) : (data.fld_price[1]-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord.fld_tds/100)))))
+                    : parseFloat(data.fld_vendornewamount)
+                    ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))))+ parseFloat(this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2)
+                }
             )
 
             cn = cn +1 
@@ -1211,15 +1212,15 @@ cellpadding="0">
             netvalue : parseFloat((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100))-(ord1.fld_offerpercent == '' || ord1.fld_offerpercent == null ? 0 : ((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*ord1.fld_offerpercent/100)))).toFixed(2),
             gstamount : data1.fld_taxpercent,
             totalamount : parseFloat((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100))-(ord1.fld_offerpercent == '' || ord1.fld_offerpercent == null ? 0 : ((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*ord1.fld_offerpercent/100)))*(data1.fld_taxpercent/100)).toFixed(2),
-            vendorsplitamount : parseFloat((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice[0]*data1.fld_quantity-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice[0]*data1.fld_quantity*(data1.fld_marginpercent/100)) : (data1.fld_price[1]*data1.fld_quantity*(data1.fld_marginpercent/100))))) : (data1.fld_price[1]*data1.fld_quantity-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice[0]*data1.fld_quantity*(data1.fld_marginpercent/100)) : (data1.fld_price[1]*data1.fld_quantity*(data1.fld_marginpercent/100)))))) - ((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*(ord1.fld_tcs/100))) - ((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*(ord1.fld_tds/100)))).toFixed(2),
-            bmssplitamount : parseFloat(((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100))-(ord1.fld_offerpercent == '' || ord1.fld_offerpercent == null ? 0 : ((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*ord1.fld_offerpercent/100)))+((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100))-(ord1.fld_offerpercent == '' || ord1.fld_offerpercent == null ? 0 : ((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*ord1.fld_offerpercent/100)))*(data1.fld_taxpercent/100)))-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice[0]*data1.fld_quantity-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice[0]*data1.fld_quantity*(data1.fld_marginpercent/100)) : (data1.fld_price[1]*data1.fld_quantity*(data1.fld_marginpercent/100))))) : (data1.fld_price[1]*data1.fld_quantity-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice[0]*data1.fld_quantity*(data1.fld_marginpercent/100)) : (data1.fld_price[1]*data1.fld_quantity*(data1.fld_marginpercent/100)))))) - ((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*(ord1.fld_tcs/100))) - ((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*(ord1.fld_tds/100))))).toFixed(2),
+            vendorsplitamount : parseFloat((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice*(data1.fld_marginpercent/100)) : (data1.fld_price[1]*(data1.fld_marginpercent/100))))) : (data1.fld_price[1]-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice*(data1.fld_marginpercent/100)) : (data1.fld_price[1]*(data1.fld_marginpercent/100)))))) - ((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*(ord1.fld_tcs/100))) - ((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*(ord1.fld_tds/100)))).toFixed(2),
+            bmssplitamount : parseFloat(((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100))-(ord1.fld_offerpercent == '' || ord1.fld_offerpercent == null ? 0 : ((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*ord1.fld_offerpercent/100)))+((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100))-(ord1.fld_offerpercent == '' || ord1.fld_offerpercent == null ? 0 : ((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*ord1.fld_offerpercent/100)))*(data1.fld_taxpercent/100)))-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice*(data1.fld_marginpercent/100)) : (data1.fld_price[1]*(data1.fld_marginpercent/100))))) : (data1.fld_price[1]-((data1.fld_marginon == 'Vendor Selling Price' ? (data1.fld_vendorsellingprice*(data1.fld_marginpercent/100)) : (data1.fld_price[1]*(data1.fld_marginpercent/100)))))) - ((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*(ord1.fld_tcs/100))) - ((((data1.fld_price[0]*data1.fld_quantity)/(1+(data1.fld_taxpercent/100)))*(ord1.fld_tds/100))))).toFixed(2),
             newvendorsplitamount : data1.fld_vendornewamount == undefined ? 0 : data1.fld_vendornewamount,
             newbmssplitamount : data1.fld_vendornewamount == undefined ? 0 : data1.fld_bmsnewamount,
             updatedon : moment().format('lll'),
             updatedby : 0,
             adjustreason : data1.fld_adjustreason,
             vednordeductamount:data1.fld_vednordeductamount
-        
+  
         },"AddVendorSplitLog").then((results2) => 
         
         // const objs = JSON.parse(result._bodyText)
@@ -1253,20 +1254,20 @@ cellpadding="0">
     ord2 = this.state.VendorOrders[i]
     PostApiCall.postRequest({
 
-      vendorid : ord2.fld_verdorid,
-      orderid : this.state.MainOrder.fld_orderid,
-      vendorname : ord2.vendorname,
-      customerordernumber : this.state.MainOrder.fld_ordernumber,
-      merchantid : ord.MerchantId,
+        vendorid : ord2.fld_verdorid,
+        orderid : this.state.MainOrder.fld_orderid,
+        vendorname : ord2.vendorname,
+        customerordernumber : this.state.MainOrder.fld_ordernumber,
+     merchantid : ord.MerchantId,
       vendorsplitamount : parseFloat(((ord2.VenDet.map(data => 
         data.fld_vendornewamount == undefined ?
-        (((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord2.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord2.fld_tds/100)))))
+        (((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100))))) : (data.fld_price[1]-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord2.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord2.fld_tds/100)))))
         : parseFloat(data.fld_vendornewamount)
         ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))))+ parseFloat(this.state.ShipChargeToVendor ? ord2.fld_shippingcharges : 0)).toFixed(2),
       
         bmssplitamount : parseFloat(ord2.VenDet.map(data => 
           data.fld_vendornewamount == undefined ?
-          (((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord2.fld_offerpercent == '' || ord2.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord2.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord2.fld_offerpercent == '' || ord2.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord2.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100))))) : (data.fld_price[1]*data.fld_quantity-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice[0]*data.fld_quantity*(data.fld_marginpercent/100)) : (data.fld_price[1]*data.fld_quantity*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord2.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord2.fld_tds/100)))))
+          (((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord2.fld_offerpercent == '' || ord2.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord2.fld_offerpercent/100)))+((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100))-(ord2.fld_offerpercent == '' || ord2.fld_offerpercent == null ? 0 : ((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*ord2.fld_offerpercent/100)))*(data.fld_taxpercent/100)))-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100))))) : (data.fld_price[1]-((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_vendorsellingprice*(data.fld_marginpercent/100)) : (data.fld_price[1]*(data.fld_marginpercent/100)))))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord2.fld_tcs/100))) - ((((data.fld_price[0]*data.fld_quantity)/(1+(data.fld_taxpercent/100)))*(ord2.fld_tds/100)))))
           : parseFloat(data.fld_bmsnewamount)
           ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))+ parseFloat(!this.state.ShipChargeToVendor ? ord.fld_shippingcharges : 0)).toFixed(2),
      
