@@ -212,7 +212,7 @@ class  AddOffer extends Component {
                                         <nav aria-label="breadcrumb" className="float-right mt-1">
                                             <ol className="breadcrumb">
                                                 <li className="breadcrumb-item"><a href="#">Offer Management</a></li>
-                                                <li className="breadcrumb-item"><a href="/ooferlist">Offer List</a></li>
+                                                <li className="breadcrumb-item"><a href="/offerlist">Offer List</a></li>
                                                 <li className="breadcrumb-item active" aria-current="page">Add Offer</li>
                                             </ol>
                                         </nav>

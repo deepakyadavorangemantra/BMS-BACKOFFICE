@@ -82,8 +82,8 @@ class ViewBooks extends Component {
               isReturnable : true,
 
               IsVisible : false,
-              EditAccessGranted : true,
-              ApproveAccessGranted : true,
+              EditAccessGranted : false,
+              ApproveAccessGranted : false,
               CountryOfOrigin : 'India',
               CountryOrigindata : []
          
