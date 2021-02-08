@@ -1,5 +1,5 @@
 
-var urlString = "https://stagapi.beatmysugar.com/BackofficeApi/";
+var urlString = "https://devapi.beatmysugar.com/BackofficeApi/";
 
 
 //  var urlString = "http://localhost:7000/BackofficeApi/";

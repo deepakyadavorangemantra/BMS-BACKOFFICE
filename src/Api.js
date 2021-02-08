@@ -1,6 +1,6 @@
 
 //  var urlString = "http://localhost:7000/BackofficeApi/";
-var urlString = "https://stagapi.beatmysugar.com/BackofficeApi/";
+var urlString = "https://devapi.beatmysugar.com/BackofficeApi/";
 
 
 const PostApiCall = {

@@ -4371,3 +4371,9 @@ div#apexcharts15hly9ud{
 .card-body.getreport-card {
     padding: 1rem!important;
 }
+
+.react-switch {
+    position: absolute;
+    top: 7px;
+    left: 5px;
+}
