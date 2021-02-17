@@ -591,12 +591,12 @@ class Sidenav extends React.Component {
                         </a>
                     </li>
 
-                      {/* <li>
-                                <a href='/testimonialmanagementlist'>
-                                     <MessageSquare/>
-                                     <span style={{paddingLeft:'3px'}}>Testimonials</span>
-                                 </a>
-                             </li> */}
+                      <li>
+                        <a href='/smslog'>
+                                <Mail/>
+                                <span style={{paddingLeft:'3px'}}>SMS Logs</span>
+                            </a>
+                        </li>
 
                    
 
