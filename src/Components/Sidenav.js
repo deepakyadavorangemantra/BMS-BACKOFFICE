@@ -134,6 +134,7 @@ import Orders from './Orders';
 import Products from './Products';
 
 import Customers from './Customers';
+import SmsLog from './SmsLog';
 import ItemComparision from './ItemComparision';
 import Vendors from './Vendors';
 import SettlementReport from './SettlementReportNew';
@@ -793,6 +794,7 @@ class Sidenav extends React.Component {
         <Route exact path='/itemcomparision' component={ItemComparision }></Route>
         <Route exact path='/vendors' component={Vendors }></Route>
         <Route exact path='/ordersettlement' component={SettlementReport }></Route>
+        <Route exact path='/smslog' component={SmsLog}></Route>
         
         <Route exact path='/codservicecharge' component={CODMaster}></Route>
         <Route exact path='/viewcustomers' component={ViewCustomer}></Route>
