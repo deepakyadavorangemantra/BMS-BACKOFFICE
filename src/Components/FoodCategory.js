@@ -8,6 +8,7 @@ import PostApiCall from '../Api'
 import GetApiCall from '../GetApi'
 import moment from 'moment';
 import { confirmAlert } from 'react-confirm-alert';
+import CKEditor from 'ckeditor4-react';
 import{
     setfoodcategory,
     setclearfoodcategory
@@ -245,14 +246,22 @@ class FoodCategory extends Component {
         <div class="col-md-12">
             <div class="form-group mb-3">
               <label for="validationCustom01">Description<span class="mandatory">*</span></label>
-              <textarea class="form-control" name="description"  onChange={(text)=>{
+              {/* <textarea class="form-control" name="description"  onChange={(text)=>{
                   this.setState({
                     description : text.target.value
                   })
 
                 }}>
                 {this.state.description} 
-              </textarea>
+              </textarea> */}
+
+            <CKEditor
+            config={{
+            extraPlugins: "justify,font,colorbutton",
+            }}                                
+            data={this.state.description}
+            onChange={(event)=>{  this.setState({ description : event.editor.getData() })  }}
+            />
             </div>
         </div>
         <div className="col-md-6">
@@ -336,14 +345,21 @@ class FoodCategory extends Component {
         <div class="col-md-12">
             <div class="form-group mb-3">
               <label for="validationCustom01">Description<span class="mandatory">*</span></label>
-              <textarea class="form-control" name="description" onChange={(text)=>{
+              {/* <textarea class="form-control" name="description" onChange={(text)=>{
                   this.setState({
                     description : text.target.value
                   })
 
                 }}>
                   {this.state.description}
-              </textarea>
+              </textarea> */}
+              <CKEditor
+              config={{
+              extraPlugins: "justify,font,colorbutton",
+              }}                                
+              data={this.state.description}
+              onChange={(event)=>{  this.setState({ description : event.editor.getData() })  }}
+              />
             </div>
         </div>
         </div>
