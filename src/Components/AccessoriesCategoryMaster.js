@@ -14,7 +14,7 @@ import{
 }
 from './Actions/ActionType';
 import imageConfig from '../Api/imageApi';
-
+import CKEditor from 'ckeditor4-react';
 
 const ImgUpload =({
   onChange,
@@ -63,6 +63,7 @@ class FoodCategory extends Component {
       var details=JSON.parse(login)
         PostApiCall.postRequest ({
             category : this.state.CategoryName,
+            description:this.state.description,
             abv : this.state.Abv,
             status : this.state.Status,
             updatedby : details[0].fld_staffid,
@@ -95,7 +96,8 @@ class FoodCategory extends Component {
             Status : 'Active',
             AccessoriesId : '',
             Abv : '',
-            CategoryName:''
+            CategoryName:'',
+            description:''
           };
         }
     
@@ -157,6 +159,7 @@ class FoodCategory extends Component {
 
               accessoriesid : this.state.AccessoriesId,
               category : this.state.CategoryName,
+              description:this.state.description,
               abv : this.state.Abv,
               status : this.state.Status,
               updatedon : moment().format('lll'),
@@ -244,6 +247,27 @@ class FoodCategory extends Component {
                 }}/>
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="form-group mb-3">
+                <label for="validationCustom01">Description<span class="mandatory">*</span></label>
+                <CKEditor
+                    config={{
+                    extraPlugins: "justify,font,colorbutton",
+                    }}                                
+                    data={this.state.description}
+                    onChange={(event)=>{  this.setState({ description : event.editor.getData() })  }}
+                  />
+                {/* <textarea class="form-control"  
+                  onChange={(text)=>{
+                    this.setState({
+                      description : text.target.value
+                    })
+
+                  }}>
+                  {this.state.description}
+                 </textarea> */}
+            </div>
+        </div>
         <div className="col-md-6">
               <div class="form-group mb-3">
                 <label for="validationCustom01">Status<span class="mandatory">*</span></label><br/>
@@ -325,6 +349,28 @@ class FoodCategory extends Component {
                   })
 
                 }}/>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group mb-3">
+                <label for="validationCustom01">Description<span class="mandatory">*</span></label>
+                {/* <textarea class="form-control"  
+                onChange={(text)=>{
+                    this.setState({
+                      description : text.target.value
+                    })
+
+                  }}>
+                  {this.state.description}
+                  </textarea> */}
+
+                  <CKEditor
+                    config={{
+                    extraPlugins: "justify,font,colorbutton",
+                    }}                                
+                    data={this.state.description}
+                    onChange={(event)=>{  this.setState({ description : event.editor.getData() })  }}
+                  />
             </div>
         </div>
         </div>
@@ -500,7 +546,8 @@ class FoodCategory extends Component {
                                                  openedit : true,
                                                  AccessoriesId : data.fld_id,
                                                  Abv : data.fld_abv,
-                                                 CategoryName:data.fld_category
+                                                 CategoryName:data.fld_category,
+                                                 description:data.fld_description
                                                })
 
                                            
