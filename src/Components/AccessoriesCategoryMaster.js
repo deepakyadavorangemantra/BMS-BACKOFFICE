@@ -14,7 +14,7 @@ import{
 }
 from './Actions/ActionType';
 import imageConfig from '../Api/imageApi';
-
+import CKEditor from 'ckeditor4-react';
 
 const ImgUpload =({
   onChange,
@@ -250,7 +250,14 @@ class FoodCategory extends Component {
         <div class="col-md-12">
             <div class="form-group mb-3">
                 <label for="validationCustom01">Description<span class="mandatory">*</span></label>
-                <textarea class="form-control"  
+                <CKEditor
+                    config={{
+                    extraPlugins: "justify,font,colorbutton",
+                    }}                                
+                    data={this.state.description}
+                    onChange={(event)=>{  this.setState({ description : event.editor.getData() })  }}
+                  />
+                {/* <textarea class="form-control"  
                   onChange={(text)=>{
                     this.setState({
                       description : text.target.value
@@ -258,7 +265,7 @@ class FoodCategory extends Component {
 
                   }}>
                   {this.state.description}
-                 </textarea>
+                 </textarea> */}
             </div>
         </div>
         <div className="col-md-6">
