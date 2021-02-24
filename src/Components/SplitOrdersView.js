@@ -1043,7 +1043,7 @@ parseFloat((data.fld_marginon == 'Vendor Selling Price' ? (data.fld_quantity*dat
           
            : parseFloat(data.fld_vendornewamount)
            ).reduce((prev, next) => parseFloat(prev) + parseFloat(next))))
-           + parseFloat(this.state.ShipChargeToVendor ? ord.fld_shippingcharges == 0 || ord.fld_shippingcharges ==null || ord.fld_shippingcharges ==undefined ? ord.fld_shippingcharges : 0 : 0)
+           + parseFloat(this.state.ShipChargeToVendor ? ord.fld_shippingcharges == 0 || ord.fld_shippingcharges ==null || ord.fld_shippingcharges ==undefined ?  0 : ord.fld_shippingcharges : 0)
            ).toFixed(2)
             : 0}
           <span style={{float : 'right',display:ord.fld_shippingcharges == 0 || ord.fld_shippingcharges ==null || ord.fld_shippingcharges ==undefined ? 'none' : ''}}> <input type="checkbox"
