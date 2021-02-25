@@ -195,7 +195,7 @@ import ViewTestimonialMaster from './ViewTestimonialMaster';
 
 
 import ShippingCharges from './ShippingCharges';
-
+import OneTimeCouponCode from '../Pages/oneTimeCouponCode';
 
 class Sidenav extends React.Component {
 
@@ -464,6 +464,7 @@ class Sidenav extends React.Component {
                                     {/* <li><a href='/itemcomparision'>Item Comparision of Sales by Month</a></li> */}
                                     <li><a href='/vendors'>Vendors</a></li>
                                     <li><a href='/ordersettlement'>Settlement Report</a></li>
+                                    <li><a href='/onetimecouponcode'>One Time Coupon</a></li>
                                     </ul>
 
                                     :
@@ -853,8 +854,8 @@ class Sidenav extends React.Component {
         <Route exact path='/edu-gifthamperdelivery' component={GiftHamperDelivery}></Route>
         <Route exact path='/edu-setalert' component={SetAlert}></Route>
         <Route exact path='/edu-teaser' component={Teaser}></Route>
-        
-    
+        {/* OM New Routes */}
+        <Route exact path='/onetimecouponcode' component={OneTimeCouponCode}></Route>
 
        </Switch>
       
