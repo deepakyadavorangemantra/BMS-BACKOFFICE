@@ -160,7 +160,7 @@ export default class AddBanner extends Component {
 save(){
     if(this.state.Vertical != ''){
 
-        if(this.state.Vertical == 'Home' || this.state.Vertical =='Insurance' || this.state.Vertical =='Sell With Us' || this.state.Vertical =='Contact Us' || this.state.Vertical =='Careers'){
+        if(this.state.Vertical == 'Home' || this.state.Vertical == 'Home2' || this.state.Vertical =='Insurance' || this.state.Vertical =='Sell With Us' || this.state.Vertical =='Contact Us' || this.state.Vertical =='Careers'){
 
             this.AddNewBanner()
         }else{
@@ -397,7 +397,7 @@ SaveFinal(){
                                                                                         height = 300
                                                                                     }
 
-                                                                                    else if(text.target.value == 'Home' || text.target.value =='Insurance' || text.target.value =='Sell With Us' || text.target.value =='Contact Us' || text.target.value =='Careers')
+                                                                                    else if(text.target.value == 'Home' || text.target.value== 'Home2' || text.target.value =='Insurance' || text.target.value =='Sell With Us' || text.target.value =='Contact Us' || text.target.value =='Careers')
                                                                                     {
                                                                                         this.setState({
                                                                                             IsType : false,
@@ -433,7 +433,7 @@ SaveFinal(){
                                                                                  </div>
                                                                             </div>
 
-                                                                            <div  class="col-md-6" style={{display : this.state.Vertical == 'Home' ? '' : 'none'}}>
+                                                                            <div  class="col-md-6" style={{display : this.state.Vertical == 'Home' || this.state.Vertical == 'Home2' ? '' : 'none'}}>
                                                                                 <div class="form-group" >
                                                                                 <label>Banner Order<span className="mandatory">*</span></label>
                                                                                 <select type="text" class="form-control" 
