@@ -55,6 +55,7 @@ export default class AddBanner extends Component {
         VerticalData:[
             {value: '', label:'Select Vertical'},
             {value: 'Home', label:'Home'},
+            {value: 'Home2', label:'Home2'},
             {value: 'Food & Supplements', label:'Food & Supplements'},
             {value: 'Footwear', label:'Footwear'},
             {value: 'Socks', label:'Socks'},
