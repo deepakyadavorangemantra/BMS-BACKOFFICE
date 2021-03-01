@@ -464,7 +464,7 @@ class Sidenav extends React.Component {
                                     {/* <li><a href='/itemcomparision'>Item Comparision of Sales by Month</a></li> */}
                                     <li><a href='/vendors'>Vendors</a></li>
                                     <li><a href='/ordersettlement'>Settlement Report</a></li>
-                                    <li><a href='/offercouponreport'>Offers</a></li>
+                                    {/* <li><a href='/offercouponreport'>Offers</a></li> */}
                                     </ul>
 
                                     :
