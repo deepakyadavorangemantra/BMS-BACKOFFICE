@@ -11,6 +11,7 @@ import moment from 'moment'
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import GetApiCall from '../GetApi';
 import PostApiCall from "../Api";
+import { AlignLeft } from 'react-feather';
 
 var gross = 0
 var marg = 0
@@ -18,7 +19,7 @@ var vm = 0
 var sp = 0
 var quan = 0
 
-export default class OneTimeCouponCode extends Component {
+export default class OfferReports extends Component {
 
     constructor(props){
     super(props)
@@ -27,7 +28,9 @@ export default class OneTimeCouponCode extends Component {
             VendorsData : [],
             VendorsOrderDataFinal : [],
             startDate : '',
-            endDate : ''
+            endDate : '',
+            OfferDataList : [],
+            offerCode : ''
         }
     }
 DatePickers=()=> {
@@ -80,27 +83,44 @@ DatePickers=()=> {
 }
 
 
+
+
 componentDidMount(){
     // Update the document title using the browser API
     Notiflix.Loading.Init({
         svgColor : '#507dc0',
       });
     Notiflix.Loading.Dots('Please wait...');
-    GetApiCall.getRequest("GetOneTimeCouponOrderDetail").then(resultdes =>
+
+        GetApiCall.getRequest("GetOffer").then(resultdes =>
             resultdes.json().then(obj => {
-                 console.log(obj.data)
+            this.setState({
+                OfferDataList : obj.data
+            })
+          Notiflix.Loading.Remove();
+        }))
+
+        this.getOfferListByCoupon('all','all');
+        this.getOffersDashboardData();
+    }
+
+    getOffersDashboardData=()=>{
+        Notiflix.Loading.Init({
+            svgColor : '#507dc0',
+          });
+        Notiflix.Loading.Dots('Please wait...');
+        PostApiCall.postRequest({}, "GetCouponOrderReport").then(resultdes =>
+            resultdes.json().then(obj => {
+                debugger;
                 this.setState({
-                    VendorsOrderData:obj.data
+                    offerDashboardData:obj.data
                 });
        
-             
+                Notiflix.Loading.Remove();
             }))
-      
+    }
 
-
-        }
-
-        
+  
 
  getReportHandler(){
   
@@ -137,9 +157,25 @@ componentDidMount(){
    
   }
 
+  getOfferListByCoupon=(offerCode, filter_type)=>{
+    Notiflix.Loading.Init({
+        svgColor : '#507dc0',
+      });
+    Notiflix.Loading.Dots('Please wait...');
+    this.setState({extractData:false, offerCode });
+    PostApiCall.postRequest({ coupon_code:offerCode=='all'? '': offerCode, filter_type:filter_type},"GetOneTimeCouponOrderDetail").then(resultdes =>
+        resultdes.json().then(obj => {
+            this.setState({
+                VendorsOrderData:obj.data
+            });
+   
+            Notiflix.Loading.Remove();
+        }))
+  }
+
   render()
   {
-    console.log(this.state.VendorsOrderData,'VendorsOrderData')
+     
 return (
     <div>
         <div class="content-page">
@@ -181,10 +217,29 @@ return (
             </div> 
            <div className="card card-body  " role="alert" aria-live="assertive" aria-atomic="true" data-toggle="toast"  >
             <div className="row align-items-center">
+                    <div className="col col-xl-6 col-sm-12">
+                        <div className="btn-toolbar  sw-toolbar sw-toolbar-top justify-content-left">
+                            <div className="btn-group">
+       
+                                <button type="button" className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                &nbsp;Select&nbsp;Report&nbsp;
+                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                    <span className="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div className="dropdown-menu">
+                                <button onClick={()=>{this.getOfferListByCoupon( 'all', "all")}} className="dropdown-item bg-white text-dark" >All Orders</button>
+                                {this.state.OfferDataList && this.state.OfferDataList.length > 0 && this.state.OfferDataList.map(( offers)=>{
+                                   return <button onClick={()=>{ this.getOfferListByCoupon( offers.fld_code, "filter")}} className="dropdown-item bg-white text-dark" >{ offers.fld_code }</button>
+                                    })
+                                }
+                                </div>
+                            </div>                    
+                            <input disabled={true} className="form-control-date ml-2" type='text' value={this.state.offerCode} />
+                        </div>
+                 </div>
                   <div className="col col-xl-12    col-sm-12">
                     <div className="btn-toolbar py-1 ml-1 pl-5  sw-toolbar sw-toolbar-top justify-content-right" style={{ float: 'right'}}>
-                                                                                {this.DatePickers()}
-
+                        {this.DatePickers()}
                    </div>
                 </div>
             </div>
