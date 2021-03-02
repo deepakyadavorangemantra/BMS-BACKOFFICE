@@ -67,7 +67,8 @@ class FoodCategory extends Component {
             description:this.state.description,
             status : this.state.Status,
             updatedby : details[0].fld_staffid,
-            updatedon : moment().format('lll')
+            updatedon : moment().format('lll'),
+            descriptionStatus:this.state.descriptionStatus
         },"AddCovidCategoryMaster").then((resultFoodC) =>
         resultFoodC.json().then(objfoodC => {
             if(resultFoodC.status == 200 || resultFoodC.status == 201){
@@ -163,7 +164,8 @@ class FoodCategory extends Component {
               abv : this.state.Abv,
               status : this.state.Status,
               updatedby : details[0].fld_staffid,
-              updatedon : moment().format('lll')
+              updatedon : moment().format('lll'),
+              descriptionStatus:this.state.descriptionStatus
           },"UpdateCovidCategoryMaster").then((resultFoodC) =>
           resultFoodC.json().then(objfoodC => {
               if(resultFoodC.status == 200 || resultFoodC.status == 201){
