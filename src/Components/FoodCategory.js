@@ -67,7 +67,8 @@ class FoodCategory extends Component {
             description : this.state.description,
             status : this.state.Status,
             updatedby : details[0].fld_staffid,
-            updatedon : moment().format('lll')
+            updatedon : moment().format('lll'),
+            descriptionStatus:this.state.descriptionStatus
         },"AddFoodCategoryMaster").then((resultFoodC) =>
         resultFoodC.json().then(objfoodC => {
             if(resultFoodC.status == 200 || resultFoodC.status == 201){
@@ -96,7 +97,8 @@ class FoodCategory extends Component {
             Status : 'Active',
             FoodId : '',
             Abv : '',
-            description:''
+            description:'',
+            descriptionStatus:'Yes'
           };
         }
     
@@ -164,7 +166,8 @@ class FoodCategory extends Component {
               description : this.state.description,
               status : this.state.Status,
               updatedby : details[0].fld_staffid,
-              updatedon : moment().format('lll')
+              updatedon : moment().format('lll'),
+              descriptionStatus:this.state.descriptionStatus
           },"UpdateFoodCategoryMaster").then((resultFoodC) =>
           resultFoodC.json().then(objfoodC => {
               if(resultFoodC.status == 200 || resultFoodC.status == 201){
@@ -266,6 +269,25 @@ class FoodCategory extends Component {
         </div>
         <div className="col-md-6">
               <div class="form-group mb-3">
+                <label for="validationCustom01">Description Show on website<span class="mandatory">*</span></label><br/>
+                <label class="radio-inline">
+                <input type="radio" name="descriptionStatus" checked = {this.state.descriptionStatus == 'Yes' ? true : false} onChange= {()=>{
+                  this.setState({
+                    descriptionStatus : 'Yes'
+                  })
+                }} /> Yes
+              </label>
+               <label class="radio-inline" style={{marginLeft:'10px'}}>
+                <input type="radio" name="descriptionStatus" checked = {this.state.descriptionStatus == 'No' ? true : false} onChange= {()=>{
+                  this.setState({
+                    descriptionStatus : 'No'
+                  })
+                }} /> No
+              </label> 
+                </div>
+        </div>
+        <div className="col-md-6">
+              <div class="form-group mb-3">
                 <label for="validationCustom01">Status<span class="mandatory">*</span></label><br/>
                 <label class="radio-inline">
                 <input type="radio" name="optradio" checked = {this.state.Status == 'Active' ? true : false} onChange= {()=>{
@@ -362,6 +384,25 @@ class FoodCategory extends Component {
               />
             </div>
         </div>
+        </div>
+        <div className="col-md-6">
+              <div class="form-group mb-3">
+                <label for="validationCustom01">Description Show on website<span class="mandatory">*</span></label><br/>
+                <label class="radio-inline">
+                <input type="radio" name="descriptionStatus" checked = {this.state.descriptionStatus == 'Yes' ? true : false} onChange= {()=>{
+                  this.setState({
+                    descriptionStatus : 'Yes'
+                  })
+                }} /> Yes
+              </label>
+               <label class="radio-inline" style={{marginLeft:'10px'}}>
+                <input type="radio" name="descriptionStatus" checked = {this.state.descriptionStatus == 'No' ? true : false} onChange= {()=>{
+                  this.setState({
+                    descriptionStatus : 'No'
+                  })
+                }} /> No
+              </label> 
+                </div>
         </div>
 
         <div className="col-md-6">
@@ -535,7 +576,8 @@ class FoodCategory extends Component {
                                                  openedit : true,
                                                  FoodId : data.fld_id,
                                                  Abv : data.fld_abv,
-                                                 description : data.fld_description
+                                                 description : data.fld_description,
+                                                 descriptionStatus : data.fld_description_status
                                                })
 
                                                this.props.setfoodcategory(data.fld_category)
