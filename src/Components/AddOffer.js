@@ -52,7 +52,7 @@ class  AddOffer extends Component {
                 EmailRegex :  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                UrlRegex : /^(https:\/\/www\.|httpss:\/\/www\.|https:\/\/|httpss:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
                imagePreviewUrl: 'https://www.adcproductdesign.com/wp-content/uploads/2018/02/Realize-Icon-Blue.png',
-           
+               oneTimeApplicable : 0
         }
     }
 
@@ -88,6 +88,7 @@ class  AddOffer extends Component {
                                                              end_date : this.props.OfferReducer.EndDate,
                                                              terms_condition : this.props.OfferReducer.TermsCondition,
                                                              show_on_website : this.state.Status,
+                                                             oneTimeApplicable : this.state.oneTimeApplicable,
                                                              updated_on : moment().format('lll').toString(),
                                                              updated_by : details[0].fld_staffid
                                                           
@@ -723,6 +724,31 @@ class  AddOffer extends Component {
                                                                                </div>
                                                                                    </div>
                                                                                      
+                                                                                <div className="col-md-6">
+                                                                                <label for="validationCustom05">First order Applicable <span className="mandatory">*</span></label>
+                                                                                  
+                                                                                   <div className="form-group mb-2">
+                                                                                   <label className="radio-inline">
+                                                                                   <input type="radio" name="optradio1"
+                                                                                              checked={this.state.oneTimeApplicable == 1 ? true : false}
+                                                                                               onChange={()=>{
+                                                                                                   this.setState({
+                                                                                                    oneTimeApplicable : 1
+                                                                                                   })
+                                                                                               }}/> Yes
+                                                                                            </label>
+                                                                                           <label className="radio-inline" style={{marginLeft:'10px'}}>
+                                                                                               <input type="radio" name="optradio1" 
+                                                                                               checked={this.state.oneTimeApplicable == 0 ? true : false}
+                                                                                               onChange={()=>{
+                                                                                                   this.setState({
+                                                                                                    oneTimeApplicable : 0
+                                                                                                   })
+                                                                                               }}/> No
+                                                                                       </label>
+                                                                                   
+                                                                               </div>
+                                                                                   </div>
                                                                                   
                                                                                 </div>
                                                                                 
