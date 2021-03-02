@@ -624,4 +624,4 @@ function mapStateToProps(state){
   export default connect(mapStateToProps, {
     setfoodcategory,
     setclearfoodcategory
-  }) (FoodCategory);
+  }) (FoodCategory); 
