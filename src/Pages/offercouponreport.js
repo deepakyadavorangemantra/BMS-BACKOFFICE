@@ -224,7 +224,7 @@ export default class OfferReports extends Component {
                                                     <span className="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div className="dropdown-menu">
-                                                    <button onClick={() => { this.getOfferListByCoupon('all', "all") }} className="dropdown-item bg-white text-dark" >All Offer</button>
+                                                    <button onClick={() => { this.getOfferListByCoupon('all', "all") }} className="dropdown-item bg-white text-dark" >All Offers</button>
                                                     {this.state.OfferDataList && this.state.OfferDataList.length > 0 && this.state.OfferDataList.map((offers) => {
                                                         return <button onClick={() => { this.getOfferListByCoupon(offers.fld_code, "filter") }} className="dropdown-item bg-white text-dark" >{offers.fld_code}</button>
                                                     })
