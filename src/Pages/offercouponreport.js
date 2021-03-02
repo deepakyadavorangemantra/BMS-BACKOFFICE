@@ -101,7 +101,7 @@ export default class OfferReports extends Component {
                 Notiflix.Loading.Remove();
             }))
 
-        this.getOfferListByCoupon('all', 'all');
+        this.getOfferListByCoupon('all offers', 'all');
         this.getOffersDashboardData();
     }
 
@@ -160,7 +160,7 @@ export default class OfferReports extends Component {
         });
         Notiflix.Loading.Dots('Please wait...');
         this.setState({ extractData: false, offerCode });
-        PostApiCall.postRequest({ coupon_code: offerCode == 'all' ? '' : offerCode, filter_type: filter_type }, "GetOneTimeCouponOrderDetail").then(resultdes =>
+        PostApiCall.postRequest({ coupon_code: offerCode == 'all offers' ? '' : offerCode, filter_type: filter_type }, "GetOneTimeCouponOrderDetail").then(resultdes =>
             resultdes.json().then(obj => {
                 this.setState({
                     VendorsOrderData: obj.data
@@ -224,7 +224,7 @@ export default class OfferReports extends Component {
                                                     <span className="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div className="dropdown-menu">
-                                                    <button onClick={() => { this.getOfferListByCoupon('all', "all") }} className="dropdown-item bg-white text-dark" >All Offers</button>
+                                                    <button onClick={() => { this.getOfferListByCoupon('all offers', "all") }} className="dropdown-item bg-white text-dark" >All Offers</button>
                                                     {this.state.OfferDataList && this.state.OfferDataList.length > 0 && this.state.OfferDataList.map((offers) => {
                                                         return <button onClick={() => { this.getOfferListByCoupon(offers.fld_code, "filter") }} className="dropdown-item bg-white text-dark" >{offers.fld_code}</button>
                                                     })
@@ -257,7 +257,7 @@ export default class OfferReports extends Component {
                                 </div>
                             </div>
 
-                            <div class="row" style={{ display: this.state.VendorsOrderData.length > 0 ? '' : 'none' }}>
+                            <div class="row" >
                                 <div class="col-12">
                                     <div class="card visually-view" style={{ overflow: 'auto' }}>
                                         <div class="card-body">
@@ -289,7 +289,7 @@ export default class OfferReports extends Component {
 
                                             </div>
 
-                                            <div class="row">
+                                            <div class="row" style={{ display: this.state.VendorsOrderData.length > 0 ? '' : 'none' }}>
                                                 <div style={{ marginBottom: "-11px" }} class="col-12">
                                                     <div class="card">
                                                         <div class="card-body">
