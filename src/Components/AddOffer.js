@@ -725,7 +725,7 @@ class  AddOffer extends Component {
                                                                                    </div>
                                                                                      
                                                                                 <div className="col-md-6">
-                                                                                <label for="validationCustom05">One Time Applicable <span className="mandatory">*</span></label>
+                                                                                <label for="validationCustom05">First order Applicable <span className="mandatory">*</span></label>
                                                                                   
                                                                                    <div className="form-group mb-2">
                                                                                    <label className="radio-inline">
