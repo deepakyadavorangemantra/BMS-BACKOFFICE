@@ -112,7 +112,6 @@ export default class OfferReports extends Component {
         Notiflix.Loading.Dots('Please wait...');
         PostApiCall.postRequest({}, "GetCouponOrderReport").then(resultdes =>
             resultdes.json().then(obj => {
-                debugger;
                 this.setState({
                     offerDashboardData: obj.data
                 });
@@ -276,10 +275,13 @@ export default class OfferReports extends Component {
                                                                     <th style={{ width: '50%' }}>Coupon Code</th>
                                                                     <th style={{ width: '50%' }}>Customers Used</th>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>BeatMySugar Festive Offer</td>
-                                                                    <td>1234</td>
+                                                                {this.state.offerDashboardData && this.state.offerDashboardData.map(( data)=>{
+                                                                    return <tr>
+                                                                    <td>{ data.CouponCode }</td>
+                                                                    <td>{ data.TotalUsers}</td>
                                                                 </tr>
+                                                                })}
+                                                                
                                                             </tbody>
                                                         </table>
                                                     </div>
