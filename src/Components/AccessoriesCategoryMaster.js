@@ -14,6 +14,7 @@ import{
 }
 from './Actions/ActionType';
 import imageConfig from '../Api/imageApi';
+import CKEditor from 'ckeditor4-react';
 
 
 const ImgUpload =({
