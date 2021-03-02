@@ -66,7 +66,8 @@ class FoodCategory extends Component {
             abv : this.state.Abv,
             status : this.state.Status,
             updatedby : details[0].fld_staffid,
-            updatedon : moment().format('lll')
+            updatedon : moment().format('lll'),
+            descriptionStatus:this.state.descriptionStatus
         },"AddAccessoriesCategoryMaster").then((resultFoodC) =>
         resultFoodC.json().then(objfoodC => {
             if(resultFoodC.status == 200 || resultFoodC.status == 201){
@@ -95,7 +96,9 @@ class FoodCategory extends Component {
             Status : 'Active',
             AccessoriesId : '',
             Abv : '',
-            CategoryName:''
+            CategoryName:'',
+            description:'',
+            descriptionStatus:'Yes'
           };
         }
     
@@ -161,6 +164,7 @@ class FoodCategory extends Component {
               status : this.state.Status,
               updatedon : moment().format('lll'),
               updatedby : details[0].fld_staffid,
+              descriptionStatus:this.state.descriptionStatus
           },"UpdateAccessoriesCategoryMaster").then((resultFoodC) =>
           resultFoodC.json().then(objfoodC => {
               if(resultFoodC.status == 200 || resultFoodC.status == 201){
@@ -244,7 +248,39 @@ class FoodCategory extends Component {
                 }}/>
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="form-group mb-3">
+                <label for="validationCustom01">Description<span class="mandatory">*</span></label>
+                <CKEditor
+                    config={{
+                    extraPlugins: "justify,font,colorbutton",
+                    }}                                
+                    data={this.state.description}
+                    onChange={(event)=>{  this.setState({ description : event.editor.getData() })  }}
+                  />
+            </div>
+        </div>
+
         <div className="col-md-6">
+              <div class="form-group mb-3">
+                <label for="validationCustom01">Description Show on website<span class="mandatory">*</span></label><br/>
+                <label class="radio-inline">
+                <input type="radio" name="descriptionStatus" checked = {this.state.descriptionStatus == 'Yes' ? true : false} onChange= {()=>{
+                  this.setState({
+                    descriptionStatus : 'Yes'
+                  })
+                }} /> Yes
+              </label>
+               <label class="radio-inline" style={{marginLeft:'10px'}}>
+                <input type="radio" name="descriptionStatus" checked = {this.state.descriptionStatus == 'No' ? true : false} onChange= {()=>{
+                  this.setState({
+                    descriptionStatus : 'No'
+                  })
+                }} /> No
+              </label> 
+                </div>
+        </div>
+     <div className="col-md-6">
               <div class="form-group mb-3">
                 <label for="validationCustom01">Status<span class="mandatory">*</span></label><br/>
                 <label class="radio-inline">
@@ -328,7 +364,25 @@ class FoodCategory extends Component {
             </div>
         </div>
         </div>
-
+        <div className="col-md-6">
+              <div class="form-group mb-3">
+                <label for="validationCustom01">Description Show on website<span class="mandatory">*</span></label><br/>
+                <label class="radio-inline">
+                <input type="radio" name="descriptionStatus" checked = {this.state.descriptionStatus == 'Yes' ? true : false} onChange= {()=>{
+                  this.setState({
+                    descriptionStatus : 'Yes'
+                  })
+                }} /> Yes
+              </label>
+               <label class="radio-inline" style={{marginLeft:'10px'}}>
+                <input type="radio" name="descriptionStatus" checked = {this.state.descriptionStatus == 'No' ? true : false} onChange= {()=>{
+                  this.setState({
+                    descriptionStatus : 'No'
+                  })
+                }} /> No
+              </label> 
+                </div>
+        </div>
         <div className="col-md-6">
               <div class="form-group mb-3">
                 <label for="validationCustom01">Status<span class="mandatory">*</span></label><br/>
@@ -500,7 +554,9 @@ class FoodCategory extends Component {
                                                  openedit : true,
                                                  AccessoriesId : data.fld_id,
                                                  Abv : data.fld_abv,
-                                                 CategoryName:data.fld_category
+                                                 CategoryName:data.fld_category,
+                                                 description:data.fld_description,
+                                                 descriptionStatus:data.fld_description_status
                                                })
 
                                            
@@ -512,12 +568,8 @@ class FoodCategory extends Component {
                                            </td>
                                          
                                            </tr>
-                           
-                                     
-                                   ))}
-                                   
-                                   
-                                    </tbody>
+                                        ))}
+                                      </tbody>
                                     </table>
                                     </div>
                                 </div>

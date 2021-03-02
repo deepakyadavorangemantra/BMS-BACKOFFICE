@@ -760,7 +760,7 @@ class  OfferView extends Component {
                                                                                    </div>
 
                                                                                 <div class="col-md-6">
-                                                                                    <label for="validationCustom05">First order Applicable<span className="mandatory">*</span></label>
+                                                                                    <label for="validationCustom05">First Order Applicable<span className="mandatory">*</span></label>
                                                                                     
                                                                                         <div class="form-group mb-2">
                                                                                         <label class="radio-inline">
