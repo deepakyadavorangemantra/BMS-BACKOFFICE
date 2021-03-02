@@ -36,7 +36,7 @@ class FoodCategory extends Component {
 
         Notiflix.Loading.Init({
             svgColor : '#507dc0'
-           
+            
           });
       
           Notiflix.Loading.Dots('Please wait...');

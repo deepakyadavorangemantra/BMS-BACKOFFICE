@@ -545,7 +545,7 @@ class FoodCategory extends Component {
                                               ]
                                             });
                                            }}
-                                           />
+                                           /> 
                                            
                                            <span>
                                              <Edit3 style={{marginLeft: '10px'}}
